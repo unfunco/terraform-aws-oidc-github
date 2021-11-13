@@ -12,13 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+locals {
+  // Refer to the README for information on obtaining the thumbprint.
+  thumbprint = "A031C46782E6E6C662C2C87C76DA9AA62CCABD8E"
+}
+
 resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.github.0.json
   description           = "Role used by the ${var.github_organisation}/${var.github_repository} GitHub repository."
   force_detach_policies = var.force_detach_policies
-  managed_policy_arns   = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
+  managed_policy_arns   = var.managed_policy_arns
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name
   path                  = var.iam_role_path
@@ -47,6 +52,6 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list  = ["https://github.com/${var.github_organisation}"]
   tags            = var.tags
-  thumbprint_list = ["A031C46782E6E6C662C2C87C76DA9AA62CCABD8E"]
+  thumbprint_list = [local.thumbprint]
   url             = "https://token.actions.githubusercontent.com"
 }

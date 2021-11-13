@@ -58,6 +58,12 @@ variable "iam_role_path" {
   type        = string
 }
 
+variable "managed_policy_arns" {
+  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
+  description = "List of managed policy ARNs to apply to the IAM role."
+  type        = list(string)
+}
+
 variable "max_session_duration" {
   default     = 3600
   description = "Maximum session duration in seconds."

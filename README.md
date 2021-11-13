@@ -4,7 +4,10 @@
 
 ### Requirements
 
+* [Make]
 * [Terraform] 1.0+
+
+### Installation and usage
 
 ### Obtaining the thumbprint
 
@@ -24,4 +27,5 @@ openssl x509 -in certificate.crt -fingerprint -noout
 Made available under the terms of the [Apache License 2.0].
 
 [Apache License 2.0]: LICENSE.md
+[Make]: https://www.gnu.org/software/make/
 [Terraform]: https://www.terraform.io
