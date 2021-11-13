@@ -25,3 +25,8 @@ help: # Display this help message
   	      printf "  \033[38;5;141m%-11s\033[0m %s\n", $$1, $$2 \
       } \
     ' $(MAKEFILE_LIST)
+
+.PHONY: thumbprint
+thumbprint: # Obtain the GitHub OpenID thumbprint
+	@echo -e ${INFO} "Obtaining the GitHub OpenID thumbprint..."
+

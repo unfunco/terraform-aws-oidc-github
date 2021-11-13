@@ -4,7 +4,7 @@
 
 ### Requirements
 
-* [Make]
+* [Make] 3.81+
 * [Terraform] 1.0+
 
 ### Installation and usage

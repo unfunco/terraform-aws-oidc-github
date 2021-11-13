@@ -20,7 +20,7 @@ locals {
 resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
-  assume_role_policy    = data.aws_iam_policy_document.github.0.json
+  assume_role_policy    = data.aws_iam_policy_document.github[0].json
   description           = "Role used by the ${var.github_organisation}/${var.github_repository} GitHub repository."
   force_detach_policies = var.force_detach_policies
   managed_policy_arns   = var.managed_policy_arns
@@ -33,18 +33,18 @@ resource "aws_iam_role" "github" {
 resource "aws_iam_policy" "github" {
   count = var.enabled ? 1 : 0
 
-  description = "Policy"
+  description = "Policy for the ${var.iam_role_name} role."
   name        = var.iam_policy_name
   path        = var.iam_policy_path
-  policy      = data.aws_iam_policy_document.github.0.json
+  policy      = data.aws_iam_policy_document.github[0].json
   tags        = var.tags
 }
 
 resource "aws_iam_role_policy_attachment" "github" {
   count = var.enabled ? 1 : 0
 
-  policy_arn = aws_iam_policy.github.0.arn
-  role       = aws_iam_role.github.0.name
+  policy_arn = aws_iam_policy.github[0].arn
+  role       = aws_iam_role.github[0].name
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
