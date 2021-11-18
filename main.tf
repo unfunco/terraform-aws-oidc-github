@@ -14,7 +14,7 @@
 
 locals {
   // Refer to the README for information on obtaining the thumbprint.
-  thumbprint = "A031C46782E6E6C662C2C87C76DA9AA62CCABD8E"
+  github_thumbprint = "A031C46782E6E6C662C2C87C76DA9AA62CCABD8E"
 }
 
 resource "aws_iam_role" "github" {
@@ -52,6 +52,6 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list  = ["https://github.com/${var.github_organisation}"]
   tags            = var.tags
-  thumbprint_list = [local.thumbprint]
+  thumbprint_list = [local.github_thumbprint]
   url             = "https://token.actions.githubusercontent.com"
 }

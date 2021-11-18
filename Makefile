@@ -29,4 +29,3 @@ help: # Display this help message
 .PHONY: thumbprint
 thumbprint: # Obtain the GitHub OpenID thumbprint
 	@echo -e ${INFO} "Obtaining the GitHub OpenID thumbprint..."
-

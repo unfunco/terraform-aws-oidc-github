@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "github" {
     }
 
     principals {
-      identifiers = [aws_iam_openid_connect_provider.github.0.arn]
+      identifiers = [aws_iam_openid_connect_provider.github[0].arn]
       type        = "Federated"
     }
   }

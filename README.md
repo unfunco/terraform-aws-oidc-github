@@ -1,8 +1,9 @@
-# AWS federation for GitHub Actions
+# AWS OIDC federation for GitHub Actions
 
 Terraform module to configure GitHub as an OpenID Connect identity provider for
-Amazon Web Services. This will allow GitHub Actions to access resources within
-an AWS account without requiring long-lived credentials to be stored in GitHub.
+Amazon Web Services.  
+This will allow GitHub Actions to access resources within an AWS account without
+requiring long-lived credentials to be stored in GitHub.
 
 ## Getting started
 
@@ -62,21 +63,21 @@ jobs:
 
 #### Optional
 
-| Name                    | Default                                      | Description                                                    |
-| ----------------------: | -------------------------------------------- | -------------------------------------------------------------- |
-| `enabled`               | `true`                                       | Flag to enable/disable creation of resources.                  |
-| `force_detach_policies` | `false`                                      | Flag to force detachment of policies attached to the IAM role. |
-| `iam_policy_name`       | `"github"`                                   | Name of the IAM policy to be assumed by GitHub.                |
-| `iam_policy_path`       | `/`                                          | Path to the IAM policy.                                        |
-| `iam_role_name`         | `"github"`                                   | Name of the IAM role.                                          |
-| `iam_role_path`         | `/`                                          | Path to the IAM role.                                          |
-| `managed_policy_arns`   | `["arn:aws:iam::aws:policy/ReadOnlyAccess"]` | List of managed policy ARNs to apply to the IAM role.          |
-| `max_session_duration`  | `3600`                                       | Maximum session duration in seconds.                           |
-| `tags`                  | `{}`                                         | Map of tags to be applied to all resources.                    |
-
-#### Optional
+| Name                    | Default    | Description                                                    |
+| ----------------------: | ---------- | -------------------------------------------------------------- |
+| `enabled`               | `true`     | Flag to enable/disable creation of resources.                  |
+| `force_detach_policies` | `false`    | Flag to force detachment of policies attached to the IAM role. |
+| `iam_policy_name`       | `"github"` | Name of the IAM policy to be assumed by GitHub.                |
+| `iam_policy_path`       | `"/"`      | Path to the IAM policy.                                        |
+| `iam_role_name`         | `"github"` | Name of the IAM role.                                          |
+| `iam_role_path`         | `"/"`      | Path to the IAM role.                                          |
+| `managed_policy_arns`   | `[]`       | List of managed policy ARNs to apply to the IAM role.          |
+| `max_session_duration`  | `3600`     | Maximum session duration in seconds.                           |
+| `tags`                  | `{}`       | Map of tags to be applied to all resources.                    |
 
 ### Outputs
+
+TODO
 
 ### Obtaining the thumbprint
 
