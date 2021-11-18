@@ -28,6 +28,7 @@ module "aws_federation_github" {
   
   github_organisation = "unfunco"
   github_repository   = "terraform-aws-federation-github"
+  managed_policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
 }
 ```
 
