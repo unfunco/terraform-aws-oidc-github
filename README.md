@@ -55,19 +55,24 @@ jobs:
 
 #### Required
 
-| Name                    | Required | Default                                      | Description                                                    |
-| ----------------------: | :------: | -------------------------------------------- | -------------------------------------------------------------- |
-| `enabled`               | No       | `true`                                       | Flag to enable/disable creation of resources.                  |
-| `force_detach_policies` | No       | `false`                                      | Flag to force detachment of policies attached to the IAM role. |
-| `github_organisation`   | Yes      |                                              | GitHub organisation name.                                      |
-| `github_repository`     | Yes      |                                              | GitHub repository name.                                        |
-| `iam_policy_name`       | No       | `"github"`                                   | Name of the IAM policy to be assumed by GitHub.                |
-| `iam_policy_path`       | No       | `/`                                          | Path to the IAM policy.                                        |
-| `iam_role_name`         | No       | `"github"`                                   | Name of the IAM role.                                          |
-| `iam_role_path`         | No       | `/`                                          | Path to the IAM role.                                          |
-| `managed_policy_arns`   | No       | `["arn:aws:iam::aws:policy/ReadOnlyAccess"]` | List of managed policy ARNs to apply to the IAM role.          |
-| `max_session_duration`  | No       | `3600`                                       | Maximum session duration in seconds.                           |
-| `tags`                  | No       | `{}`                                         | Map of tags to be applied to all resources.                    |
+| Name                   | Type     | Description               |
+| ---------------------- | -------- | ------------------------- |
+| `github_organisation`  | `string` | GitHub organisation name. |
+| `github_repository`    | `string` | GitHub repository name.   |
+
+#### Optional
+
+| Name                    | Default                                      | Description                                                    |
+| ----------------------: | -------------------------------------------- | -------------------------------------------------------------- |
+| `enabled`               | `true`                                       | Flag to enable/disable creation of resources.                  |
+| `force_detach_policies` | `false`                                      | Flag to force detachment of policies attached to the IAM role. |
+| `iam_policy_name`       | `"github"`                                   | Name of the IAM policy to be assumed by GitHub.                |
+| `iam_policy_path`       | `/`                                          | Path to the IAM policy.                                        |
+| `iam_role_name`         | `"github"`                                   | Name of the IAM role.                                          |
+| `iam_role_path`         | `/`                                          | Path to the IAM role.                                          |
+| `managed_policy_arns`   | `["arn:aws:iam::aws:policy/ReadOnlyAccess"]` | List of managed policy ARNs to apply to the IAM role.          |
+| `max_session_duration`  | `3600`                                       | Maximum session duration in seconds.                           |
+| `tags`                  | `{}`                                         | Map of tags to be applied to all resources.                    |
 
 #### Optional
 
