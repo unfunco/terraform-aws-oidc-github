@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-data "aws_iam_policy_document" "github" {
-  count = var.enabled ? 1 : 0
+data "aws_iam_policy_document" "assume_role" {
+  count = local.enabled
 
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -21,14 +21,26 @@ data "aws_iam_policy_document" "github" {
 
     condition {
       test     = "StringLike"
-      values   = ["repo:${var.github_repository}:*"]
-      variable = "token.actions.githubusercontent.com:sub:"
+      values   = ["repo:${var.github_organisation}/${var.github_repository}:*"]
+      variable = "token.actions.githubusercontent.com:sub"
     }
 
     principals {
       identifiers = [aws_iam_openid_connect_provider.github[0].arn]
       type        = "Federated"
     }
+  }
+
+  version = "2012-10-17"
+}
+
+data "aws_iam_policy_document" "github" {
+  count = local.enabled
+
+  statement {
+    actions   = ["sts:GetCallerIdentity"]
+    effect    = "Allow"
+    resources = ["*"]
   }
 
   version = "2012-10-17"

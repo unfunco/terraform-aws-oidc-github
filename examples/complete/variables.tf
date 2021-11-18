@@ -44,12 +44,6 @@ variable "iam_role_path" {
   type        = string
 }
 
-variable "managed_policy_arns" {
-  default     = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
-  description = "List of managed policy ARNs to apply to the IAM role."
-  type        = list(string)
-}
-
 variable "max_session_duration" {
   default     = 3600
   description = "Maximum session duration in seconds."
@@ -62,12 +56,12 @@ variable "max_session_duration" {
 }
 
 variable "region" {
-  description = ""
+  description = "AWS region in which to apply resources."
   type        = string
 }
 
 variable "tags" {
   default     = {}
   description = "Map of tags to be applied to all resources."
-  type        = map(string)
+  type        = object({})
 }

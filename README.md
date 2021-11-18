@@ -1,11 +1,10 @@
-# AWS OIDC federation for GitHub Actions
+# AWS federation for GitHub Actions
 
-Terraform module to configure GitHub as an OpenID Connect identity provider for
-Amazon Web Services.  
-This will allow GitHub Actions to access resources within an AWS account without
-requiring long-lived credentials to be stored in GitHub.
+Terraform module to configure GitHub Actions as an IAM OIDC identity provider
+in AWS. This enables GitHub Actions to access resources within an AWS account
+without requiring long-lived credentials to be stored as GitHub secrets.
 
-## Getting started
+## 🔨 Getting started
 
 ### Requirements
 
@@ -23,12 +22,11 @@ provider "aws" {
 }
 
 module "aws_federation_github" {
-  source  = "TODO"
+  source  = "unfunco/oidc-github/aws"
   version = "0.1.0"
   
-  github_organisation = "unfunco"
-  github_repository   = "terraform-aws-federation-github"
-  managed_policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
+  github_organisation = "your-org"
+  github_repository   = "your-repo"
 }
 ```
 
@@ -40,6 +38,8 @@ from the GitHub OIDC provider and then requests an access token from AWS.
 jobs:
   caller-identity:
     name: Check caller identity
+    permissions:
+      id-token: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -48,7 +48,7 @@ jobs:
       uses: aws-actions/configure-aws-credentials@v1
       with:
         aws-region: ${{ secrets.AWS_REGION }}
-        role-session-name: CallerIdentitySession
+        role-session-name: CheckCallerIdentity
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
 ```
@@ -65,7 +65,7 @@ jobs:
 #### Optional
 
 | Name                    | Default    | Description                                                    |
-| ----------------------: | ---------- | -------------------------------------------------------------- |
+| ----------------------- | ---------- | -------------------------------------------------------------- |
 | `enabled`               | `true`     | Flag to enable/disable creation of resources.                  |
 | `force_detach_policies` | `false`    | Flag to force detachment of policies attached to the IAM role. |
 | `iam_policy_name`       | `"github"` | Name of the IAM policy to be assumed by GitHub.                |
@@ -78,23 +78,33 @@ jobs:
 
 ### Outputs
 
-TODO
+| Name                   | Type     | Description               |
+| ---------------------- | -------- | ------------------------- |
+| `github_organisation`  | `string` | GitHub organisation name. |
+| `github_repository`    | `string` | GitHub repository name.   |
 
 ### Obtaining the thumbprint
 
 ```bash
 JWKS=$(curl -s https://token.actions.githubusercontent.com/.well-known/openid-configuration | jq -r '.jwks_uri')
 echo $JWKS | awk -F[/:] '{print $4}'
+```
 
-openssl s_client -servername token.actions.githubusercontent.com -showcerts -connect token.actions.githubusercontent.com:443
-
-# Paste the last certificate into a file called certificate.crt
-openssl x509 -in certificate.crt -fingerprint -noout
+```bash
+# TODO: Return the last certificate only.
+openssl s_client \
+  -servername token.actions.githubusercontent.com \
+  -connect token.actions.githubusercontent.com:443 \
+  -showcerts 2>/dev/null </dev/null \
+  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' \
+  | openssl x509 -in /dev/stdin -fingerprint -noout
 ```
 
 ## References
 
 * [Configuring OpenID Connect in Amazon Web Services]
+* [Creating OpenID Connect (OIDC) identity providers]
+* [Obtaining the thumbprint for an OpenID Connect Identity Provider]
 
 ## License
 
@@ -104,5 +114,7 @@ Made available under the terms of the [Apache License 2.0].
 [Apache License 2.0]: LICENSE.md
 [Complete example]: examples/complete
 [Configuring OpenID Connect in Amazon Web Services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
+[Creating OpenID Connect (OIDC) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 [Make]: https://www.gnu.org/software/make/
+[Obtaining the thumbprint for an OpenID Connect Identity Provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
 [Terraform]: https://www.terraform.io

@@ -13,44 +13,36 @@
 // limitations under the License.
 
 locals {
+  enabled = var.enabled ? 1 : 0
+
   // Refer to the README for information on obtaining the thumbprint.
-  github_thumbprint = "A031C46782E6E6C662C2C87C76DA9AA62CCABD8E"
+  github_thumbprint = "a031c46782e6e6c662c2c87c76da9aa62ccabd8e"
 }
 
 resource "aws_iam_role" "github" {
-  count = var.enabled ? 1 : 0
+  count = local.enabled
 
-  assume_role_policy    = data.aws_iam_policy_document.github[0].json
+  assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
   description           = "Role used by the ${var.github_organisation}/${var.github_repository} GitHub repository."
   force_detach_policies = var.force_detach_policies
-  managed_policy_arns   = var.managed_policy_arns
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name
   path                  = var.iam_role_path
   tags                  = var.tags
 }
 
-resource "aws_iam_policy" "github" {
-  count = var.enabled ? 1 : 0
+resource "aws_iam_role_policy" "github" {
+  count = local.enabled
 
-  description = "Policy for the ${var.iam_role_name} role."
-  name        = var.iam_policy_name
-  path        = var.iam_policy_path
+  name_prefix = var.iam_role_name
   policy      = data.aws_iam_policy_document.github[0].json
-  tags        = var.tags
-}
-
-resource "aws_iam_role_policy_attachment" "github" {
-  count = var.enabled ? 1 : 0
-
-  policy_arn = aws_iam_policy.github[0].arn
-  role       = aws_iam_role.github[0].name
+  role        = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
-  count = var.enabled ? 1 : 0
+  count = local.enabled
 
-  client_id_list  = ["https://github.com/${var.github_organisation}"]
+  client_id_list  = ["https://github.com/${var.github_organisation}", "sts.amazonaws.com"]
   tags            = var.tags
   thumbprint_list = [local.github_thumbprint]
   url             = "https://token.actions.githubusercontent.com"

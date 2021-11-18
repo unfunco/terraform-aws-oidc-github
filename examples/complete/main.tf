@@ -13,5 +13,6 @@ module "aws_federation_github" {
   iam_role_path         = var.iam_role_path
   github_organisation   = var.github_organisation
   github_repository     = var.github_repository
+  max_session_duration  = var.max_session_duration
   tags                  = var.tags
 }
