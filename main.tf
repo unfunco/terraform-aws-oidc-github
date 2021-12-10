@@ -28,7 +28,7 @@ resource "aws_iam_role" "github" {
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name
   path                  = var.iam_role_path
-  permissions_boundary =  var.iam_role_permissions_boundary
+  permissions_boundary  = var.iam_role_permissions_boundary
   tags                  = var.tags
 }
 
