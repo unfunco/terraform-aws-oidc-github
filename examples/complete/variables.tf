@@ -1,3 +1,9 @@
+variable "attach_read_only_policy" {
+  default     = true
+  description = "Flag to enable/disable the attachment of the ReadOnly policy."
+  type        = bool
+}
+
 variable "enabled" {
   default     = true
   description = "Flag to enable/disable the creation of resources."
@@ -42,6 +48,18 @@ variable "iam_role_path" {
   default     = "/"
   description = "Path to the IAM role."
   type        = string
+}
+
+variable "iam_role_permissions_boundary" {
+  default     = null
+  description = "ARN of the permissions boundary to be used by the IAM role."
+  type        = string
+}
+
+variable "iam_role_policy_arns" {
+  default     = []
+  description = "List of IAM policy ARNs to attach to the IAM role."
+  type        = list(string)
 }
 
 variable "max_session_duration" {

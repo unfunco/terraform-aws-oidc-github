@@ -28,15 +28,22 @@ resource "aws_iam_role" "github" {
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name
   path                  = var.iam_role_path
+  permissions_boundary =  var.iam_role_permissions_boundary
   tags                  = var.tags
 }
 
-resource "aws_iam_role_policy" "github" {
-  count = local.enabled
+resource "aws_iam_role_policy_attachment" "read_only" {
+  count = var.enabled && var.attach_read_only_policy ? 1 : 0
 
-  name_prefix = var.iam_role_name
-  policy      = data.aws_iam_policy_document.github[0].json
-  role        = aws_iam_role.github[0].id
+  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  role       = aws_iam_role.github[0].id
+}
+
+resource "aws_iam_role_policy_attachment" "custom" {
+  count = var.enabled ? length(var.iam_role_policy_arns) : 0
+
+  policy_arn = var.iam_role_policy_arns[count.index]
+  role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
