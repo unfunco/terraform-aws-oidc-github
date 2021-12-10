@@ -39,6 +39,7 @@ jobs:
   caller-identity:
     name: Check caller identity
     permissions:
+      contents: read
       id-token: write
     runs-on: ubuntu-latest
     steps:
