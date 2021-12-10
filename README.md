@@ -69,7 +69,7 @@ jobs:
 | ------------------------------- | ---------- | -------------------------------------------------------------- |
 | `attach_read_only_policy`       | `true`     | Flag to attach/detach the ReadOnly policy.                     |
 | `enabled`                       | `true`     | Flag to enable/disable creation of resources.                  |
-| `force_detach_policies`         | `false`    | Flag to force detachment of policies attached to the IAM role. |
+| `force_detach_policies`         | `false`    | Flag to force detach policies attached to the IAM role.        |
 | `iam_policy_name`               | `"github"` | Name of the IAM policy to be assumed by GitHub.                |
 | `iam_policy_path`               | `"/"`      | Path to the IAM policy.                                        |
 | `iam_role_name`                 | `"github"` | Name of the IAM role.                                          |

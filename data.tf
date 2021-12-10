@@ -33,15 +33,3 @@ data "aws_iam_policy_document" "assume_role" {
 
   version = "2012-10-17"
 }
-
-data "aws_iam_policy_document" "github" {
-  count = local.enabled
-
-  statement {
-    actions   = ["sts:GetCallerIdentity"]
-    effect    = "Allow"
-    resources = ["*"]
-  }
-
-  version = "2012-10-17"
-}
