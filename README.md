@@ -23,7 +23,7 @@ provider "aws" {
 
 module "aws_federation_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.1.0"
+  version = "0.1.1"
   
   github_organisation = "your-org"
   github_repository   = "your-repo"
@@ -66,14 +66,14 @@ jobs:
 
 | Name                            | Default    | Description                                                    |
 | ------------------------------- | ---------- | -------------------------------------------------------------- |
-| `attach_read_only_policy`       | `true`     | Flag to enable/disable the attachment of the ReadOnly policy.  |
+| `attach_read_only_policy`       | `true`     | Flag to attach/detach the ReadOnly policy.                     |
 | `enabled`                       | `true`     | Flag to enable/disable creation of resources.                  |
 | `force_detach_policies`         | `false`    | Flag to force detachment of policies attached to the IAM role. |
 | `iam_policy_name`               | `"github"` | Name of the IAM policy to be assumed by GitHub.                |
 | `iam_policy_path`               | `"/"`      | Path to the IAM policy.                                        |
 | `iam_role_name`                 | `"github"` | Name of the IAM role.                                          |
 | `iam_role_path`                 | `"/"`      | Path to the IAM role.                                          |
-| `iam_role_permissions_boundary` | `""`       | ARN of the permissions boundary to be used by the IAM role.    |
+| `iam_role_permissions_boundary` | `""`       | Permissions boundary to be used by the IAM role.               |
 | `iam_role_policy_arns`          | `[]`       | List of IAM policy ARNs to be attached to the IAM role.        |
 | `managed_policy_arns`           | `[]`       | List of managed policy ARNs to apply to the IAM role.          |
 | `max_session_duration`          | `3600`     | Maximum session duration in seconds.                           |

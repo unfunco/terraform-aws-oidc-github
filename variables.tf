@@ -65,7 +65,7 @@ variable "iam_role_path" {
 }
 
 variable "iam_role_permissions_boundary" {
-  default     = null
+  default     = ""
   description = "ARN of the permissions boundary to be used by the IAM role."
   type        = string
 }
