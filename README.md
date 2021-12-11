@@ -46,7 +46,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@master
       with:
         aws-region: ${{ secrets.AWS_REGION }}
         role-session-name: CheckCallerIdentity
