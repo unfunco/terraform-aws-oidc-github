@@ -2,7 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-module "aws_federation_github" {
+module "aws_oidc_github" {
   source = "../../"
 
   enabled = var.enabled

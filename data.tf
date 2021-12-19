@@ -13,7 +13,7 @@
 // limitations under the License.
 
 data "aws_iam_policy_document" "assume_role" {
-  count = local.enabled
+  count = var.enabled ? 1 : 0
 
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]

@@ -13,14 +13,12 @@
 // limitations under the License.
 
 locals {
-  enabled = var.enabled ? 1 : 0
-
   // Refer to the README for information on obtaining the thumbprint.
   github_thumbprint = "a031c46782e6e6c662c2c87c76da9aa62ccabd8e"
 }
 
 resource "aws_iam_role" "github" {
-  count = local.enabled
+  count = var.enabled ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
   description           = "Role used by the ${var.github_organisation}/${var.github_repository} GitHub repository."
@@ -47,7 +45,7 @@ resource "aws_iam_role_policy_attachment" "custom" {
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
-  count = local.enabled
+  count = var.enabled ? 1 : 0
 
   client_id_list  = ["https://github.com/${var.github_organisation}", "sts.amazonaws.com"]
   tags            = var.tags
