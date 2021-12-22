@@ -1,7 +1,7 @@
 # AWS federation for GitHub Actions
 
-Terraform module to configure GitHub Actions as an IAM OIDC identity provider
-in AWS. This enables GitHub Actions to access resources within an AWS account
+Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
+AWS. This enables GitHub Actions to access resources within an AWS account
 without requiring long-lived credentials to be stored as GitHub secrets.
 
 ## 🔨 Getting started
@@ -24,7 +24,7 @@ provider "aws" {
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
   version = "0.1.2"
-  
+
   github_organisation = "your-org"
   github_repository   = "your-repo"
 }
@@ -58,10 +58,10 @@ jobs:
 
 #### Required
 
-| Name                  | Type     | Description               |
-|-----------------------|----------|---------------------------|
-| `github_organisation` | `string` | GitHub organisation name. |
-| `github_repository`   | `string` | GitHub repository name.   |
+| Name                  | Type     | Description                      |
+|-----------------------|----------|----------------------------------|
+| `github_organisation` | `string` | GitHub organisation name.        |
+| `github_repositories` | `string` | List of GitHub repository names. |
 
 #### Optional
 

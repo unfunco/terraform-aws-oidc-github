@@ -21,7 +21,7 @@ resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
-  description           = "Role used by the ${var.github_organisation}/${var.github_repository} GitHub repository."
+  description           = "Role used by the ${var.github_organisation} GitHub organisation."
   force_detach_policies = var.force_detach_policies
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name

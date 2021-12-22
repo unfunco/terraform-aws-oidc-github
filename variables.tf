@@ -35,9 +35,9 @@ variable "github_organisation" {
   type        = string
 }
 
-variable "github_repository" {
-  description = "GitHub repository name."
-  type        = string
+variable "github_repositories" {
+  description = "List of GitHub repository names."
+  type        = list(string)
 }
 
 variable "iam_policy_name" {
