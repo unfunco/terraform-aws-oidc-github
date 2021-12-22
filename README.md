@@ -23,7 +23,7 @@ provider "aws" {
 
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.1.1"
+  version = "0.1.2"
   
   github_organisation = "your-org"
   github_repository   = "your-repo"
