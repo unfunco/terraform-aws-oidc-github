@@ -58,10 +58,10 @@ jobs:
 
 #### Required
 
-| Name                  | Type     | Description                      |
-|-----------------------|----------|----------------------------------|
-| `github_organisation` | `string` | GitHub organisation name.        |
-| `github_repositories` | `string` | List of GitHub repository names. |
+| Name                  | Type           | Description                      |
+|-----------------------|----------------|----------------------------------|
+| `github_organisation` | `string`       | GitHub organisation name.        |
+| `github_repositories` | `list(string)` | List of GitHub repository names. |
 
 #### Optional
 
