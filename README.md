@@ -23,7 +23,7 @@ provider "aws" {
 
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.2.0"
+  version = "0.3.0"
 
   github_organisation = "honestempire"
   github_repositories = ["example-repo", "another-repo"]
@@ -67,6 +67,7 @@ jobs:
 
 | Name                            | Default    | Description                                             |
 |---------------------------------|------------|---------------------------------------------------------|
+| `attach_admin_policy`           | `false`    | Flag to attach/detach the AdministratorAccess policy.   |
 | `attach_read_only_policy`       | `true`     | Flag to attach/detach the ReadOnly policy.              |
 | `enabled`                       | `true`     | Flag to enable/disable creation of resources.           |
 | `force_detach_policies`         | `false`    | Flag to force detach policies attached to the IAM role. |
