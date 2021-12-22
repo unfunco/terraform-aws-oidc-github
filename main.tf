@@ -30,6 +30,13 @@ resource "aws_iam_role" "github" {
   tags                  = var.tags
 }
 
+resource "aws_iam_role_policy_attachment" "admin" {
+  count = var.enabled && var.attach_admin_policy ? 1 : 0
+
+  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  role       = aws_iam_role.github[0].id
+}
+
 resource "aws_iam_role_policy_attachment" "read_only" {
   count = var.enabled && var.attach_read_only_policy ? 1 : 0
 

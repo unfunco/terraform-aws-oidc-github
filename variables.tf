@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+variable "attach_admin_policy" {
+  default     = false
+  description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
+  type        = bool
+}
+
 variable "attach_read_only_policy" {
   default     = true
   description = "Flag to enable/disable the attachment of the ReadOnly policy."
