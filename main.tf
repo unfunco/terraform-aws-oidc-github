@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-locals {
-  // Refer to the README for information on obtaining the thumbprint.
-  github_thumbprint = "a031c46782e6e6c662c2c87c76da9aa62ccabd8e"
-}
-
 resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
@@ -56,6 +51,6 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list  = ["https://github.com/${var.github_organisation}", "sts.amazonaws.com"]
   tags            = var.tags
-  thumbprint_list = [local.github_thumbprint]
+  thumbprint_list = [var.github_thumbprint]
   url             = "https://token.actions.githubusercontent.com"
 }

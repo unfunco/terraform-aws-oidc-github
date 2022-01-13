@@ -36,6 +36,13 @@ variable "force_detach_policies" {
   type        = string
 }
 
+// Refer to the README for information on obtaining the thumbprint.
+variable "github_thumbprint" {
+  default     = "15e29108718111e59b3dad31954647e3c344a231"
+  description = "GitHub OpenID TLS cert thumbprint"
+  type        = string
+}
+
 variable "github_organisation" {
   description = "GitHub organisation name."
   type        = string
