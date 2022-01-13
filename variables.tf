@@ -36,13 +36,6 @@ variable "force_detach_policies" {
   type        = string
 }
 
-// Refer to the README for information on obtaining the thumbprint.
-variable "github_thumbprint" {
-  default     = "15e29108718111e59b3dad31954647e3c344a231"
-  description = "GitHub OpenID TLS cert thumbprint"
-  type        = string
-}
-
 variable "github_organisation" {
   description = "GitHub organisation name."
   type        = string
@@ -51,6 +44,13 @@ variable "github_organisation" {
 variable "github_repositories" {
   description = "List of GitHub repository names."
   type        = list(string)
+}
+
+// Refer to the README for information on obtaining the thumbprint.
+variable "github_thumbprint" {
+  default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
+  description = "GitHub OpenID TLS certificate thumbprint."
+  type        = string
 }
 
 variable "iam_policy_name" {

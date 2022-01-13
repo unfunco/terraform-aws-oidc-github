@@ -32,6 +32,12 @@ variable "github_repositories" {
   type        = list(string)
 }
 
+variable "github_thumbprint" {
+  default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
+  description = "GitHub OpenID TLS certificate thumbprint."
+  type        = string
+}
+
 variable "iam_policy_name" {
   default     = "github"
   description = "Name of the IAM policy to be assumed by GitHub."
