@@ -23,7 +23,7 @@ provider "aws" {
 
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.3.0"
+  version = "0.4.0"
 
   github_organisation = "honestempire"
   github_repositories = ["example-repo", "another-repo"]
@@ -49,7 +49,6 @@ jobs:
       uses: aws-actions/configure-aws-credentials@master
       with:
         aws-region: ${{ secrets.AWS_REGION }}
-        role-session-name: CheckCallerIdentity
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
 ```

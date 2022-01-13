@@ -49,6 +49,5 @@ jobs:
       uses: aws-actions/configure-aws-credentials@master
       with:
         aws-region: ${{ secrets.AWS_REGION }}
-        role-session-name: CheckCallerIdentity
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
