@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+locals {
+  partition = data.aws_partition.current.partition
+}
+
 resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
@@ -28,14 +32,14 @@ resource "aws_iam_role" "github" {
 resource "aws_iam_role_policy_attachment" "admin" {
   count = var.enabled && var.attach_admin_policy ? 1 : 0
 
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
   count = var.enabled && var.attach_read_only_policy ? 1 : 0
 
-  policy_arn = "arn:aws:iam::aws:policy/ReadOnlyAccess"
+  policy_arn = "arn:${local.partition}:iam::aws:policy/ReadOnlyAccess"
   role       = aws_iam_role.github[0].id
 }
 

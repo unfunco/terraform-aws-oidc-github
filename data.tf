@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+data "aws_partition" "current" {}
+
 data "aws_iam_policy_document" "assume_role" {
   count = var.enabled ? 1 : 0
 
