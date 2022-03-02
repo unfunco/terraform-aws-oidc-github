@@ -18,3 +18,23 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
+    - if: ${{ failure() }}
+      name: Send a notification to Slack
+      uses: slackapi/slack-github-action@v1.18.0
+      env:
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        payload: |
+          {
+            "text": "${{ github.event.repository.name }}: ${{ job.status }}\n${{ github.event.head_commit.url }}",
+            "blocks": [
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "${{ github.event.repository.name }}: ${{ job.status }}\n${{ github.event.head_commit.url }}"
+                }
+              }
+            ]
+          }
