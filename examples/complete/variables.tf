@@ -93,5 +93,5 @@ variable "region" {
 variable "tags" {
   default     = {}
   description = "Map of tags to be applied to all resources."
-  type        = object({})
+  type        = map(string)
 }
