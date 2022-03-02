@@ -37,6 +37,7 @@ jobs:
       run: terraform validate
 
   caller-identity:
+    if: ${{ github.event_name == 'push' }}
     name: Return the IAM user
     permissions:
       contents: read
