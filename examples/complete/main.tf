@@ -9,6 +9,7 @@ module "aws_oidc_github" {
 
   attach_admin_policy           = var.attach_admin_policy
   attach_read_only_policy       = var.attach_read_only_policy
+  create_oidc_provider          = var.create_oidc_provider
   force_detach_policies         = var.force_detach_policies
   github_thumbprint             = var.github_thumbprint
   iam_policy_name               = var.iam_policy_name

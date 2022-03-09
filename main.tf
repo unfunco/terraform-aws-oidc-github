@@ -14,6 +14,8 @@
 
 locals {
   partition = data.aws_partition.current.partition
+
+  oidc_provider = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0] : data.aws_iam_openid_connect_provider.github[0]
 }
 
 resource "aws_iam_role" "github" {
@@ -51,7 +53,7 @@ resource "aws_iam_role_policy_attachment" "custom" {
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
-  count = var.enabled ? 1 : 0
+  count = var.enabled && var.create_oidc_provider ? 1 : 0
 
   client_id_list  = ["https://github.com/${var.github_organisation}", "sts.amazonaws.com"]
   tags            = var.tags
