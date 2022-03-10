@@ -10,6 +10,12 @@ variable "attach_read_only_policy" {
   type        = bool
 }
 
+variable "create_oidc_provider" {
+  default     = true
+  description = "Flag to enable/disable the creation of the GitHub OIDC provider."
+  type        = bool
+}
+
 variable "enabled" {
   default     = true
   description = "Flag to enable/disable the creation of resources."

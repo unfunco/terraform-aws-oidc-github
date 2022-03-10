@@ -28,10 +28,16 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     principals {
-      identifiers = [aws_iam_openid_connect_provider.github[0].arn]
+      identifiers = [local.oidc_provider.arn]
       type        = "Federated"
     }
   }
 
   version = "2012-10-17"
+}
+
+data "aws_iam_openid_connect_provider" "github" {
+  count = var.enabled && !var.create_oidc_provider ? 1 : 0
+
+  url = "https://token.actions.githubusercontent.com"
 }
