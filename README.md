@@ -19,7 +19,7 @@ provider "aws" {
 
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.4.1"
+  version = "0.5.0"
 
   github_organisation = "honestempire"
   github_repositories = ["example-repo", "another-repo"]
