@@ -34,7 +34,7 @@ variable "github_repositories" {
 }
 
 variable "github_thumbprint" {
-  default     = "6938fd4d98bab03faadb97b34396831e3780aea1"
+  default     = "15E29108718111E59B3DAD31954647E3C344A231"
   description = "GitHub OpenID TLS certificate thumbprint."
   type        = string
 }
