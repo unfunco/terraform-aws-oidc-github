@@ -13,16 +13,16 @@
 // limitations under the License.
 
 locals {
-  partition = data.aws_partition.current.partition
-
-  oidc_provider = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0] : data.aws_iam_openid_connect_provider.github[0]
+  github_organizations = [for repo in var.github_repositories : split("/", repo)[0]]
+  oidc_provider        = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0] : data.aws_iam_openid_connect_provider.github[0]
+  partition            = data.aws_partition.current.partition
 }
 
 resource "aws_iam_role" "github" {
   count = var.enabled ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
-  description           = "Role used by the ${var.github_organization} GitHub organization."
+  description           = "Role used by the GitHub OIDC provider."
   force_detach_policies = var.force_detach_policies
   max_session_duration  = var.max_session_duration
   name                  = var.iam_role_name
@@ -55,7 +55,11 @@ resource "aws_iam_role_policy_attachment" "custom" {
 resource "aws_iam_openid_connect_provider" "github" {
   count = var.enabled && var.create_oidc_provider ? 1 : 0
 
-  client_id_list  = ["https://github.com/${var.github_organization}", "sts.amazonaws.com"]
+  client_id_list = concat(
+    [for org in local.github_organizations : "https://github.com/${org}"],
+    ["sts.amazonaws.com"]
+  )
+
   tags            = var.tags
   thumbprint_list = [var.github_thumbprint]
   url             = "https://token.actions.githubusercontent.com"
