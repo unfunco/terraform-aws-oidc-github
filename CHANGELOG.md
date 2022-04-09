@@ -3,6 +3,11 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [0.6.0] – 2022-04-09
+
+* Allow multiple organizations to be used in a single module ([d32aa74](https://github.com/unfunco/terraform-aws-oidc-github/commit/d32aa74a2783db98196c7d6b2670dcf3bf6ae2fe))
+* Remove unused IAM policy variables ([c26a176](https://github.com/unfunco/terraform-aws-oidc-github/commit/c26a17633c7823b5bdf0f208bea1dd2f48370880))
+
 ## [0.5.0] – 2022-03-10
 
 * Allow the use of existing GitHub OIDC providers ([6b40b05](https://github.com/unfunco/terraform-aws-oidc-github/commit/6b40b05b203b9ed7f1d119f4613937446b8c3bcb))
@@ -48,4 +53,5 @@ This project adheres to the [semantic versioning] specification.
 [0.4.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.3.0...v0.4.0
 [0.4.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.4.0...v0.4.1
 [0.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.4.1...v0.5.0
+[0.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.5.0...v0.6.0
 [Semantic versioning]: https://semver.org
