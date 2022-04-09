@@ -44,18 +44,6 @@ variable "github_thumbprint" {
   type        = string
 }
 
-variable "iam_policy_name" {
-  default     = "github"
-  description = "Name of the IAM policy to be assumed by GitHub."
-  type        = string
-}
-
-variable "iam_policy_path" {
-  default     = "/"
-  description = "Path to the IAM policy."
-  type        = string
-}
-
 variable "iam_role_name" {
   default     = "github"
   description = "Name of the IAM role."

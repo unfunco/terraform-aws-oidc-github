@@ -42,13 +42,13 @@ variable "force_detach_policies" {
   type        = string
 }
 
-variable "github_organisation" {
-  description = "GitHub organisation name."
+variable "github_organization" {
+  description = "GitHub organization name."
   type        = string
 }
 
 variable "github_repositories" {
-  description = "List of GitHub repository names."
+  description = "List of GitHub repository names which will be authorized to assume role."
   type        = list(string)
 }
 
@@ -59,27 +59,15 @@ variable "github_thumbprint" {
   type        = string
 }
 
-variable "iam_policy_name" {
-  default     = "github"
-  description = "Name of the IAM policy to be assumed by GitHub."
-  type        = string
-}
-
-variable "iam_policy_path" {
-  default     = "/"
-  description = "Path to the IAM policy."
-  type        = string
-}
-
 variable "iam_role_name" {
   default     = "github"
-  description = "Name of the IAM role."
+  description = "Name of the IAM role to be created. This will be assumable by GitHub."
   type        = string
 }
 
 variable "iam_role_path" {
   default     = "/"
-  description = "Path to the IAM role."
+  description = "Path under which to create IAM role."
   type        = string
 }
 
