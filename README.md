@@ -82,24 +82,22 @@ No modules.
 
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_attach_admin_policy"></a> [attach\_admin\_policy](#input\_attach\_admin\_policy) | Flag to enable/disable the attachment of the AdministratorAccess policy. | `bool` | `false` | no |
-| <a name="input_attach_read_only_policy"></a> [attach\_read\_only\_policy](#input\_attach\_read\_only\_policy) | Flag to enable/disable the attachment of the ReadOnly policy. | `bool` | `true` | no |
-| <a name="input_create_oidc_provider"></a> [create\_oidc\_provider](#input\_create\_oidc\_provider) | Flag to enable/disable the creation of the GitHub OIDC provider. | `bool` | `true` | no |
-| <a name="input_enabled"></a> [enabled](#input\_enabled) | Flag to enable/disable the creation of resources. | `bool` | `true` | no |
-| <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies) | Flag to force detachment of policies attached to the IAM role. | `string` | `false` | no |
-| <a name="input_github_organisation"></a> [github\_organisation](#input\_github\_organisation) | GitHub organisation name. | `string` | n/a | yes |
-| <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories) | List of GitHub repository names. | `list(string)` | n/a | yes |
-| <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint) | GitHub OpenID TLS certificate thumbprint. | `string` | `"6938fd4d98bab03faadb97b34396831e3780aea1"` | no |
-| <a name="input_iam_policy_name"></a> [iam\_policy\_name](#input\_iam\_policy\_name) | Name of the IAM policy to be assumed by GitHub. | `string` | `"github"` | no |
-| <a name="input_iam_policy_path"></a> [iam\_policy\_path](#input\_iam\_policy\_path) | Path to the IAM policy. | `string` | `"/"` | no |
-| <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name) | Name of the IAM role. | `string` | `"github"` | no |
-| <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path) | Path to the IAM role. | `string` | `"/"` | no |
-| <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the permissions boundary to be used by the IAM role. | `string` | `""` | no |
-| <a name="input_iam_role_policy_arns"></a> [iam\_role\_policy\_arns](#input\_iam\_role\_policy\_arns) | List of IAM policy ARNs to attach to the IAM role. | `list(string)` | `[]` | no |
-| <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration) | Maximum session duration in seconds. | `number` | `3600` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Map of tags to be applied to all resources. | `map(string)` | `{}` | no |
+| Name                                                                                                                            | Description                                                              | Type | Default | Required |
+|---------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|------|---------|:--------:|
+| <a name="input_attach_admin_policy"></a> [attach\_admin\_policy](#input\_attach\_admin\_policy)                                 | Flag to enable/disable the attachment of the AdministratorAccess policy. | `bool` | `false` | no |
+| <a name="input_attach_read_only_policy"></a> [attach\_read\_only\_policy](#input\_attach\_read\_only\_policy)                   | Flag to enable/disable the attachment of the ReadOnly policy.            | `bool` | `true` | no |
+| <a name="input_create_oidc_provider"></a> [create\_oidc\_provider](#input\_create\_oidc\_provider)                              | Flag to enable/disable the creation of the GitHub OIDC provider.         | `bool` | `true` | no |
+| <a name="input_enabled"></a> [enabled](#input\_enabled)                                                                         | Flag to enable/disable the creation of resources.                        | `bool` | `true` | no |
+| <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies)                           | Flag to force detachment of policies attached to the IAM role.           | `string` | `false` | no |
+| <a name="input_github_organization"></a> [github\_organization](#input\_github\_organization)                                   | GitHub organization name.                                                | `string` | n/a | yes |
+| <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories)                                   | List of GitHub repository names.                                         | `list(string)` | n/a | yes |
+| <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint)                                         | GitHub OpenID TLS certificate thumbprint.                                | `string` | `"6938fd4d98bab03faadb97b34396831e3780aea1"` | no |
+| <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name)                                                   | Name of the IAM role.                                                    | `string` | `"github"` | no |
+| <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path)                                                   | Path to the IAM role.                                                    | `string` | `"/"` | no |
+| <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the permissions boundary to be used by the IAM role.              | `string` | `""` | no |
+| <a name="input_iam_role_policy_arns"></a> [iam\_role\_policy\_arns](#input\_iam\_role\_policy\_arns)                            | List of IAM policy ARNs to attach to the IAM role.                       | `list(string)` | `[]` | no |
+| <a name="input_max_session_duration"></a> [max\_session\_duration](#input\_max\_session\_duration)                              | Maximum session duration in seconds.                                     | `number` | `3600` | no |
+| <a name="input_tags"></a> [tags](#input\_tags)                                                                                  | Map of tags to be applied to all resources.                              | `map(string)` | `{}` | no |
 
 ## Outputs
 

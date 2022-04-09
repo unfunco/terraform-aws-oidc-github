@@ -28,8 +28,8 @@ variable "force_detach_policies" {
   type        = string
 }
 
-variable "github_organisation" {
-  description = "GitHub organisation name."
+variable "github_organization" {
+  description = "GitHub organization name."
   type        = string
 }
 
