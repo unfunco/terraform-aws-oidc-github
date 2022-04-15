@@ -43,7 +43,7 @@ variable "force_detach_policies" {
 }
 
 variable "github_repositories" {
-  description = "List of GitHub organization/repository names authorized to assume role."
+  description = "List of GitHub organization/repository names authorized to assume the role."
   type        = list(string)
 
   validation {
