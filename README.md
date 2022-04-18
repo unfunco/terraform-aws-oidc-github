@@ -105,7 +105,7 @@ Trusted Entities look like
 ```bash
             "Condition": {
                 "StringEquals": {
-                    "gitlab.com:sub": "https://gitlab.com"
+                    "gitlab.com:sub": "project_path:{group_id}/{project_name}:ref_type:branch:ref:main
                 }
             }
 ```            
