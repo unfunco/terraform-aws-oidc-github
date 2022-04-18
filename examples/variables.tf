@@ -33,13 +33,13 @@ variable "audience" {
 
 variable "match_field" {
   type        = string
-  default     = "aud"
-  description = "	Issuer, the domain of your GitLab instance. Default 'aud'. Change to 'sub' if you want to use the filter to any project"
+  default     = "sub"
+  description = "	Issuer, the domain of your GitLab instance. Default 'aud'. Change to 'sub' if you want to use the filter to a specific branch or group"
 }
 
 variable "match_value" {
   type        = list(any)
-  default     = ["https://gitlab.com"]
+  default     = ["project_path:tho8111998/gitlab-oidc-aws:ref_type:branch:ref:main"]
   description = "It should be the your Gitab Instance URl by default. But if you want to use filer to a specific group, branch or tag, use this format project_path:mygroup/myproject:ref_type:branch:ref:main"
 
 }

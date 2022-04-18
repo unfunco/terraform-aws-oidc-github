@@ -67,7 +67,7 @@ variable "attach_admin_policy" {
 variable "match_field" {
   type        = string
   default     = "aud"
-  description = "	Issuer, the domain of your GitLab instance. Default 'aud'. Change to 'sub' if you want to use the filter to any project"
+  description = "	Issuer, the domain of your GitLab instance. Default value is 'aud' with gilab instance url. Change to 'sub' if you want to use the filter to any project"
 }
 
 variable "match_value" {
