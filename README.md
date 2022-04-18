@@ -67,6 +67,27 @@ Below condition allows any GitLab project to retrieve temporary credentials from
       variable = "${aws_iam_openid_connect_provider.gitlab[0].url}:${var.match_field}" # gitlab.com:aud
     }
 ```
+Trusted Entities look liks
+```bash
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::585584209241:oidc-provider/gitlab.com"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "gitlab.com:aud": "https://gitlab.com"
+                }
+            }
+        }
+    ]
+}
+```
+
 <code>sub</code> is a concatenation of metadata describing the GitLab CI/CD workflow including the group, project, branch, and tag. The sub field is in the following format:
 
 project_path:{gitlab_group_id}/{project_name}:ref_type:{type}:ref:{branch_name}
@@ -78,6 +99,16 @@ project_path:{gitlab_group_id}/{project_name}:ref_type:{type}:ref:{branch_name}
 | Filter to specific project | 	project_path:mygroup/myproject:ref_type:branch:ref:main |
 | Filter to all projects under a group | Wildcard supported. project_path:mygroup/*:ref_type:branch:ref:main |
 | Filter to a Git tag | Wildcard supported. project_path:mygroup/*:ref_type:tag:ref:1.0 |
+
+Trusted Entities look like
+
+```bash
+            "Condition": {
+                "StringEquals": {
+                    "gitlab.com:sub": "https://gitlab.com"
+                }
+            }
+```            
 
 ## Inputs
 
