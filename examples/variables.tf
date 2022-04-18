@@ -39,7 +39,7 @@ variable "match_field" {
 
 variable "match_value" {
   type        = list(any)
-  default     = ["project_path:tho8111998/gitlab-oidc-aws:ref_type:branch:ref:main"]
+  default     = ["project_path:{group_id}/{project}:ref_type:branch:ref:main"]
   description = "It should be the your Gitab Instance URl by default. But if you want to use filer to a specific group, branch or tag, use this format project_path:mygroup/myproject:ref_type:branch:ref:main"
 
 }
