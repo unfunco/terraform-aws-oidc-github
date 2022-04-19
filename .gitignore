@@ -6,6 +6,7 @@
 *_override.tf.json
 .terraform.lock.hcl
 .terraformrc
+.tfsec/
 certificate.crt
 crash.log
 override.tf

@@ -1,0 +1,45 @@
+name: Security
+
+on:
+  pull_request:
+    branches:
+    - main
+    paths-ignore:
+    - .github/**/*.yaml
+    - .editorconfig
+    - .gitignore
+    - CHANGELOG.md
+    - LICENSE.md
+    - README.md
+  push:
+    branches:
+    - main
+    paths-ignore:
+    - .github/**/*.yaml
+    - .editorconfig
+    - .gitignore
+    - CHANGELOG.md
+    - LICENSE.md
+    - README.md
+  schedule:
+  - cron: "35 23 * * 5"
+
+jobs:
+  scan:
+    name: Security scan
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Run tfsec
+      uses: tfsec/tfsec-sarif-action@v0.1.0
+      with:
+        sarif_file: tfsec.sarif
+    - name: Upload SARIF artifact
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: tfsec.sarif
