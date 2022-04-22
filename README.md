@@ -1,5 +1,9 @@
 # AWS federation for GitHub Actions
 
+[![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
+[![Cron / Verify](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml)
+[![Security](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml)
+
 Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
 AWS. This enables GitHub Actions to access resources within an AWS account
 without requiring long-lived credentials to be stored as GitHub secrets.
