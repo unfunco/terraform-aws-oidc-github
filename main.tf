@@ -14,7 +14,7 @@
 
 locals {
   github_organizations = [for repo in var.github_repositories : split("/", repo)[0]]
-  oidc_provider        = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0] : data.aws_iam_openid_connect_provider.github[0]
+  oidc_provider_arn    = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn
   partition            = data.aws_partition.current.partition
 }
 
