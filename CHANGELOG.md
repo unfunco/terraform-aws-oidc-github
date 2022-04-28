@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [0.6.1] – 2022-04-28
+
+* Fixed an issue with inconsistent types in locals ([ddaa1ce](https://github.com/unfunco/terraform-aws-oidc-github/commit/ddaa1cee0ede5475c3ba30238875de7e7eddef4c))
+
 ## [0.6.0] – 2022-04-09
 
 * Allow multiple organizations to be used in a single module ([d32aa74](https://github.com/unfunco/terraform-aws-oidc-github/commit/d32aa74a2783db98196c7d6b2670dcf3bf6ae2fe))
@@ -54,4 +58,5 @@ This project adheres to the [semantic versioning] specification.
 [0.4.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.4.0...v0.4.1
 [0.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.4.1...v0.5.0
 [0.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.5.0...v0.6.0
+[0.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.0...v0.6.1
 [Semantic versioning]: https://semver.org
