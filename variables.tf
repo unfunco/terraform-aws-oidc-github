@@ -57,6 +57,13 @@ variable "github_repositories" {
   }
 }
 
+// See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#configuring-the-subject-in-your-cloud-provider
+variable "github_ref" {
+  default     = ""
+  type        = string
+  description = "GitHub ref that must be in OIDC claim e.g. 'refs/heads/my-prod-branch'"
+}
+
 // Refer to the README for information on obtaining the thumbprint.
 // This is specified as a variable to allow it to be updated quickly if it is
 // unexpectedly changed by GitHub.
