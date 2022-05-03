@@ -22,8 +22,11 @@ data "aws_iam_policy_document" "assume_role" {
     effect  = "Allow"
 
     condition {
-      test     = "StringLike"
-      values   = [for repo in var.github_repositories : "repo:${repo}:%{if var.github_ref != ""}ref:${var.github_ref}%{else}*%{endif}"]
+      test = "StringLike"
+      values = [
+        for repo in var.github_repositories :
+        "repo:%{if length(regexall(":+", repo)) > 0}${repo}%{else}${repo}:*%{endif}"
+      ]
       variable = "token.actions.githubusercontent.com:sub"
     }
 

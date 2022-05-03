@@ -37,17 +37,10 @@ variable "github_repositories" {
     // organization/repository format used by GitHub.
     condition = length([
       for repo in var.github_repositories : 1
-      if length(regexall("^[A-Za-z0-9_.-]+?/[A-Za-z0-9_.-]+$", repo)) > 0
+      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+|\\*)$", repo)) > 0
     ]) == length(var.github_repositories)
     error_message = "Repositories must be specified in the organization/repository format."
   }
-}
-
-// See https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#configuring-the-subject-in-your-cloud-provider
-variable "github_ref" {
-  default     = ""
-  type        = string
-  description = "GitHub ref that must be in OIDC claim e.g. 'refs/heads/my-prod-branch'"
 }
 
 // Refer to the README for information on obtaining the thumbprint.

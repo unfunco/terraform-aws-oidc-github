@@ -17,7 +17,6 @@ module "aws_oidc_github" {
   iam_role_permissions_boundary = var.iam_role_permissions_boundary
   iam_role_policy_arns          = var.iam_role_policy_arns
   github_repositories           = var.github_repositories
-  github_ref                    = var.github_ref
   max_session_duration          = var.max_session_duration
   tags                          = var.tags
 }
