@@ -3,6 +3,11 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [0.7.0] – 2022-05-03
+
+* Allow specific branch filtering ([3af1335](https://github.com/unfunco/terraform-aws-oidc-github/commit/3af133545de56f85a40dc76aacbd79f2b9fc8b26))
+* Fixed a regression that prevents a wildcard being used for repositories ([80ae598](https://github.com/unfunco/terraform-aws-oidc-github/commit/80ae5981070a173d00c885b7444de23d94e56bef))
+
 ## [0.6.1] – 2022-04-28
 
 * Fixed an issue with inconsistent types in locals ([ddaa1ce](https://github.com/unfunco/terraform-aws-oidc-github/commit/ddaa1cee0ede5475c3ba30238875de7e7eddef4c))
@@ -59,4 +64,5 @@ This project adheres to the [semantic versioning] specification.
 [0.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.4.1...v0.5.0
 [0.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.5.0...v0.6.0
 [0.6.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.0...v0.6.1
+[0.7.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.1...v0.7.0
 [Semantic versioning]: https://semver.org
