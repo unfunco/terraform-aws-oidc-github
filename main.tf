@@ -29,6 +29,14 @@ resource "aws_iam_role" "github" {
   path                  = var.iam_role_path
   permissions_boundary  = var.iam_role_permissions_boundary
   tags                  = var.tags
+
+  dynamic "inline_policy" {
+    for_each = var.iam_role_inline_policies
+    content {
+      name   = each.key
+      policy = each.value
+    }
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
