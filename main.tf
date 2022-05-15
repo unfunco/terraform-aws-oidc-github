@@ -33,8 +33,8 @@ resource "aws_iam_role" "github" {
   dynamic "inline_policy" {
     for_each = var.iam_role_inline_policies
     content {
-      name   = each.key
-      policy = each.value
+      name   = inline_policy.key
+      policy = inline_policy.value
     }
   }
 }
