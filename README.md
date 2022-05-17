@@ -23,7 +23,7 @@ provider "aws" {
 
 module "aws_oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "0.7.0"
+  version = "0.8.0"
 
   github_repositories = [
     "org/repo",
@@ -56,6 +56,7 @@ jobs:
 ```
 
 <!-- BEGIN_TF_DOCS -->
+
 ## Requirements
 
 | Name                                                                      | Version |
@@ -97,6 +98,7 @@ No modules.
 | <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies)                           | Flag to force detachment of policies attached to the IAM role.           | `string`       | `false`                                      |    no    |
 | <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories)                                   | List of GitHub organization/repository names.                            | `list(string)` | n/a                                          |   yes    |
 | <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint)                                         | GitHub OpenID TLS certificate thumbprint.                                | `string`       | `"6938fd4d98bab03faadb97b34396831e3780aea1"` |    no    |
+| <a name="iam_role_inline_policies"></a> [iam\_role\_inline\_policies](#iam\_role\_inline\_policies)                             | Inline policies map with policy name as key and json as value.           | `map(string)`  | `{}`                                         |    no    |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name)                                                   | Name of the IAM role.                                                    | `string`       | `"github"`                                   |    no    |
 | <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path)                                                   | Path to the IAM role.                                                    | `string`       | `"/"`                                        |    no    |
 | <a name="input_iam_role_permissions_boundary"></a> [iam\_role\_permissions\_boundary](#input\_iam\_role\_permissions\_boundary) | ARN of the permissions boundary to be used by the IAM role.              | `string`       | `""`                                         |    no    |

@@ -3,6 +3,11 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [0.8.0] – 2022-05-17
+
+* Allow the attachment of inline IAM policies to the OIDC role ([6445a81](https://github.com/unfunco/terraform-aws-oidc-github/commit/6445a81934184714cffa032370239a3e1be07380))
+* Fixed a null reference issue when enabled is set to false ([7f2bb73](https://github.com/unfunco/terraform-aws-oidc-github/commit/7f2bb7351dbd62d34e4fa441d1949c16684d3c58))
+
 ## [0.7.0] – 2022-05-03
 
 * Allow specific branch filtering ([3af1335](https://github.com/unfunco/terraform-aws-oidc-github/commit/3af133545de56f85a40dc76aacbd79f2b9fc8b26))
@@ -65,4 +70,5 @@ This project adheres to the [semantic versioning] specification.
 [0.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.5.0...v0.6.0
 [0.6.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.0...v0.6.1
 [0.7.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.1...v0.7.0
+[0.8.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.7.0...v0.8.0
 [Semantic versioning]: https://semver.org
