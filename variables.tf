@@ -90,7 +90,7 @@ variable "iam_role_policy_arns" {
   description = "List of IAM policy ARNs to attach to the IAM role."
   type        = list(string)
 }
-  
+
 variable "iam_role_inline_policies" {
   default     = {}
   description = "Inline policies map with policy name as key and json as value."

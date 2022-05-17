@@ -19,7 +19,7 @@ module "aws_oidc_github" {
   github_repositories           = var.github_repositories
   max_session_duration          = var.max_session_duration
   tags                          = var.tags
-  
+
   iam_role_inline_policies = {
     "example_inline_policy" : data.aws_iam_policy_document.example.json
   }
