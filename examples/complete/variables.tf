@@ -25,7 +25,7 @@ variable "enabled" {
 variable "force_detach_policies" {
   default     = false
   description = "Flag to force detachment of policies attached to the IAM role."
-  type        = string
+  type        = bool
 }
 
 variable "github_repositories" {
