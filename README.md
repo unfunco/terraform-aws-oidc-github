@@ -21,7 +21,7 @@ provider "aws" {
   region = var.region
 }
 
-module "aws_oidc_github" {
+module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
   version = "0.8.0"
 
@@ -95,7 +95,7 @@ No modules.
 | <a name="input_attach_read_only_policy"></a> [attach\_read\_only\_policy](#input\_attach\_read\_only\_policy)                   | Flag to enable/disable the attachment of the ReadOnly policy.            | `bool`         | `true`                                       |    no    |
 | <a name="input_create_oidc_provider"></a> [create\_oidc\_provider](#input\_create\_oidc\_provider)                              | Flag to enable/disable the creation of the GitHub OIDC provider.         | `bool`         | `true`                                       |    no    |
 | <a name="input_enabled"></a> [enabled](#input\_enabled)                                                                         | Flag to enable/disable the creation of resources.                        | `bool`         | `true`                                       |    no    |
-| <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies)                           | Flag to force detachment of policies attached to the IAM role.           | `string`       | `false`                                      |    no    |
+| <a name="input_force_detach_policies"></a> [force\_detach\_policies](#input\_force\_detach\_policies)                           | Flag to force detachment of policies attached to the IAM role.           | `bool`         | `false`                                      |    no    |
 | <a name="input_github_repositories"></a> [github\_repositories](#input\_github\_repositories)                                   | List of GitHub organization/repository names.                            | `list(string)` | n/a                                          |   yes    |
 | <a name="input_github_thumbprint"></a> [github\_thumbprint](#input\_github\_thumbprint)                                         | GitHub OpenID TLS certificate thumbprint.                                | `string`       | `"6938fd4d98bab03faadb97b34396831e3780aea1"` |    no    |
 | <a name="iam_role_inline_policies"></a> [iam\_role\_inline\_policies](#iam\_role\_inline\_policies)                             | Inline policies map with policy name as key and json as value.           | `map(string)`  | `{}`                                         |    no    |
