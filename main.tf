@@ -13,7 +13,7 @@
 // limitations under the License.
 
 locals {
-  github_organizations = [for repo in var.github_repositories : split("/", repo)[0]]
+  github_organizations = toset([for repo in var.github_repositories : split("/", repo)[0]])
   oidc_provider_arn    = var.enabled ? (var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn) : ""
   partition            = data.aws_partition.current.partition
 }
