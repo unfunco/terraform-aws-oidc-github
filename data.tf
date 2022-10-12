@@ -44,3 +44,7 @@ data "aws_iam_openid_connect_provider" "github" {
 
   url = "https://token.actions.githubusercontent.com"
 }
+
+data "tls_certificate" "github" {
+  url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
+}
