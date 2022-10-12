@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.0.0] – 2022-10-12
+
+- Fixed an issue that could cause duplicate client IDs ([1e2a908](https://github.com/unfunco/terraform-aws-oidc-github/commit/1e2a9080933a96aaff681082e0878a38cfe787e2))
+
 ## [0.8.0] – 2022-05-17
 
 - Allow the attachment of inline IAM policies to the OIDC role ([6445a81](https://github.com/unfunco/terraform-aws-oidc-github/commit/6445a81934184714cffa032370239a3e1be07380))
@@ -71,4 +75,5 @@ This project adheres to the [semantic versioning] specification.
 [0.6.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.0...v0.6.1
 [0.7.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.6.1...v0.7.0
 [0.8.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.7.0...v0.8.0
+[1.0.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.8.0...v1.0.0
 [semantic versioning]: https://semver.org
