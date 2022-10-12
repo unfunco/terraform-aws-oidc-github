@@ -1,0 +1,31 @@
+formatter: markdown
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sections:
+  hide: [ modules, providers, requirements ]
+
+sort:
+  enabled: true
+  by: name
+
+settings:
+  anchor: false
+  color: false
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: false
+  indent: 0
+  lockfile: true
+  read-comments: true
+  required: true
+  sensitive: true
+  type: true
