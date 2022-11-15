@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.1.1] – 2022-11-15
+
+- Support TLS provider versions >= 3 ([710428f](https://github.com/unfunco/terraform-aws-oidc-github/commit/710428f4b6ef4e7a5b505f46a053a62c15d3e01c))
+
 ## [1.1.0] – 2022-10-12
 
 - Use a data source to obtain the GitHub thumbprint ([07c4be3](https://github.com/unfunco/terraform-aws-oidc-github/commit/07c4be3c5569461f00209346dca61d5901ea789f))
@@ -81,4 +85,5 @@ This project adheres to the [semantic versioning] specification.
 [0.8.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.7.0...v0.8.0
 [1.0.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.8.0...v1.0.0
 [1.1.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.0.0...v1.1.0
+[1.1.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.0...v1.1.1
 [semantic versioning]: https://semver.org
