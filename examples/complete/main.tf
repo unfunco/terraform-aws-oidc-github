@@ -11,7 +11,6 @@ module "aws_oidc_github" {
   attach_read_only_policy       = var.attach_read_only_policy
   create_oidc_provider          = var.create_oidc_provider
   force_detach_policies         = var.force_detach_policies
-  github_thumbprint             = var.github_thumbprint
   iam_role_name                 = var.iam_role_name
   iam_role_path                 = var.iam_role_path
   iam_role_permissions_boundary = var.iam_role_permissions_boundary
