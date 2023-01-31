@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.2.0] – 2023-01-31
+
+- Add support for wildcards in GitHub repository names ([b55b33f](https://github.com/unfunco/terraform-aws-oidc-github/commit/b55b33f12c2bd4255d0c2ae6a8a7f4cfa2fdaca9))
+
 ## [1.1.1] – 2022-11-15
 
 - Support TLS provider versions >= 3 ([710428f](https://github.com/unfunco/terraform-aws-oidc-github/commit/710428f4b6ef4e7a5b505f46a053a62c15d3e01c))
@@ -86,4 +90,5 @@ This project adheres to the [semantic versioning] specification.
 [1.0.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v0.8.0...v1.0.0
 [1.1.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.0.0...v1.1.0
 [1.1.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.0...v1.1.1
+[1.2.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.1...v1.2.0
 [semantic versioning]: https://semver.org
