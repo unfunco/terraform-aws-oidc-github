@@ -30,6 +30,12 @@ data "aws_iam_policy_document" "assume_role" {
       variable = "token.actions.githubusercontent.com:sub"
     }
 
+    condition {
+      test     = "StringLike"
+      values   = ["sts.amazonaws.com"]
+      variable = "token.actions.githubusercontent.com:aud"
+    }
+
     principals {
       identifiers = [local.oidc_provider_arn]
       type        = "Federated"
