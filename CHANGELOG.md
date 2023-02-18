@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.2.1] – 2023-02-18
+
+- Added an explicit audience claim ([2dc99c4](https://github.com/unfunco/terraform-aws-oidc-github/commit/2dc99c4d7dcf925768948e00555695f229fed150))
+
 ## [1.2.0] – 2023-01-31
 
 - Add support for wildcards in GitHub repository names ([b55b33f](https://github.com/unfunco/terraform-aws-oidc-github/commit/b55b33f12c2bd4255d0c2ae6a8a7f4cfa2fdaca9))
@@ -91,4 +95,5 @@ This project adheres to the [semantic versioning] specification.
 [1.1.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.0.0...v1.1.0
 [1.1.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.0...v1.1.1
 [1.2.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.1...v1.2.0
+[1.2.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.2.0...v1.2.1
 [semantic versioning]: https://semver.org
