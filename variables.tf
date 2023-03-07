@@ -16,6 +16,11 @@ variable "additional_thumbprints" {
   default     = null
   description = "List of additonal thumbprints for the OIDC provider."
   type        = list(string)
+
+  validation {
+    condition     = length(var.additional_thumbprints) > 4
+    error_message = "Only 4 additional thumbprints can be set, for a maximum of 5 in the OIDC provider."
+  }
 }
 
 variable "attach_admin_policy" {
