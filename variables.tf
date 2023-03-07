@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-variable "additonal_thumbprints" {
+variable "additional_thumbprints" {
   default     = null
   description = "List of additonal thumbprints for the OIDC provider."
   type        = list(string)
