@@ -22,6 +22,8 @@ module "aws_oidc_github" {
   iam_role_inline_policies = {
     "example_inline_policy" : data.aws_iam_policy_document.example.json
   }
+
+  additional_thumbprints = var.additional_thumbprints
 }
 
 data "aws_iam_policy_document" "example" {
