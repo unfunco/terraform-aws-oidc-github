@@ -1,6 +1,6 @@
 variable "additional_thumbprints" {
   default     = null
-  description = "List of additonal thumbprints for the OIDC provider."
+  description = "List of additional thumbprints for the OIDC provider."
   type        = list(string)
 
   validation {
