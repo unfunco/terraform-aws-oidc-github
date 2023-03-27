@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.3.1] – 2023-03-27
+
+- Ensure the additional_thumbprints variable allows null values ([750f0f6](https://github.com/unfunco/terraform-aws-oidc-github/commit/750f0f6b0296057ff9910cebd2ac2f577b0cdb90))
+
 ## [1.3.0] – 2023-03-21
 
 - Added a variable to allow additional thumbprints to be specified ([f3ca314](https://github.com/unfunco/terraform-aws-oidc-github/commit/f3ca3143052eecf59fc08be8dbb288855764414f))
@@ -101,4 +105,5 @@ This project adheres to the [semantic versioning] specification.
 [1.2.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.1.1...v1.2.0
 [1.2.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.2.0...v1.2.1
 [1.3.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.2.1...v1.3.0
+[1.3.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.3.0...v1.3.1
 [semantic versioning]: https://semver.org
