@@ -36,7 +36,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
     - name: Run tfsec
-      uses: tfsec/tfsec-sarif-action@v0.1.0
+      uses: tfsec/tfsec-sarif-action@v0.1.4
       with:
         sarif_file: tfsec.sarif
     - name: Upload SARIF artifact
