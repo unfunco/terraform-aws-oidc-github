@@ -41,6 +41,7 @@ The following demonstrates how to use GitHub Actions once the Terraform module
 has been applied to your AWS account. The action receives a JSON Web Token (JWT)
 from the GitHub OIDC provider and then requests an access token from AWS.
 
+<!-- prettier-ignore -->
 ```yaml
 jobs:
   caller-identity:
@@ -50,14 +51,14 @@ jobs:
       id-token: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
-      - run: aws sts get-caller-identity
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
+    - run: aws sts get-caller-identity
 ```
 
 <!-- BEGIN_TF_DOCS -->
