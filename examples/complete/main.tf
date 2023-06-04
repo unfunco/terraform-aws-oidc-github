@@ -29,6 +29,7 @@ module "aws_oidc_github" {
 data "aws_iam_policy_document" "example" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["*"]
+    effect    = "Allow"
+    resources = ["dynamodb:CreateTable"]
   }
 }
