@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     principals {
-      identifiers = [local.oidc_provider_arn]
+      identifiers = ["${local.oidc_provider_arn}%{if var.enterprise_slug != ""}/${var.enterprise_slug}%{endif}"]
       type        = "Federated"
     }
   }
@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_openid_connect_provider" "github" {
   count = var.enabled && !var.create_oidc_provider ? 1 : 0
 
-  url = "https://token.actions.githubusercontent.com"
+  url = "https://token.actions.githubusercontent.com%{if var.enterprise_slug != ""}/${var.enterprise_slug}%{endif}"
 }
 
 data "tls_certificate" "github" {

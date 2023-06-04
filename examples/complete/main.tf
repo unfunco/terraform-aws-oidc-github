@@ -7,9 +7,11 @@ module "aws_oidc_github" {
 
   enabled = var.enabled
 
+  additional_thumbprints        = var.additional_thumbprints
   attach_admin_policy           = var.attach_admin_policy
   attach_read_only_policy       = var.attach_read_only_policy
   create_oidc_provider          = var.create_oidc_provider
+  enterprise_slug               = var.enterprise_slug
   force_detach_policies         = var.force_detach_policies
   iam_role_name                 = var.iam_role_name
   iam_role_path                 = var.iam_role_path
@@ -22,13 +24,12 @@ module "aws_oidc_github" {
   iam_role_inline_policies = {
     "example_inline_policy" : data.aws_iam_policy_document.example.json
   }
-
-  additional_thumbprints = var.additional_thumbprints
 }
 
 data "aws_iam_policy_document" "example" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = ["*"]
+    effect    = "Allow"
+    resources = ["dynamodb:CreateTable"]
   }
 }

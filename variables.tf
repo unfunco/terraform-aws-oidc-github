@@ -47,6 +47,12 @@ variable "enabled" {
   type        = bool
 }
 
+variable "enterprise_slug" {
+  default     = ""
+  description = "Enterprise slug for GitHub Enterprise Cloud customers."
+  type        = string
+}
+
 variable "force_detach_policies" {
   default     = false
   description = "Flag to force detachment of policies attached to the IAM role."
