@@ -1,4 +1,4 @@
-# AWS federation for GitHub Actions
+# OpenID Connect for AWS and GitHub Actions
 
 [![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
 [![Cron / Verify](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml)
@@ -6,8 +6,8 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-purple.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
-AWS. This enables GitHub Actions to access resources within an AWS account
-without requiring long-lived credentials to be stored as GitHub secrets.
+AWS. OpenID Connect allows GitHub Actions workflows to access resources in AWS
+without requiring the AWS credentials as to be stored long-lived GitHub secrets.
 
 ## 🔨 Getting started
 
@@ -28,7 +28,7 @@ provider "aws" {
 
 module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "1.4.0"
+  version = "1.5.0"
 
   github_repositories = [
     "org/repo",
@@ -56,10 +56,17 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v2
       with:
-        aws-region: ${{ secrets.AWS_REGION }}
-        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
+        aws-region: ${{ env.AWS_REGION }}
+        role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
 ```
+
+#### Enterprise Cloud
+
+Organisations using GitHub Enterprise Cloud can further improve their security
+posture by setting the `enterprise_slug` variable. This configuration ensures
+that the organisation will receive OIDC tokens from a unique URL, after this is
+applied, the JWT will contain an updated `iss` claim.
 
 <!-- BEGIN_TF_DOCS -->
 
@@ -86,6 +93,7 @@ jobs:
 | attach_read_only_policy       | Flag to enable/disable the attachment of the ReadOnly policy.               | `bool`         | `true`     |    no    |
 | create_oidc_provider          | Flag to enable/disable the creation of the GitHub OIDC provider.            | `bool`         | `true`     |    no    |
 | enabled                       | Flag to enable/disable the creation of resources.                           | `bool`         | `true`     |    no    |
+| enterprise_slug               | Enterprise slug for GitHub Enterprise Cloud customers.                      | `string`       | `""`       |    no    |
 | force_detach_policies         | Flag to force detachment of policies attached to the IAM role.              | `bool`         | `false`    |    no    |
 | github_repositories           | List of GitHub organization/repository names authorized to assume the role. | `list(string)` | n/a        |   yes    |
 | iam_role_inline_policies      | Inline policies map with policy name as key and json as value.              | `map(string)`  | `{}`       |    no    |
