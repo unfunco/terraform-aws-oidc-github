@@ -5,7 +5,7 @@ This project adheres to the [semantic versioning] specification.
 
 ## [1.5.0] – 2023-06-04
 
-- Add support for organisations using GitHub Enterprise Cloud.
+- Add support for organisations using GitHub Enterprise Cloud ([c1d6cc13](https://github.com/unfunco/terraform-aws-oidc-github/commit/c1d6cc13cfd7668784dec11e96f23061b346eae0))
 
 ## [1.4.0] – 2023-06-01
 
