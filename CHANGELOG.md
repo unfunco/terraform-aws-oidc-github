@@ -3,6 +3,11 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.5.1] – 2023-06-28
+
+- Prevent duplication of thumbprints ([35f725d](https://github.com/unfunco/terraform-aws-oidc-github/commit/35f725d4448b6838afd5b9e95ca793f7d4988665))
+- Reduce the number of allowed additional thumbprints ([b89bb89](https://github.com/unfunco/terraform-aws-oidc-github/commit/b89bb89c36746f5dead86b82490ace173adda354))
+
 ## [1.5.0] – 2023-06-04
 
 - Add support for organisations using GitHub Enterprise Cloud ([c1d6cc13](https://github.com/unfunco/terraform-aws-oidc-github/commit/c1d6cc13cfd7668784dec11e96f23061b346eae0))
@@ -116,4 +121,5 @@ This project adheres to the [semantic versioning] specification.
 [1.3.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.3.0...v1.3.1
 [1.4.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.3.1...v1.4.0
 [1.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.4.0...v1.5.0
+[1.5.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.0...v1.5.1
 [semantic versioning]: https://semver.org
