@@ -4,8 +4,8 @@ variable "additional_thumbprints" {
   type        = list(string)
 
   validation {
-    condition     = var.additional_thumbprints == null ? true : length(var.additional_thumbprints) <= 4
-    error_message = "Only 4 additional thumbprints can be set, for a maximum of 5 in the OIDC provider."
+    condition     = var.additional_thumbprints == null ? true : length(var.additional_thumbprints) <= 3
+    error_message = "Only 3 additional thumbprints can be set, for a maximum of 5 in the OIDC provider."
   }
 }
 
