@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.5.2] – 2023-06-29
+
+- Discard the order of thumbprints ([5fae63a](https://github.com/unfunco/terraform-aws-oidc-github/commit/5fae63a23c87a59839453df6b04956babd32734e))
+
 ## [1.5.1] – 2023-06-28
 
 - Prevent duplication of thumbprints ([35f725d](https://github.com/unfunco/terraform-aws-oidc-github/commit/35f725d4448b6838afd5b9e95ca793f7d4988665))
@@ -122,4 +126,5 @@ This project adheres to the [semantic versioning] specification.
 [1.4.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.3.1...v1.4.0
 [1.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.4.0...v1.5.0
 [1.5.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.0...v1.5.1
+[1.5.2]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.1...v1.5.2
 [semantic versioning]: https://semver.org
