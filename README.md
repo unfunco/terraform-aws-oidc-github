@@ -7,7 +7,7 @@
 
 Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
 AWS. OpenID Connect allows GitHub Actions workflows to access resources in AWS
-without requiring the AWS credentials as to be stored long-lived GitHub secrets.
+without requiring the AWS credentials to be stored long-lived GitHub secrets.
 
 ## 🔨 Getting started
 
