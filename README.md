@@ -7,12 +7,14 @@
 
 Terraform module to configure GitHub Actions as an IAM OIDC identity provider in
 AWS. OpenID Connect allows GitHub Actions workflows to access resources in AWS
-without requiring the AWS credentials to be stored long-lived GitHub secrets.
+without requiring AWS credentials to be stored as long-lived GitHub secrets.
 
 ## 🔨 Getting started
 
 ### Requirements
 
+- [AWS Provider] 4.0+
+- [TLS Provider] 3.0+
 - [Terraform] 1.0+
 
 ### Installation and usage
@@ -117,6 +119,7 @@ applied, the JWT will contain an updated `iss` claim.
 - [Configuring OpenID Connect in Amazon Web Services]
 - [Creating OpenID Connect (OIDC) identity providers]
 - [Obtaining the thumbprint for an OpenID Connect Identity Provider]
+- [GitHub Actions – Update on OIDC integration with AWS]
 
 ## License
 
@@ -124,9 +127,12 @@ applied, the JWT will contain an updated `iss` claim.
 Made available under the terms of the [Apache License 2.0].
 
 [apache license 2.0]: LICENSE.md
+[aws provider]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 [complete example]: examples/complete
 [configuring openid connect in amazon web services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [creating openid connect (oidc) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 [make]: https://www.gnu.org/software/make/
 [obtaining the thumbprint for an openid connect identity provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
 [terraform]: https://www.terraform.io
+[tls provider]: https://registry.terraform.io/providers/hashicorp/tls/latest/docs
+[github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
