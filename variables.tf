@@ -25,7 +25,7 @@ variable "additional_thumbprints" {
 
 variable "allowed_audiences" {
   default     = ["sts.amazonaws.com"]
-  description = "List of allowed audiences for the OIDC provider."
+  description = "List of OIDC audiences allowed to assume the role."
   type        = list(string)
 }
 
