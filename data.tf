@@ -32,7 +32,7 @@ data "aws_iam_policy_document" "assume_role" {
 
     condition {
       test     = "StringEquals"
-      values   = ["sts.amazonaws.com"]
+      values   = var.allowed_audiences
       variable = "token.actions.githubusercontent.com:aud"
     }
 

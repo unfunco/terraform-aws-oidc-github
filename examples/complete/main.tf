@@ -8,6 +8,7 @@ module "aws_oidc_github" {
   enabled = var.enabled
 
   additional_thumbprints        = var.additional_thumbprints
+  allowed_audiences             = var.allowed_audiences
   attach_admin_policy           = var.attach_admin_policy
   attach_read_only_policy       = var.attach_read_only_policy
   create_oidc_provider          = var.create_oidc_provider

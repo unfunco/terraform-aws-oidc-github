@@ -9,6 +9,12 @@ variable "additional_thumbprints" {
   }
 }
 
+variable "allowed_audiences" {
+  default     = ["sts.amazonaws.com"]
+  description = "List of allowed audiences for the OIDC provider."
+  type        = list(string)
+}
+
 variable "attach_admin_policy" {
   default     = false
   description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
