@@ -1,3 +1,9 @@
+variable "additional_audiences" {
+  default     = null
+  description = "List of additional OIDC audiences allowed to assume the role."
+  type        = list(string)
+}
+
 variable "additional_thumbprints" {
   default     = null
   description = "List of additional thumbprints for the OIDC provider."
@@ -9,11 +15,6 @@ variable "additional_thumbprints" {
   }
 }
 
-variable "allowed_audiences" {
-  default     = ["sts.amazonaws.com"]
-  description = "List of OIDC audiences allowed to assume the role."
-  type        = list(string)
-}
 
 variable "attach_admin_policy" {
   default     = false
