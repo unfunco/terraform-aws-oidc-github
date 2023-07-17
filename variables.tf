@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+variable "additional_audiences" {
+  default     = null
+  description = "List of additional OIDC audiences allowed to assume the role."
+  type        = list(string)
+}
+
 variable "additional_thumbprints" {
   default     = null
   description = "List of additional thumbprints for the OIDC provider."
@@ -21,12 +27,6 @@ variable "additional_thumbprints" {
     condition     = var.additional_thumbprints == null ? true : length(var.additional_thumbprints) <= 3
     error_message = "Only 3 additional thumbprints can be set, for a maximum of 5 in the OIDC provider."
   }
-}
-
-variable "additional_audiences" {
-  default     = null
-  description = "List of additional OIDC audiences allowed to assume the role."
-  type        = list(string)
 }
 
 variable "attach_admin_policy" {

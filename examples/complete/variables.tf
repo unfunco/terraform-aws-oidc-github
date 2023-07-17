@@ -15,7 +15,6 @@ variable "additional_thumbprints" {
   }
 }
 
-
 variable "attach_admin_policy" {
   default     = false
   description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
