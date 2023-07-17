@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+variable "additional_audiences" {
+  default     = null
+  description = "List of additional OIDC audiences allowed to assume the role."
+  type        = list(string)
+}
+
 variable "additional_thumbprints" {
   default     = null
   description = "List of additional thumbprints for the OIDC provider."

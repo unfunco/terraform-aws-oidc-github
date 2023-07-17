@@ -90,6 +90,7 @@ applied, the JWT will contain an updated `iss` claim.
 
 | Name                          | Description                                                                 | Type           | Default    | Required |
 | ----------------------------- | --------------------------------------------------------------------------- | -------------- | ---------- | :------: |
+| additional_audiences          | List of additional OIDC audiences allowed to assume the role.               | `list(string)` | `null`     |    no    |
 | additional_thumbprints        | List of additional thumbprints for the OIDC provider.                       | `list(string)` | `null`     |    no    |
 | attach_admin_policy           | Flag to enable/disable the attachment of the AdministratorAccess policy.    | `bool`         | `false`    |    no    |
 | attach_read_only_policy       | Flag to enable/disable the attachment of the ReadOnly policy.               | `bool`         | `true`     |    no    |
