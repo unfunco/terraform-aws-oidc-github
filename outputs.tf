@@ -17,3 +17,9 @@ output "iam_role_arn" {
   description = "ARN of the IAM role."
   value       = var.enabled ? aws_iam_role.github[0].arn : ""
 }
+
+output "iam_role_name" {
+  depends_on  = [aws_iam_role.github]
+  description = "Name of the IAM role."
+  value       = var.enabled ? aws_iam_role.github[0].name : ""
+}
