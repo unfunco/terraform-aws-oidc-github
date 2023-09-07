@@ -109,9 +109,10 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Outputs
 
-| Name         | Description          |
-| ------------ | -------------------- |
-| iam_role_arn | ARN of the IAM role. |
+| Name          | Description           |
+| ------------- | --------------------- |
+| iam_role_arn  | ARN of the IAM role.  |
+| iam_role_name | Name of the IAM role. |
 
 <!-- END_TF_DOCS -->
 
