@@ -3,6 +3,11 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.6.0] – 2023-09-07
+
+- Allow additional audiences to be specified ([d5f4644](https://github.com/unfunco/terraform-aws-oidc-github/commit/d5f46444ed4018b88d0204df037ac3b4dbca7a03))
+- Add IAM role name to outputs ([2ef5c27](https://github.com/unfunco/terraform-aws-oidc-github/commit/2ef5c27980657505c0e00d8665e57fa5c885785b))
+
 ## [1.5.2] – 2023-06-29
 
 - Discard the order of thumbprints ([5fae63a](https://github.com/unfunco/terraform-aws-oidc-github/commit/5fae63a23c87a59839453df6b04956babd32734e))
@@ -127,4 +132,5 @@ This project adheres to the [semantic versioning] specification.
 [1.5.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.4.0...v1.5.0
 [1.5.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.0...v1.5.1
 [1.5.2]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.1...v1.5.2
+[1.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.2...v1.6.0
 [semantic versioning]: https://semver.org
