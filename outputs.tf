@@ -23,3 +23,9 @@ output "iam_role_name" {
   description = "Name of the IAM role."
   value       = var.enabled ? aws_iam_role.github[0].name : ""
 }
+
+output "oidc_provider_arn" {
+  depends_on  = [aws_iam_openid_connect_provider.github]
+  description = "ARN of the OIDC provider."
+  value       = var.enabled ? aws_iam_openid_connect_provider.github[0].arn : ""
+}
