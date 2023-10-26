@@ -3,6 +3,10 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.7.0] – 2023-10-26
+
+- Add the OIDC provider ARN as an output ([11d98e3](https://github.com/unfunco/terraform-aws-oidc-github/commit/11d98e3dea7ca8e41be157d21fe4769c31fe7570))
+
 ## [1.6.0] – 2023-09-07
 
 - Allow additional audiences to be specified ([d5f4644](https://github.com/unfunco/terraform-aws-oidc-github/commit/d5f46444ed4018b88d0204df037ac3b4dbca7a03))
@@ -133,4 +137,5 @@ This project adheres to the [semantic versioning] specification.
 [1.5.1]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.0...v1.5.1
 [1.5.2]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.1...v1.5.2
 [1.6.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.5.2...v1.6.0
+[1.7.0]: https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.6.0...v1.7.0
 [semantic versioning]: https://semver.org

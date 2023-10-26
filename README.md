@@ -30,7 +30,7 @@ provider "aws" {
 
 module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "1.6.0"
+  version = "1.7.0"
 
   github_repositories = [
     "org/repo",
@@ -109,10 +109,11 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Outputs
 
-| Name          | Description           |
-| ------------- | --------------------- |
-| iam_role_arn  | ARN of the IAM role.  |
-| iam_role_name | Name of the IAM role. |
+| Name              | Description               |
+| ----------------- | ------------------------- |
+| iam_role_arn      | ARN of the IAM role.      |
+| iam_role_name     | Name of the IAM role.     |
+| oidc_provider_arn | ARN of the OIDC provider. |
 
 <!-- END_TF_DOCS -->
 
