@@ -3,6 +3,18 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## 0.1.0 (2024-02-05)
+
+
+### New features
+
+* Begin automating the release process ([#42](https://github.com/unfunco/terraform-aws-oidc-github/issues/42)) ([c9493af](https://github.com/unfunco/terraform-aws-oidc-github/commit/c9493aff293beb6797da347ca282bd3f0d9913c3))
+
+
+### Miscellaneous
+
+* Set the first automated release version ([#44](https://github.com/unfunco/terraform-aws-oidc-github/issues/44)) ([cc3ded5](https://github.com/unfunco/terraform-aws-oidc-github/commit/cc3ded5d0b5bb0cd615ac8202b3d99bbc50735d2))
+
 ## [1.7.1] – 2023-10-29
 
 - Condition the OIDC provider ARN output ([b570d79](https://github.com/unfunco/terraform-aws-oidc-github/commit/b570d7995efa9b542d5cdbe9ae30dea29f23cfcc))
