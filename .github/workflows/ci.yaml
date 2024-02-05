@@ -7,6 +7,7 @@ on:
     paths-ignore:
     - .editorconfig
     - .gitignore
+    - CHANGELOG.md
     - LICENSE.md
     - README.md
   push:
@@ -15,6 +16,7 @@ on:
     paths-ignore:
     - .editorconfig
     - .gitignore
+    - CHANGELOG.md
     - LICENSE.md
     - README.md
 
@@ -26,7 +28,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: ${{ matrix.terraform_version }}
     - name: Initialise with no backend
@@ -48,8 +50,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: ${{ secrets.AWS_REGION }}
         role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - run: aws sts get-caller-identity
+
+  release:
+    name: Release?
+    needs: [ caller-identity ]
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+    - name: Prepare a release
+      uses: google-github-actions/release-please-action@v4
+      with:
+        config-file: .github/release-please-config.json
+        manifest-file: .github/release-please-manifest.json
+        token: ${{ secrets.GITHUB_TOKEN }}

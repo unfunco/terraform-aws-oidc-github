@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    ".": {
+      "changelog-sections": [
+        {
+          "hidden": false,
+          "section": "New features",
+          "type": "feat"
+        },
+        {
+          "hidden": false,
+          "section": "Bug fixes",
+          "type": "fix"
+        },
+        {
+          "hidden": false,
+          "section": "Miscellaneous",
+          "type": "chore"
+        }
+      ],
+      "draft": false,
+      "extra-label": "automata 🤖,autorelease: pending,chore 🧹",
+      "include-v-in-tag": true,
+      "initial-version": "1.8.0",
+      "prerelease": false,
+      "pull-request-header": "🤖 I have created a release",
+      "pull-request-title-pattern": "chore: Release v${version}",
+      "release-type": "terraform-module"
+    }
+  }
+}
