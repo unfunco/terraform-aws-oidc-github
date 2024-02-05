@@ -3,6 +3,49 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## 0.1.0 (2024-02-05)
+
+
+### New features
+
+* Add IAM role name to the outputs ([#37](https://github.com/unfunco/terraform-aws-oidc-github/issues/37)) ([2ef5c27](https://github.com/unfunco/terraform-aws-oidc-github/commit/2ef5c27980657505c0e00d8665e57fa5c885785b)), closes [#36](https://github.com/unfunco/terraform-aws-oidc-github/issues/36)
+* add support for creating multiple roles ([6b40b05](https://github.com/unfunco/terraform-aws-oidc-github/commit/6b40b05b203b9ed7f1d119f4613937446b8c3bcb))
+* Add support for GitHub Enterprise Cloud ([#29](https://github.com/unfunco/terraform-aws-oidc-github/issues/29)) ([c1d6cc1](https://github.com/unfunco/terraform-aws-oidc-github/commit/c1d6cc13cfd7668784dec11e96f23061b346eae0))
+* Add the ARN of the OIDC provider as output ([#38](https://github.com/unfunco/terraform-aws-oidc-github/issues/38)) ([11d98e3](https://github.com/unfunco/terraform-aws-oidc-github/commit/11d98e3dea7ca8e41be157d21fe4769c31fe7570))
+* Allow additional audiences ([#35](https://github.com/unfunco/terraform-aws-oidc-github/issues/35)) ([d5f4644](https://github.com/unfunco/terraform-aws-oidc-github/commit/d5f46444ed4018b88d0204df037ac3b4dbca7a03))
+* allow every repo on the organization ([80ae598](https://github.com/unfunco/terraform-aws-oidc-github/commit/80ae5981070a173d00c885b7444de23d94e56bef))
+* Allow wildcard in repo names ([#20](https://github.com/unfunco/terraform-aws-oidc-github/issues/20)) ([b55b33f](https://github.com/unfunco/terraform-aws-oidc-github/commit/b55b33f12c2bd4255d0c2ae6a8a7f4cfa2fdaca9))
+* Begin automating the release process ([#42](https://github.com/unfunco/terraform-aws-oidc-github/issues/42)) ([c9493af](https://github.com/unfunco/terraform-aws-oidc-github/commit/c9493aff293beb6797da347ca282bd3f0d9913c3))
+
+
+### Bug fixes
+
+* Add token.actions.githubusercontent.com:aud condition ([#22](https://github.com/unfunco/terraform-aws-oidc-github/issues/22)) ([2dc99c4](https://github.com/unfunco/terraform-aws-oidc-github/commit/2dc99c4d7dcf925768948e00555695f229fed150))
+* Discard the order of thumbprints ([5fae63a](https://github.com/unfunco/terraform-aws-oidc-github/commit/5fae63a23c87a59839453df6b04956babd32734e))
+* Ensure additional_thumbprint validation allows a null value ([#26](https://github.com/unfunco/terraform-aws-oidc-github/issues/26)) ([750f0f6](https://github.com/unfunco/terraform-aws-oidc-github/commit/750f0f6b0296057ff9910cebd2ac2f577b0cdb90))
+* Fix a null reference when enabled is false ([7f2bb73](https://github.com/unfunco/terraform-aws-oidc-github/commit/7f2bb7351dbd62d34e4fa441d1949c16684d3c58))
+* only use OIDC provider ARN when OIDC provider is created ([#40](https://github.com/unfunco/terraform-aws-oidc-github/issues/40)) ([b570d79](https://github.com/unfunco/terraform-aws-oidc-github/commit/b570d7995efa9b542d5cdbe9ae30dea29f23cfcc))
+* Prevent duplicate GitHub thumbprints ([#32](https://github.com/unfunco/terraform-aws-oidc-github/issues/32)) ([35f725d](https://github.com/unfunco/terraform-aws-oidc-github/commit/35f725d4448b6838afd5b9e95ca793f7d4988665))
+* Reduce the allowed additional_thumbprints ([#31](https://github.com/unfunco/terraform-aws-oidc-github/issues/31)) ([b89bb89](https://github.com/unfunco/terraform-aws-oidc-github/commit/b89bb89c36746f5dead86b82490ace173adda354))
+* typing on tags should be map not object ([8965bec](https://github.com/unfunco/terraform-aws-oidc-github/commit/8965becb055ca8f117b5d02bfc864133a35444e2))
+* Use StringEquals instead of StringLike ([c19b62f](https://github.com/unfunco/terraform-aws-oidc-github/commit/c19b62f7f682afdddc667acfa590a67add1db62c))
+
+
+### Miscellaneous
+
+* Add changelog entry for 1.5.1 ([f3abd4e](https://github.com/unfunco/terraform-aws-oidc-github/commit/f3abd4e29c7ddf78594469e45451fad46250c50a))
+* Add IAM role name to the output docs ([ef7228e](https://github.com/unfunco/terraform-aws-oidc-github/commit/ef7228e973001492f525edea8a44a9e059b3fe05))
+* Add Terraform 1.5 to the verify matrix ([52b5db3](https://github.com/unfunco/terraform-aws-oidc-github/commit/52b5db32e07413af065bca8dfea27ba72977d2ce))
+* Add Terraform 1.6 to verification matrix ([e8265d1](https://github.com/unfunco/terraform-aws-oidc-github/commit/e8265d1072babd4a7b0f6c6a5dfd231a97646737))
+* Fix spelling/grammar in the README ([f308473](https://github.com/unfunco/terraform-aws-oidc-github/commit/f308473c7b286aa2ab596928371ecc6a91c2b6a0))
+* Prepare docs for v1.6.0 ([b9e1ea7](https://github.com/unfunco/terraform-aws-oidc-github/commit/b9e1ea70b25c8260731ef4d573691d6755ce84ed))
+* Prepare to release v1.7.0 ([3cdba65](https://github.com/unfunco/terraform-aws-oidc-github/commit/3cdba6585aff2630ed87c5cd717491498c6506d0))
+* Prepare to release v1.7.1 ([6aed749](https://github.com/unfunco/terraform-aws-oidc-github/commit/6aed749fc1cdbff25a0052eec5ae9a2d584507e9))
+* Prepare to release version 1.2.1 ([7cffa03](https://github.com/unfunco/terraform-aws-oidc-github/commit/7cffa030a7f9a4d288658aa9495dfa9445c12427))
+* Update description and links in the README ([86fe901](https://github.com/unfunco/terraform-aws-oidc-github/commit/86fe90196c8f137d3201353a995d177ac0568928))
+* Update GitHub Actions versions ([6f064b0](https://github.com/unfunco/terraform-aws-oidc-github/commit/6f064b04a8e8ec10b03c5cf6868ec5002a3988ab))
+* Update the changelog for v1.5.2 ([21853ad](https://github.com/unfunco/terraform-aws-oidc-github/commit/21853ade5606908b26f5100590a1631a5464f0f5))
+
 ## [1.7.1] – 2023-10-29
 
 - Condition the OIDC provider ARN output ([b570d79](https://github.com/unfunco/terraform-aws-oidc-github/commit/b570d7995efa9b542d5cdbe9ae30dea29f23cfcc))
