@@ -19,13 +19,13 @@ variable "additional_audiences" {
 }
 
 variable "additional_thumbprints" {
-  default     = null
+  default     = []
   description = "List of additional thumbprints for the OIDC provider."
   type        = list(string)
 
   validation {
-    condition     = var.additional_thumbprints == null ? true : length(var.additional_thumbprints) <= 3
-    error_message = "Only 3 additional thumbprints can be set, for a maximum of 5 in the OIDC provider."
+    condition     = length(var.additional_thumbprints) <= 5
+    error_message = "A maximum of 5 additional thumbprints can be configured in the OIDC provider."
   }
 }
 

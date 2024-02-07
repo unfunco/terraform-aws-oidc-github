@@ -16,10 +16,6 @@ locals {
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
   ])
-  known_thumbprints = [
-    "1c58a3a8518e8759bf075b76b750d4f2df264fcd",
-    "6938fd4d98bab03faadb97b34396831e3780aea1",
-  ]
   oidc_provider_arn = var.enabled ? (var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn) : ""
   partition         = data.aws_partition.current.partition
 }
@@ -77,15 +73,10 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   tags = var.tags
   url  = "https://token.actions.githubusercontent.com%{if var.enterprise_slug != ""}/${var.enterprise_slug}%{endif}"
-  thumbprint_list = toset(var.additional_thumbprints != null ?
+  thumbprint_list = toset(
     concat(
-      local.known_thumbprints,
       [data.tls_certificate.github.certificates[0].sha1_fingerprint],
       var.additional_thumbprints,
-    ) :
-    concat(
-      local.known_thumbprints,
-      [data.tls_certificate.github.certificates[0].sha1_fingerprint],
     )
   )
 }
