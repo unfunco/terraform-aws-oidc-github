@@ -3,6 +3,25 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.8.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.7.1...v1.8.0) (2024-04-22)
+
+
+### New features
+
+* Begin automating the release process ([#42](https://github.com/unfunco/terraform-aws-oidc-github/issues/42)) ([c9493af](https://github.com/unfunco/terraform-aws-oidc-github/commit/c9493aff293beb6797da347ca282bd3f0d9913c3))
+
+
+### Miscellaneous
+
+* Automatically upgrade workflow dependencies ([#48](https://github.com/unfunco/terraform-aws-oidc-github/issues/48)) ([be2be58](https://github.com/unfunco/terraform-aws-oidc-github/commit/be2be58ee1099200738ef947082607056a16ee73))
+* Bump aws-actions/configure-aws-credentials from 2 to 4 ([#50](https://github.com/unfunco/terraform-aws-oidc-github/issues/50)) ([0f5075d](https://github.com/unfunco/terraform-aws-oidc-github/commit/0f5075dd79665395e8cc0f82432c8f0e03f9d34d))
+* bump github/codeql-action from 2 to 3 ([#49](https://github.com/unfunco/terraform-aws-oidc-github/issues/49)) ([6cbdace](https://github.com/unfunco/terraform-aws-oidc-github/commit/6cbdaceb66b5ebc06ae3ba2660c58f78748f6301))
+* Bump slackapi/slack-github-action from 1.18.0 to 1.25.0 ([#51](https://github.com/unfunco/terraform-aws-oidc-github/issues/51)) ([5093c20](https://github.com/unfunco/terraform-aws-oidc-github/commit/5093c2023bf0b148f2c4b769b43f6f3dae3d55ff))
+* Bump slackapi/slack-github-action from 1.25.0 to 1.26.0 ([#53](https://github.com/unfunco/terraform-aws-oidc-github/issues/53)) ([5962e07](https://github.com/unfunco/terraform-aws-oidc-github/commit/5962e07265407e8c70c95dd20a917ff1b12aa712))
+* Remove known thumbprints ([#52](https://github.com/unfunco/terraform-aws-oidc-github/issues/52)) ([c0b2178](https://github.com/unfunco/terraform-aws-oidc-github/commit/c0b2178bc74e49dcc9c2330651f0e866f25b762c))
+* Set the first automated release version ([#44](https://github.com/unfunco/terraform-aws-oidc-github/issues/44)) ([cc3ded5](https://github.com/unfunco/terraform-aws-oidc-github/commit/cc3ded5d0b5bb0cd615ac8202b3d99bbc50735d2))
+* Set the previous version in the manifest ([#46](https://github.com/unfunco/terraform-aws-oidc-github/issues/46)) ([cb4b7c9](https://github.com/unfunco/terraform-aws-oidc-github/commit/cb4b7c9ab3bd00ab35541e23417e145c62082802))
+
 ## [1.7.1] – 2023-10-29
 
 - Condition the OIDC provider ARN output ([b570d79](https://github.com/unfunco/terraform-aws-oidc-github/commit/b570d7995efa9b542d5cdbe9ae30dea29f23cfcc))
