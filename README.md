@@ -24,13 +24,9 @@ The following snippet shows the minimum required configuration to create a
 working OIDC connection between GitHub Actions and AWS.
 
 ```terraform
-provider "aws" {
-  region = var.region
-}
-
 module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "1.7.1"
+  version = "1.8.0"
 
   github_repositories = [
     "org/repo",
@@ -54,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
+      uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: ${{ env.AWS_REGION }}
         role-to-assume: arn:aws:iam::${{ env.AWS_ACCOUNT_ID }}:role/github
