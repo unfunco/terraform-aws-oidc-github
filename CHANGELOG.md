@@ -3,6 +3,13 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.8.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.8.0...v1.8.1) (2024-05-14)
+
+
+### Miscellaneous
+
+* Update release-please-action organisation ([#55](https://github.com/unfunco/terraform-aws-oidc-github/issues/55)) ([6a67a48](https://github.com/unfunco/terraform-aws-oidc-github/commit/6a67a48bf466eb0a0820c90a4753aa205a6b0230))
+
 ## [1.8.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.7.1...v1.8.0) (2024-04-22)
 
 
