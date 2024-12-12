@@ -40,9 +40,9 @@ variable "enabled" {
 }
 
 variable "enterprise_slug" {
-  default     = false
+  default     = ""
   description = "Enterprise slug for GitHub Enterprise Cloud customers."
-  type        = bool
+  type        = string
 }
 
 variable "force_detach_policies" {
