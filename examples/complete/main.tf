@@ -31,6 +31,6 @@ data "aws_iam_policy_document" "example" {
   statement {
     actions   = ["s3:GetObject"]
     effect    = "Allow"
-    resources = ["dynamodb:CreateTable"]
+    resources = ["arn:aws:s3:::amzn-s3-demo-bucket/*"]
   }
 }
