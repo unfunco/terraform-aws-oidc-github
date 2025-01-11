@@ -3,6 +3,18 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [1.9.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.8.1...v1.9.0) (2025-01-11)
+
+
+### New features
+
+* Support non-default AWS partitions ([#65](https://github.com/unfunco/terraform-aws-oidc-github/issues/65)) ([801d242](https://github.com/unfunco/terraform-aws-oidc-github/commit/801d24208abb4547c695c7b38545d3b9142d4dbf))
+
+
+### Miscellaneous
+
+* Split workflows and simplify testing ([#67](https://github.com/unfunco/terraform-aws-oidc-github/issues/67)) ([7cbbdbd](https://github.com/unfunco/terraform-aws-oidc-github/commit/7cbbdbd7837fc47554468dbc7ce20d3504c43ac3))
+
 ## [1.8.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.8.0...v1.8.1) (2024-12-29)
 
 
