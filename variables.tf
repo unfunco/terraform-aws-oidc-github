@@ -47,6 +47,12 @@ variable "create_oidc_provider" {
   type        = bool
 }
 
+variable "create_iam_role" {
+  default     = true
+  description = ""
+  type        = bool
+}
+
 variable "enabled" {
   default     = true
   description = "Flag to enable/disable the creation of resources."
