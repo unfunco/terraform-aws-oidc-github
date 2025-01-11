@@ -30,6 +30,12 @@ variable "create_oidc_provider" {
   type        = bool
 }
 
+variable "create_iam_role" {
+  default     = true
+  description = ""
+  type        = bool
+}
+
 variable "dangerously_attach_admin_policy" {
   default     = false
   description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
