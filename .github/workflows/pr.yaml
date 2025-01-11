@@ -1,7 +1,7 @@
-name: CI
+name: PR
 
 on:
-  push:
+  pull_request:
     branches:
     - main
     paths-ignore:
@@ -29,18 +29,3 @@ jobs:
       run: terraform fmt -check -recursive
     - name: Validate the configuration
       run: terraform validate
-
-  release:
-    name: Release?
-    needs: [ verify ]
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-    - name: Prepare a release
-      uses: googleapis/release-please-action@v4
-      with:
-        config-file: .github/release-please-config.json
-        manifest-file: .github/release-please-manifest.json
-        token: ${{ secrets.GITHUB_TOKEN }}
