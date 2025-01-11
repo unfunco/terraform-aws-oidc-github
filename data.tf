@@ -31,8 +31,11 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     condition {
-      test     = "StringEquals"
-      values   = var.additional_audiences != null ? concat(["sts.amazonaws.com"], var.additional_audiences) : ["sts.amazonaws.com"]
+      test = "StringEquals"
+      values = var.additional_audiences != null ? concat(
+        [format("sts.%v", local.dns_suffix)],
+        var.additional_audiences,
+      ) : [format("sts.%v", local.dns_suffix)]
       variable = "token.actions.githubusercontent.com:aud"
     }
 
