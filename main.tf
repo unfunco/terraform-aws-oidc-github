@@ -13,9 +13,11 @@
 // limitations under the License.
 
 locals {
+  audience = format("sts.%v", local.dns_suffix)
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
   ])
+  dns_suffix        = data.aws_partition.current.dns_suffix
   oidc_provider_arn = var.enabled ? (var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn) : ""
   partition         = data.aws_partition.current.partition
 }
@@ -67,7 +69,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list = concat(
     [for org in local.github_organizations : "https://github.com/${org}"],
-    ["sts.amazonaws.com"]
+    [local.audience],
   )
 
   tags = var.tags
