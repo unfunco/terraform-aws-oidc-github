@@ -9,7 +9,7 @@ variable "additional_audiences" {
 
 variable "additional_thumbprints" {
   default     = []
-  description = "List of additional thumbprints for the OIDC provider."
+  description = "A list of additional thumbprints for the OIDC provider."
   type        = list(string)
 
   validation {
@@ -49,7 +49,7 @@ variable "force_detach_policies" {
 }
 
 variable "github_repositories" {
-  description = "List of GitHub organization/repository names authorized to assume the role."
+  description = "A list of GitHub organization/repository names authorized to assume the role."
   type        = list(string)
 
   validation {
@@ -71,19 +71,19 @@ variable "iam_role_name" {
 
 variable "iam_role_path" {
   default     = "/"
-  description = "Path under which to create IAM role."
+  description = "The path under which to create IAM role."
   type        = string
 }
 
 variable "iam_role_permissions_boundary" {
   default     = ""
-  description = "ARN of the permissions boundary to be used by the IAM role."
+  description = "The ARN of the permissions boundary to be used by the IAM role."
   type        = string
 }
 
 variable "iam_role_policy_arns" {
   default     = []
-  description = "List of IAM policy ARNs to attach to the IAM role."
+  description = "A list of IAM policy ARNs to attach to the IAM role."
   type        = list(string)
 }
 
@@ -95,17 +95,17 @@ variable "iam_role_inline_policies" {
 
 variable "max_session_duration" {
   default     = 3600
-  description = "Maximum session duration in seconds."
+  description = "The maximum session duration in seconds."
   type        = number
 
   validation {
     condition     = var.max_session_duration >= 3600 && var.max_session_duration <= 43200
-    error_message = "Maximum session duration must be between 3600 and 43200 seconds."
+    error_message = "The maximum session duration must be between 3600 and 43200 seconds."
   }
 }
 
 variable "tags" {
   default     = {}
-  description = "Map of tags to be applied to all resources."
+  description = "A map of tags to be applied to all applicable resources."
   type        = map(string)
 }
