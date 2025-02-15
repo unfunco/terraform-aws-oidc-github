@@ -44,7 +44,7 @@ resource "aws_iam_role_policy" "inline_policies" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = var.enabled && var.attach_admin_policy ? 1 : 0
+  count = var.enabled && var.dangerously_attach_admin_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.github[0].id
