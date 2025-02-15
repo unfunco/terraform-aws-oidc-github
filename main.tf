@@ -12,7 +12,7 @@ locals {
 }
 
 resource "aws_iam_role" "github" {
-  assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
+  assume_role_policy    = data.aws_iam_policy_document.assume_role.json
   description           = "Role assumed by the GitHub OIDC provider."
   force_detach_policies = var.force_detach_policies
   max_session_duration  = var.max_session_duration
@@ -27,28 +27,28 @@ resource "aws_iam_role_policy" "inline_policies" {
 
   name   = each.key
   policy = each.value
-  role   = aws_iam_role.github[0].id
+  role   = aws_iam_role.github.id
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
   count = var.dangerously_attach_admin_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
-  role       = aws_iam_role.github[0].id
+  role       = aws_iam_role.github.id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
   count = var.attach_read_only_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/ReadOnlyAccess"
-  role       = aws_iam_role.github[0].id
+  role       = aws_iam_role.github.id
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
   count = length(var.iam_role_policy_arns)
 
   policy_arn = var.iam_role_policy_arns[count.index]
-  role       = aws_iam_role.github[0].id
+  role       = aws_iam_role.github.id
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
