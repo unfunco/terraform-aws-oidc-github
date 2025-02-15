@@ -64,8 +64,8 @@ variable "github_repositories" {
 }
 
 variable "iam_role_name" {
-  default     = "github"
-  description = "Name of the IAM role to be created. This will be assumable by GitHub."
+  default     = "GitHubActions"
+  description = "The name of the IAM role to be created and made assumable by GitHub Actions."
   type        = string
 }
 

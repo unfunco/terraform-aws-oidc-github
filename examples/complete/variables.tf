@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2024 Daniel Morris <daniel@honestempire.com>
+// SPDX-License-Identifier: MIT
+
 variable "additional_audiences" {
   default     = null
   description = "List of additional OIDC audiences allowed to assume the role."
@@ -15,14 +18,8 @@ variable "additional_thumbprints" {
   }
 }
 
-variable "attach_admin_policy" {
-  default     = false
-  description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
-  type        = bool
-}
-
 variable "attach_read_only_policy" {
-  default     = true
+  default     = false
   description = "Flag to enable/disable the attachment of the ReadOnly policy."
   type        = bool
 }
@@ -33,9 +30,9 @@ variable "create_oidc_provider" {
   type        = bool
 }
 
-variable "enabled" {
-  default     = true
-  description = "Flag to enable/disable the creation of resources."
+variable "dangerously_attach_admin_policy" {
+  default     = false
+  description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
   type        = bool
 }
 
@@ -60,15 +57,15 @@ variable "github_repositories" {
     // organization/repository format used by GitHub.
     condition = length([
       for repo in var.github_repositories : 1
-      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/-]+[*]?|\\*)$", repo)) > 0
+      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/\\-\\*]+)$", repo)) > 0
     ]) == length(var.github_repositories)
     error_message = "Repositories must be specified in the organization/repository format."
   }
 }
 
 variable "iam_role_name" {
-  default     = "github"
-  description = "Name of the IAM role to be created. This will be assumable by GitHub."
+  default     = "GitHubActions"
+  description = "The name of the IAM role to be created and made assumable by GitHub Actions."
   type        = string
 }
 
@@ -90,6 +87,12 @@ variable "iam_role_policy_arns" {
   type        = list(string)
 }
 
+variable "iam_role_inline_policies" {
+  default     = {}
+  description = "Inline policies map with policy name as key and json as value."
+  type        = map(string)
+}
+
 variable "max_session_duration" {
   default     = 3600
   description = "Maximum session duration in seconds."
@@ -99,11 +102,6 @@ variable "max_session_duration" {
     condition     = var.max_session_duration >= 3600 && var.max_session_duration <= 43200
     error_message = "Maximum session duration must be between 3600 and 43200 seconds."
   }
-}
-
-variable "region" {
-  description = "AWS region in which to apply resources."
-  type        = string
 }
 
 variable "tags" {
