@@ -36,7 +36,7 @@ variable "attach_admin_policy" {
 }
 
 variable "attach_read_only_policy" {
-  default     = true
+  default     = false
   description = "Flag to enable/disable the attachment of the ReadOnly policy."
   type        = bool
 }
