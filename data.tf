@@ -1,11 +1,9 @@
 // SPDX-FileCopyrightText: 2024 Daniel Morris <daniel@honestempire.com>
 // SPDX-License-Identifier: MIT
 
-data "aws_partition" "current" {}
+data "aws_partition" "this" {}
 
 data "aws_iam_policy_document" "assume_role" {
-  count = var.enabled ? 1 : 0
-
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
@@ -38,9 +36,12 @@ data "aws_iam_policy_document" "assume_role" {
 }
 
 data "aws_iam_openid_connect_provider" "github" {
-  count = var.enabled && !var.create_oidc_provider ? 1 : 0
+  count = !var.create_oidc_provider ? 1 : 0
 
-  url = "https://token.actions.githubusercontent.com%{if var.enterprise_slug != ""}/${var.enterprise_slug}%{endif}"
+  url = format(
+    "https://token.actions.githubusercontent.com%v",
+    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
+  )
 }
 
 data "tls_certificate" "github" {

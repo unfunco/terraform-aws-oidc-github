@@ -36,12 +36,6 @@ variable "dangerously_attach_admin_policy" {
   type        = bool
 }
 
-variable "enabled" {
-  default     = true
-  description = "Flag to enable/disable the creation of resources."
-  type        = bool
-}
-
 variable "enterprise_slug" {
   default     = ""
   description = "Enterprise slug for GitHub Enterprise Cloud customers."

@@ -77,7 +77,7 @@ applied, the JWT will contain an updated `iss` claim.
 | [aws_iam_role_policy_attachment.read_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource    |
 | [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)            | data source |
-| [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                    | data source |
+| [aws_partition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                       | data source |
 | [tls_certificate.github](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate)                                 | data source |
 
 ## Inputs
@@ -89,7 +89,6 @@ applied, the JWT will contain an updated `iss` claim.
 | attach_read_only_policy         | Flag to enable/disable the attachment of the ReadOnly policy.               | `bool`         | `false`    |    no    |
 | create_oidc_provider            | Flag to enable/disable the creation of the GitHub OIDC provider.            | `bool`         | `true`     |    no    |
 | dangerously_attach_admin_policy | Flag to enable/disable the attachment of the AdministratorAccess policy.    | `bool`         | `false`    |    no    |
-| enabled                         | Flag to enable/disable the creation of resources.                           | `bool`         | `true`     |    no    |
 | enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                      | `string`       | `""`       |    no    |
 | force_detach_policies           | Flag to force detachment of policies attached to the IAM role.              | `bool`         | `false`    |    no    |
 | github_repositories             | List of GitHub organization/repository names authorized to assume the role. | `list(string)` | n/a        |   yes    |
@@ -103,11 +102,11 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Outputs
 
-| Name              | Description               |
-| ----------------- | ------------------------- |
-| iam_role_arn      | ARN of the IAM role.      |
-| iam_role_name     | Name of the IAM role.     |
-| oidc_provider_arn | ARN of the OIDC provider. |
+| Name              | Description                   |
+| ----------------- | ----------------------------- |
+| iam_role_arn      | The ARN of the IAM role.      |
+| iam_role_name     | The name of the IAM role.     |
+| oidc_provider_arn | The ARN of the OIDC provider. |
 
 <!-- END_TF_DOCS -->
 
