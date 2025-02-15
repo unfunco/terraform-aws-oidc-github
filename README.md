@@ -1,7 +1,6 @@
 # OpenID Connect for AWS and GitHub Actions
 
 [![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
-[![Cron / Verify](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/cron.yaml)
 [![Security](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-purple.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -122,14 +121,14 @@ applied, the JWT will contain an updated `iss` claim.
 ## License
 
 © 2021 [Daniel Morris](https://unfun.co)  
-Made available under the terms of the [Apache License 2.0].
+Made available under the terms of the [MIT License].
 
-[apache license 2.0]: LICENSE.md
 [aws provider]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 [complete example]: examples/complete
 [configuring openid connect in amazon web services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [creating openid connect (oidc) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 [make]: https://www.gnu.org/software/make/
+[mit license]: LICENSE.md
 [obtaining the thumbprint for an openid connect identity provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
 [terraform]: https://www.terraform.io
 [tls provider]: https://registry.terraform.io/providers/hashicorp/tls/latest/docs
