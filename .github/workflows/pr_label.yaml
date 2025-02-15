@@ -23,13 +23,13 @@ jobs:
       with:
         script: |
           const labels = []
-          if (context.payload.pull_request.title.startsWith('fix:')) {
+          if (context.payload.pull_request.title.startsWith('fix')) {
             labels.push('bug 🐛')
           }
-          if (context.payload.pull_request.title.startsWith('chore:')) {
+          if (context.payload.pull_request.title.startsWith('chore')) {
             labels.push('chore 🧹')
           }
-          if (context.payload.pull_request.title.startsWith('feat:')) {
+          if (context.payload.pull_request.title.startsWith('feat')) {
             labels.push('feature 💡')
           }
           if (labels.length > 0) {
