@@ -72,6 +72,7 @@ applied, the JWT will contain an updated `iss` claim.
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider)    | resource    |
 | [aws_iam_role.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                          | resource    |
+| [aws_iam_role_policy.inline_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy)                   | resource    |
 | [aws_iam_role_policy_attachment.admin](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)       | resource    |
 | [aws_iam_role_policy_attachment.custom](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)      | resource    |
 | [aws_iam_role_policy_attachment.read_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource    |
@@ -87,7 +88,7 @@ applied, the JWT will contain an updated `iss` claim.
 | additional_audiences          | List of additional OIDC audiences allowed to assume the role.               | `list(string)` | `null`     |    no    |
 | additional_thumbprints        | List of additional thumbprints for the OIDC provider.                       | `list(string)` | `[]`       |    no    |
 | attach_admin_policy           | Flag to enable/disable the attachment of the AdministratorAccess policy.    | `bool`         | `false`    |    no    |
-| attach_read_only_policy       | Flag to enable/disable the attachment of the ReadOnly policy.               | `bool`         | `true`     |    no    |
+| attach_read_only_policy       | Flag to enable/disable the attachment of the ReadOnly policy.               | `bool`         | `false`    |    no    |
 | create_oidc_provider          | Flag to enable/disable the creation of the GitHub OIDC provider.            | `bool`         | `true`     |    no    |
 | enabled                       | Flag to enable/disable the creation of resources.                           | `bool`         | `true`     |    no    |
 | enterprise_slug               | Enterprise slug for GitHub Enterprise Cloud customers.                      | `string`       | `""`       |    no    |
