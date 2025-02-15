@@ -13,9 +13,9 @@ between GitHub Actions workflows and AWS resources.
 
 ### Requirements
 
-- [AWS Provider] 4.0+
-- [TLS Provider] 3.0+
-- [Terraform] 1.0+
+- [AWS Provider] 5.0+
+- [TLS Provider] 4.0+
+- [Terraform] 1.10+
 
 ### Installation and usage
 

@@ -1,6 +1,16 @@
 name: CI
 
 on:
+  pull_request:
+    branches:
+    - main
+    paths-ignore:
+    - .editorconfig
+    - .gitignore
+    - CHANGELOG.md
+    - LICENSE.md
+    - Makefile
+    - README.md
   push:
     branches:
     - main
@@ -29,9 +39,12 @@ jobs:
       run: terraform fmt -check -recursive
     - name: Validate the configuration
       run: terraform validate
+    - name: Run unit tests
+      run: terraform test
 
   release:
     name: Release?
+    if: github.event == 'push'
     needs: [ verify ]
     permissions:
       contents: write
