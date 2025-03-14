@@ -15,3 +15,8 @@ output "oidc_provider_arn" {
   description = "The ARN of the OIDC provider."
   value       = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn
 }
+
+output "oidc_provider_url" {
+  description = "The URL of the OIDC provider."
+  value       = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].url : data.aws_iam_openid_connect_provider.github[0].url
+}
