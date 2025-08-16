@@ -62,6 +62,8 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v5
     - name: Prepare a release
       uses: googleapis/release-please-action@v4
       with:
