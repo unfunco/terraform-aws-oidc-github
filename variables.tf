@@ -18,9 +18,33 @@ variable "additional_thumbprints" {
   }
 }
 
+variable "attach_ec2_full_access_policy" {
+  default     = false
+  description = "Enable/disable the attachment of the AmazonEC2FullAccess policy."
+  type        = bool
+}
+
+variable "attach_lambda_full_access_policy" {
+  default     = false
+  description = "Enable/disable the attachment of the AWSLambda_FullAccess policy."
+  type        = bool
+}
+
+variable "attach_rds_full_access_policy" {
+  default     = false
+  description = "Enable/disable the attachment of the AmazonRDSFullAccess policy."
+  type        = bool
+}
+
 variable "attach_read_only_policy" {
   default     = false
   description = "Enable/disable the attachment of the ReadOnly policy."
+  type        = bool
+}
+
+variable "attach_s3_full_access_policy" {
+  default     = false
+  description = "Enable/disable the attachment of the AmazonS3FullAccess policy."
   type        = bool
 }
 

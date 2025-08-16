@@ -66,53 +66,61 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Resources
 
-| Name                                                                                                                                                 | Type        |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider)    | resource    |
-| [aws_iam_role.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                          | resource    |
-| [aws_iam_role_policy.inline_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy)                   | resource    |
-| [aws_iam_role_policy_attachment.admin](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)       | resource    |
-| [aws_iam_role_policy_attachment.custom](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)      | resource    |
-| [aws_iam_role_policy_attachment.read_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)   | resource    |
-| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider) | data source |
-| [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)            | data source |
-| [aws_partition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                       | data source |
-| [tls_certificate.github](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate)                                 | data source |
+| Name                                                                                                                                                        | Type        |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_openid_connect_provider)           | resource    |
+| [aws_iam_role.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                                 | resource    |
+| [aws_iam_role_policy.inline_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy)                          | resource    |
+| [aws_iam_role_policy_attachment.admin](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)              | resource    |
+| [aws_iam_role_policy_attachment.custom](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)             | resource    |
+| [aws_iam_role_policy_attachment.ec2_full_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)    | resource    |
+| [aws_iam_role_policy_attachment.lambda_full_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource    |
+| [aws_iam_role_policy_attachment.rds_full_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)    | resource    |
+| [aws_iam_role_policy_attachment.read_only](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)          | resource    |
+| [aws_iam_role_policy_attachment.s3_full_access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment)     | resource    |
+| [aws_iam_openid_connect_provider.github](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_openid_connect_provider)        | data source |
+| [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document)                   | data source |
+| [aws_partition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                              | data source |
+| [tls_certificate.github](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate)                                        | data source |
 
 ## Inputs
 
-| Name                            | Description                                                                  | Type           | Default                                  | Required |
-| ------------------------------- | ---------------------------------------------------------------------------- | -------------- | ---------------------------------------- | :------: |
-| additional_audiences            | Additional OIDC audiences allowed to assume the role.                        | `list(string)` | `null`                                   |    no    |
-| additional_thumbprints          | Additional thumbprints for the OIDC provider.                                | `list(string)` | `[]`                                     |    no    |
-| attach_read_only_policy         | Enable/disable the attachment of the ReadOnly policy.                        | `bool`         | `false`                                  |    no    |
-| create                          | Enable/disable the creation of all resources.                                | `bool`         | `true`                                   |    no    |
-| create_iam_role                 | Enable/disable creation of the IAM role.                                     | `bool`         | `true`                                   |    no    |
-| create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                     | `bool`         | `true`                                   |    no    |
-| dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.             | `bool`         | `false`                                  |    no    |
-| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                       | `string`       | `""`                                     |    no    |
-| github_repositories             | GitHub organization/repository names authorized to assume the role.          | `list(string)` | n/a                                      |   yes    |
-| iam_role_description            | Description of the IAM role to be created.                                   | `string`       | `"Assumed by the GitHub OIDC provider."` |    no    |
-| iam_role_force_detach_policies  | Force detachment of policies attached to the IAM role.                       | `bool`         | `false`                                  |    no    |
-| iam_role_inline_policies        | Inline policies map with policy name as key and json as value.               | `map(string)`  | `{}`                                     |    no    |
-| iam_role_max_session_duration   | The maximum session duration in seconds.                                     | `number`       | `3600`                                   |    no    |
-| iam_role_name                   | The name of the IAM role to be created and made assumable by GitHub Actions. | `string`       | `"GitHubActions"`                        |    no    |
-| iam_role_path                   | The path under which to create IAM role.                                     | `string`       | `"/"`                                    |    no    |
-| iam_role_permissions_boundary   | The ARN of the permissions boundary to be used by the IAM role.              | `string`       | `""`                                     |    no    |
-| iam_role_policy_arns            | IAM policy ARNs to attach to the IAM role.                                   | `list(string)` | `[]`                                     |    no    |
-| iam_role_tags                   | Additional tags to be applied to the IAM role.                               | `map(string)`  | `{}`                                     |    no    |
-| oidc_provider_tags              | Tags to be applied to the OIDC provider.                                     | `map(string)`  | `{}`                                     |    no    |
-| tags                            | Tags to be applied to all applicable resources.                              | `map(string)`  | `{}`                                     |    no    |
+| Name                             | Description                                                                  | Type           | Default                                  | Required |
+| -------------------------------- | ---------------------------------------------------------------------------- | -------------- | ---------------------------------------- | :------: |
+| additional_audiences             | Additional OIDC audiences allowed to assume the role.                        | `list(string)` | `null`                                   |    no    |
+| additional_thumbprints           | Additional thumbprints for the OIDC provider.                                | `list(string)` | `[]`                                     |    no    |
+| attach_ec2_full_access_policy    | Enable/disable the attachment of the AmazonEC2FullAccess policy.             | `bool`         | `false`                                  |    no    |
+| attach_lambda_full_access_policy | Enable/disable the attachment of the AWSLambda_FullAccess policy.            | `bool`         | `false`                                  |    no    |
+| attach_rds_full_access_policy    | Enable/disable the attachment of the AmazonRDSFullAccess policy.             | `bool`         | `false`                                  |    no    |
+| attach_read_only_policy          | Enable/disable the attachment of the ReadOnly policy.                        | `bool`         | `false`                                  |    no    |
+| attach_s3_full_access_policy     | Enable/disable the attachment of the AmazonS3FullAccess policy.              | `bool`         | `false`                                  |    no    |
+| create                           | Enable/disable the creation of all resources.                                | `bool`         | `true`                                   |    no    |
+| create_iam_role                  | Enable/disable creation of the IAM role.                                     | `bool`         | `true`                                   |    no    |
+| create_oidc_provider             | Enable/disable the creation of the GitHub OIDC provider.                     | `bool`         | `true`                                   |    no    |
+| dangerously_attach_admin_policy  | Enable/disable the attachment of the AdministratorAccess policy.             | `bool`         | `false`                                  |    no    |
+| enterprise_slug                  | Enterprise slug for GitHub Enterprise Cloud customers.                       | `string`       | `""`                                     |    no    |
+| github_repositories              | GitHub organization/repository names authorized to assume the role.          | `list(string)` | `[]`                                     |    no    |
+| iam_role_description             | Description of the IAM role to be created.                                   | `string`       | `"Assumed by the GitHub OIDC provider."` |    no    |
+| iam_role_force_detach_policies   | Force detachment of policies attached to the IAM role.                       | `bool`         | `false`                                  |    no    |
+| iam_role_inline_policies         | Inline policies map with policy name as key and json as value.               | `map(string)`  | `{}`                                     |    no    |
+| iam_role_max_session_duration    | The maximum session duration in seconds.                                     | `number`       | `3600`                                   |    no    |
+| iam_role_name                    | The name of the IAM role to be created and made assumable by GitHub Actions. | `string`       | `"GitHubActions"`                        |    no    |
+| iam_role_path                    | The path under which to create IAM role.                                     | `string`       | `"/"`                                    |    no    |
+| iam_role_permissions_boundary    | The ARN of the permissions boundary to be used by the IAM role.              | `string`       | `""`                                     |    no    |
+| iam_role_policy_arns             | IAM policy ARNs to attach to the IAM role.                                   | `list(string)` | `[]`                                     |    no    |
+| iam_role_tags                    | Additional tags to be applied to the IAM role.                               | `map(string)`  | `{}`                                     |    no    |
+| oidc_provider_tags               | Tags to be applied to the OIDC provider.                                     | `map(string)`  | `{}`                                     |    no    |
+| tags                             | Tags to be applied to all applicable resources.                              | `map(string)`  | `{}`                                     |    no    |
 
 ## Outputs
 
-| Name                        | Description                                                             |
-| --------------------------- | ----------------------------------------------------------------------- |
-| assume_role_policy_document | The assume role policy document that can be attached to your IAM roles. |
-| iam_role_arn                | The ARN of the IAM role.                                                |
-| iam_role_name               | The name of the IAM role.                                               |
-| oidc_provider_arn           | The ARN of the OIDC provider.                                           |
-| oidc_provider_url           | The URL of the OIDC provider.                                           |
+| Name                             | Description                                                                  |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| assume_role_policy_document_json | The assume role policy JSON document that can be attached to your IAM roles. |
+| iam_role_arn                     | The ARN of the IAM role.                                                     |
+| iam_role_name                    | The name of the IAM role.                                                    |
+| oidc_provider_arn                | The ARN of the OIDC provider.                                                |
+| oidc_provider_url                | The URL of the OIDC provider.                                                |
 
 <!-- END_TF_DOCS -->
 
