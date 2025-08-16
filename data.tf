@@ -4,6 +4,8 @@
 data "aws_partition" "this" {}
 
 data "aws_iam_policy_document" "assume_role" {
+  count = var.enabled && var.create_oidc_provider ? 1 : 0
+
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
     effect  = "Allow"
