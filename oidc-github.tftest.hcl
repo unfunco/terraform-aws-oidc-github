@@ -25,6 +25,7 @@ run "create_oidc_provider_only" {
     create               = true
     create_iam_role      = false
     create_oidc_provider = true
+    github_repositories  = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
