@@ -83,23 +83,25 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Inputs
 
-| Name                            | Description                                                                   | Type           | Default           | Required |
-| ------------------------------- | ----------------------------------------------------------------------------- | -------------- | ----------------- | :------: |
-| additional_audiences            | List of additional OIDC audiences allowed to assume the role.                 | `list(string)` | `null`            |    no    |
-| additional_thumbprints          | A list of additional thumbprints for the OIDC provider.                       | `list(string)` | `[]`              |    no    |
-| attach_read_only_policy         | Flag to enable/disable the attachment of the ReadOnly policy.                 | `bool`         | `false`           |    no    |
-| create_oidc_provider            | Flag to enable/disable the creation of the GitHub OIDC provider.              | `bool`         | `true`            |    no    |
-| dangerously_attach_admin_policy | Flag to enable/disable the attachment of the AdministratorAccess policy.      | `bool`         | `false`           |    no    |
-| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                        | `string`       | `""`              |    no    |
-| force_detach_policies           | Flag to force detachment of policies attached to the IAM role.                | `bool`         | `false`           |    no    |
-| github_repositories             | A list of GitHub organization/repository names authorized to assume the role. | `list(string)` | n/a               |   yes    |
-| iam_role_inline_policies        | Inline policies map with policy name as key and json as value.                | `map(string)`  | `{}`              |    no    |
-| iam_role_name                   | The name of the IAM role to be created and made assumable by GitHub Actions.  | `string`       | `"GitHubActions"` |    no    |
-| iam_role_path                   | The path under which to create IAM role.                                      | `string`       | `"/"`             |    no    |
-| iam_role_permissions_boundary   | The ARN of the permissions boundary to be used by the IAM role.               | `string`       | `""`              |    no    |
-| iam_role_policy_arns            | A list of IAM policy ARNs to attach to the IAM role.                          | `list(string)` | `[]`              |    no    |
-| max_session_duration            | The maximum session duration in seconds.                                      | `number`       | `3600`            |    no    |
-| tags                            | A map of tags to be applied to all applicable resources.                      | `map(string)`  | `{}`              |    no    |
+| Name                            | Description                                                                  | Type           | Default           | Required |
+| ------------------------------- | ---------------------------------------------------------------------------- | -------------- | ----------------- | :------: |
+| additional_audiences            | Additional OIDC audiences allowed to assume the role.                        | `list(string)` | `null`            |    no    |
+| additional_thumbprints          | Additional thumbprints for the OIDC provider.                                | `list(string)` | `[]`              |    no    |
+| attach_read_only_policy         | Enable/disable the attachment of the ReadOnly policy.                        | `bool`         | `false`           |    no    |
+| create_iam_role                 | Enable/disable creation of the IAM role.                                     | `bool`         | `true`            |    no    |
+| create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                     | `bool`         | `true`            |    no    |
+| dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.             | `bool`         | `false`           |    no    |
+| enabled                         | Enable/disable the creation of resources.                                    | `bool`         | `true`            |    no    |
+| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                       | `string`       | `""`              |    no    |
+| force_detach_policies           | Force detachment of policies attached to the IAM role.                       | `bool`         | `false`           |    no    |
+| github_repositories             | GitHub organization/repository names authorized to assume the role.          | `list(string)` | n/a               |   yes    |
+| iam_role_inline_policies        | Inline policies map with policy name as key and json as value.               | `map(string)`  | `{}`              |    no    |
+| iam_role_name                   | The name of the IAM role to be created and made assumable by GitHub Actions. | `string`       | `"GitHubActions"` |    no    |
+| iam_role_path                   | The path under which to create IAM role.                                     | `string`       | `"/"`             |    no    |
+| iam_role_permissions_boundary   | The ARN of the permissions boundary to be used by the IAM role.              | `string`       | `""`              |    no    |
+| iam_role_policy_arns            | IAM policy ARNs to attach to the IAM role.                                   | `list(string)` | `[]`              |    no    |
+| max_session_duration            | The maximum session duration in seconds.                                     | `number`       | `3600`            |    no    |
+| tags                            | Tags to be applied to all applicable resources.                              | `map(string)`  | `{}`              |    no    |
 
 ## Outputs
 
@@ -108,6 +110,7 @@ applied, the JWT will contain an updated `iss` claim.
 | iam_role_arn      | The ARN of the IAM role.      |
 | iam_role_name     | The name of the IAM role.     |
 | oidc_provider_arn | The ARN of the OIDC provider. |
+| oidc_provider_url | The URL of the OIDC provider. |
 
 <!-- END_TF_DOCS -->
 

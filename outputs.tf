@@ -3,12 +3,12 @@
 
 output "iam_role_arn" {
   description = "The ARN of the IAM role."
-  value       = aws_iam_role.github.arn
+  value       = var.enabled && var.create_iam_role ? aws_iam_role.github[0].arn : ""
 }
 
 output "iam_role_name" {
   description = "The name of the IAM role."
-  value       = aws_iam_role.github.name
+  value       = var.enabled && var.create_iam_role ? aws_iam_role.github[0].name : ""
 }
 
 output "oidc_provider_arn" {
