@@ -2,8 +2,13 @@
 // SPDX-License-Identifier: MIT
 
 locals {
-  create_iam_role      = var.create && var.create_iam_role
-  create_oidc_provider = var.create && var.create_oidc_provider
+  create_iam_role = var.create && var.create_iam_role && (
+    var.github_repositories != null && length(var.github_repositories) > 0
+  )
+
+  create_oidc_provider = var.create && var.create_oidc_provider && (
+    var.github_repositories != null && length(var.github_repositories) > 0
+  )
 
   attach_read_only_policy         = local.create_iam_role && var.attach_read_only_policy
   dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy

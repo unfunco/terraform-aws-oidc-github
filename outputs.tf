@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2024 Daniel Morris <daniel@honestempire.com>
 // SPDX-License-Identifier: MIT
 
-output "assume_role_policy_document_json" {
-  description = "The assume role policy JSON document that can be attached to your IAM roles."
+output "assume_role_policy" {
+  description = "The assume role policy document that can be attached to your IAM roles."
   value       = local.create_oidc_provider ? data.aws_iam_policy_document.assume_role[0].json : ""
 }
 
