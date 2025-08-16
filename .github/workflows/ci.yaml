@@ -39,6 +39,12 @@ jobs:
       run: terraform fmt -check -recursive
     - name: Validate the configuration
       run: terraform validate
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ vars.AWS_REGION }}
+        role-session-name: OIDCGitHubActionsTerraformTest${{ github.run_id }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
     - name: Run unit tests
       run: terraform test
 
