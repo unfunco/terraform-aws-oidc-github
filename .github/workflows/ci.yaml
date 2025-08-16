@@ -55,7 +55,7 @@ jobs:
 
   release:
     name: Release?
-    if: github.event == 'push'
+    if: github.event_name == 'push' && github.repository == 'unfunco/terraform-aws-oidc-github'
     needs: [ verify ]
     permissions:
       contents: write
