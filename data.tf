@@ -47,7 +47,7 @@ data "aws_iam_openid_connect_provider" "github" {
 }
 
 data "tls_certificate" "github" {
-  count = local.create_oidc_provider
+  count = local.create_oidc_provider ? 1 : 0
 
   url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
 }
