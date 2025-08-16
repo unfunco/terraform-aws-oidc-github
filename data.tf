@@ -1,10 +1,12 @@
 // SPDX-FileCopyrightText: 2024 Daniel Morris <daniel@honestempire.com>
 // SPDX-License-Identifier: MIT
 
-data "aws_partition" "this" {}
+data "aws_partition" "this" {
+  count = var.create ? 1 : 0
+}
 
 data "aws_iam_policy_document" "assume_role" {
-  count = local.create_oidc_provider ? 1 : 0
+  count = var.create ? 1 : 0
 
   version = "2012-10-17"
 

@@ -8,14 +8,9 @@ locals {
   attach_read_only_policy         = local.create_iam_role && var.attach_read_only_policy
   dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
 
-  audience = format("sts.%v", local.dns_suffix)
-
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
   ])
-
-  dns_suffix = data.aws_partition.this.dns_suffix
-  partition  = data.aws_partition.this.partition
 
   oidc_provider_arn = (
     var.create_oidc_provider ?
@@ -28,13 +23,13 @@ resource "aws_iam_role" "github" {
   count = local.create_iam_role ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
-  description           = "Assumed by the GitHub OIDC provider."
-  force_detach_policies = var.force_detach_policies
-  max_session_duration  = var.max_session_duration
+  description           = var.iam_role_description
+  force_detach_policies = var.iam_role_force_detach_policies
+  max_session_duration  = var.iam_role_max_session_duration
   name                  = var.iam_role_name
   path                  = var.iam_role_path
   permissions_boundary  = var.iam_role_permissions_boundary
-  tags                  = var.tags
+  tags                  = merge(var.tags, var.iam_role_tags)
 }
 
 resource "aws_iam_role_policy" "inline_policies" {
@@ -48,14 +43,14 @@ resource "aws_iam_role_policy" "inline_policies" {
 resource "aws_iam_role_policy_attachment" "admin" {
   count = local.create_iam_role && var.dangerously_attach_admin_policy ? 1 : 0
 
-  policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
+  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
   count = local.create_iam_role && var.attach_read_only_policy ? 1 : 0
 
-  policy_arn = "arn:${local.partition}:iam::aws:policy/ReadOnlyAccess"
+  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/ReadOnlyAccess"
   role       = aws_iam_role.github[0].id
 }
 
@@ -65,7 +60,7 @@ resource "aws_iam_role_policy_attachment" "custom" {
   role = aws_iam_role.github[0].id
   policy_arn = format(
     "arn:%v:iam::aws:policy/AdministratorAccess",
-    local.partition,
+    data.aws_partition.this[0].partition,
   )
 }
 
@@ -74,10 +69,10 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list = concat(
     [for org in local.github_organizations : format("https://github.com/%v", org)],
-    [local.audience],
+    format("sts.%v", data.aws_partition.this[0].dns_suffix),
   )
 
-  tags = var.tags
+  tags = merge(var.tags, var.oidc_provider_tags)
 
   thumbprint_list = toset(
     concat(
