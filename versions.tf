@@ -2,10 +2,12 @@
 // SPDX-License-Identifier: MIT
 
 terraform {
+  required_version = "~> 1.12"
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 5.0"
+      version = ">= 6.0"
     }
 
     tls = {
@@ -13,6 +15,4 @@ terraform {
       version = ">= 4.0"
     }
   }
-
-  required_version = "~> 1.10"
 }
