@@ -13,9 +13,7 @@ between GitHub Actions workflows and AWS resources.
 
 ### Requirements
 
-- [AWS Provider] 4.0+
-- [TLS Provider] 3.0+
-- [Terraform] 1.0+
+- [Terraform] 1.12+
 
 ### Installation and usage
 
@@ -130,9 +128,9 @@ Made available under the terms of the [MIT License].
 [complete example]: examples/complete
 [configuring openid connect in amazon web services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [creating openid connect (oidc) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
+[github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
 [make]: https://www.gnu.org/software/make/
 [mit license]: LICENSE.md
 [obtaining the thumbprint for an openid connect identity provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
 [terraform]: https://www.terraform.io
 [tls provider]: https://registry.terraform.io/providers/hashicorp/tls/latest/docs
-[github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
