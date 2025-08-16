@@ -29,21 +29,21 @@ resource "aws_iam_role_policy" "inline_policies" {
 
   name   = each.key
   policy = each.value
-  role   = aws_iam_role.github.id
+  role   = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
   count = var.enabled && var.create_iam_role && var.dangerously_attach_admin_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
-  role       = aws_iam_role.github.id
+  role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
   count = var.enabled && var.create_iam_role && var.attach_read_only_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/ReadOnlyAccess"
-  role       = aws_iam_role.github.id
+  role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
