@@ -13,9 +13,7 @@ between GitHub Actions workflows and AWS resources.
 
 ### Requirements
 
-- [AWS Provider] 4.0+
-- [TLS Provider] 3.0+
-- [Terraform] 1.0+
+- [Terraform] 1.12+
 
 ### Installation and usage
 
@@ -88,10 +86,10 @@ applied, the JWT will contain an updated `iss` claim.
 | additional_audiences            | Additional OIDC audiences allowed to assume the role.                        | `list(string)` | `null`            |    no    |
 | additional_thumbprints          | Additional thumbprints for the OIDC provider.                                | `list(string)` | `[]`              |    no    |
 | attach_read_only_policy         | Enable/disable the attachment of the ReadOnly policy.                        | `bool`         | `false`           |    no    |
+| create                          | Enable/disable the creation of all resources.                                | `bool`         | `true`            |    no    |
 | create_iam_role                 | Enable/disable creation of the IAM role.                                     | `bool`         | `true`            |    no    |
 | create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                     | `bool`         | `true`            |    no    |
 | dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.             | `bool`         | `false`           |    no    |
-| enabled                         | Enable/disable the creation of resources.                                    | `bool`         | `true`            |    no    |
 | enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                       | `string`       | `""`              |    no    |
 | force_detach_policies           | Force detachment of policies attached to the IAM role.                       | `bool`         | `false`           |    no    |
 | github_repositories             | GitHub organization/repository names authorized to assume the role.          | `list(string)` | n/a               |   yes    |
@@ -130,9 +128,9 @@ Made available under the terms of the [MIT License].
 [complete example]: examples/complete
 [configuring openid connect in amazon web services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [creating openid connect (oidc) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
+[github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
 [make]: https://www.gnu.org/software/make/
 [mit license]: LICENSE.md
 [obtaining the thumbprint for an openid connect identity provider]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc_verify-thumbprint.html
 [terraform]: https://www.terraform.io
 [tls provider]: https://registry.terraform.io/providers/hashicorp/tls/latest/docs
-[github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/

@@ -4,7 +4,9 @@
 data "aws_partition" "this" {}
 
 data "aws_iam_policy_document" "assume_role" {
-  count = var.enabled && var.create_oidc_provider ? 1 : 0
+  count = local.create_oidc_provider ? 1 : 0
+
+  version = "2012-10-17"
 
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -33,12 +35,10 @@ data "aws_iam_policy_document" "assume_role" {
       type        = "Federated"
     }
   }
-
-  version = "2012-10-17"
 }
 
 data "aws_iam_openid_connect_provider" "github" {
-  count = !var.create_oidc_provider ? 1 : 0
+  count = !local.create_oidc_provider ? 1 : 0
 
   url = format(
     "https://token.actions.githubusercontent.com%v",
@@ -47,5 +47,7 @@ data "aws_iam_openid_connect_provider" "github" {
 }
 
 data "tls_certificate" "github" {
+  count = local.create_oidc_provider ? 1 : 0
+
   url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
 }

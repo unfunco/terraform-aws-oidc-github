@@ -2,17 +2,30 @@
 // SPDX-License-Identifier: MIT
 
 locals {
+  create_iam_role      = var.create && var.create_iam_role
+  create_oidc_provider = var.create && var.create_oidc_provider
+
+  attach_read_only_policy         = local.create_iam_role && var.attach_read_only_policy
+  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
+
   audience = format("sts.%v", local.dns_suffix)
+
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
   ])
-  dns_suffix        = data.aws_partition.this.dns_suffix
-  oidc_provider_arn = var.create_oidc_provider ? aws_iam_openid_connect_provider.github[0].arn : data.aws_iam_openid_connect_provider.github[0].arn
-  partition         = data.aws_partition.this.partition
+
+  dns_suffix = data.aws_partition.this.dns_suffix
+  partition  = data.aws_partition.this.partition
+
+  oidc_provider_arn = (
+    var.create_oidc_provider ?
+    aws_iam_openid_connect_provider.github[0].arn :
+    data.aws_iam_openid_connect_provider.github[0].arn
+  )
 }
 
 resource "aws_iam_role" "github" {
-  count = var.enabled && var.create_iam_role ? 1 : 0
+  count = local.create_iam_role ? 1 : 0
 
   assume_role_policy    = data.aws_iam_policy_document.assume_role[0].json
   description           = "Assumed by the GitHub OIDC provider."
@@ -33,21 +46,21 @@ resource "aws_iam_role_policy" "inline_policies" {
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
-  count = var.enabled && var.create_iam_role && var.dangerously_attach_admin_policy ? 1 : 0
+  count = local.create_iam_role && var.dangerously_attach_admin_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/AdministratorAccess"
   role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "read_only" {
-  count = var.enabled && var.create_iam_role && var.attach_read_only_policy ? 1 : 0
+  count = local.create_iam_role && var.attach_read_only_policy ? 1 : 0
 
   policy_arn = "arn:${local.partition}:iam::aws:policy/ReadOnlyAccess"
   role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_role_policy_attachment" "custom" {
-  count = var.enabled && var.create_iam_role ? length(var.iam_role_policy_arns) : 0
+  count = local.create_iam_role ? length(var.iam_role_policy_arns) : 0
 
   role = aws_iam_role.github[0].id
   policy_arn = format(
@@ -57,7 +70,7 @@ resource "aws_iam_role_policy_attachment" "custom" {
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
-  count = var.create_oidc_provider ? 1 : 0
+  count = local.create_oidc_provider ? 1 : 0
 
   client_id_list = concat(
     [for org in local.github_organizations : format("https://github.com/%v", org)],
@@ -68,7 +81,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   thumbprint_list = toset(
     concat(
-      [data.tls_certificate.github.certificates[0].sha1_fingerprint],
+      [data.tls_certificate.github[0].certificates[0].sha1_fingerprint],
       var.additional_thumbprints,
     )
   )

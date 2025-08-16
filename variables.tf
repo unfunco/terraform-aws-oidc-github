@@ -24,9 +24,9 @@ variable "attach_read_only_policy" {
   type        = bool
 }
 
-variable "create_oidc_provider" {
+variable "create" {
   default     = true
-  description = "Enable/disable the creation of the GitHub OIDC provider."
+  description = "Enable/disable the creation of all resources."
   type        = bool
 }
 
@@ -36,15 +36,15 @@ variable "create_iam_role" {
   type        = bool
 }
 
-variable "dangerously_attach_admin_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the AdministratorAccess policy."
+variable "create_oidc_provider" {
+  default     = true
+  description = "Enable/disable the creation of the GitHub OIDC provider."
   type        = bool
 }
 
-variable "enabled" {
-  default     = true
-  description = "Enable/disable the creation of resources."
+variable "dangerously_attach_admin_policy" {
+  default     = false
+  description = "Enable/disable the attachment of the AdministratorAccess policy."
   type        = bool
 }
 
