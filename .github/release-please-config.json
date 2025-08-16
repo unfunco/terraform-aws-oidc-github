@@ -28,7 +28,14 @@
       "prerelease": false,
       "pull-request-header": "🤖 I have created a release",
       "pull-request-title-pattern": "chore: Release v${version}",
-      "release-type": "terraform-module"
+      "release-type": "terraform-module",
+      "extra-files": [
+        {
+          "glob": false,
+          "path": "README.md",
+          "type": "generic"
+        }
+      ]
     }
   }
 }
