@@ -54,12 +54,6 @@ variable "enterprise_slug" {
   type        = string
 }
 
-variable "force_detach_policies" {
-  default     = false
-  description = "Force detachment of policies attached to the IAM role."
-  type        = bool
-}
-
 variable "github_repositories" {
   description = "GitHub organization/repository names authorized to assume the role."
   type        = list(string)
@@ -72,6 +66,29 @@ variable "github_repositories" {
       if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/\\-\\*]+)$", repo)) > 0
     ]) == length(var.github_repositories)
     error_message = "Repositories must be specified in the organization/repository format."
+  }
+}
+
+variable "iam_role_description" {
+  default     = "Assumed by the GitHub OIDC provider."
+  description = "Description of the IAM role to be created."
+  type        = string
+}
+
+variable "iam_role_force_detach_policies" {
+  default     = false
+  description = "Force detachment of policies attached to the IAM role."
+  type        = bool
+}
+
+variable "iam_role_max_session_duration" {
+  default     = 3600
+  description = "The maximum session duration in seconds."
+  type        = number
+
+  validation {
+    condition     = var.iam_role_max_session_duration >= 3600 && var.iam_role_max_session_duration <= 43200
+    error_message = "The maximum session duration must be between 3600 and 43200 seconds."
   }
 }
 
@@ -105,15 +122,16 @@ variable "iam_role_inline_policies" {
   type        = map(string)
 }
 
-variable "max_session_duration" {
-  default     = 3600
-  description = "The maximum session duration in seconds."
-  type        = number
+variable "iam_role_tags" {
+  default     = {}
+  description = "Additional tags to be applied to the IAM role."
+  type        = map(string)
+}
 
-  validation {
-    condition     = var.max_session_duration >= 3600 && var.max_session_duration <= 43200
-    error_message = "The maximum session duration must be between 3600 and 43200 seconds."
-  }
+variable "oidc_provider_tags" {
+  default     = {}
+  description = "Tags to be applied to the OIDC provider."
+  type        = map(string)
 }
 
 variable "tags" {
