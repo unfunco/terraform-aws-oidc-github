@@ -1,6 +1,16 @@
 name: CI
 
 on:
+  pull_request:
+    branches:
+    - main
+    paths-ignore:
+    - .editorconfig
+    - .gitignore
+    - CHANGELOG.md
+    - LICENSE.md
+    - Makefile
+    - README.md
   push:
     branches:
     - main
@@ -15,6 +25,9 @@ on:
 jobs:
   verify:
     name: Verify
+    permissions:
+      contents: read
+      id-token: write
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -29,9 +42,20 @@ jobs:
       run: terraform fmt -check -recursive
     - name: Validate the configuration
       run: terraform validate
+    - name: Configure AWS credentials
+      if: github.event_name == 'push' && github.repository == 'unfunco/terraform-aws-oidc-github'
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ vars.AWS_REGION }}
+        role-session-name: OIDCGitHubActionsTerraformTest${{ github.run_id }}
+        role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github
+    - name: Run unit tests
+      if: github.event_name == 'push' && github.repository == 'unfunco/terraform-aws-oidc-github'
+      run: terraform test
 
   release:
     name: Release?
+    if: github.event == 'push'
     needs: [ verify ]
     permissions:
       contents: write

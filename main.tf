@@ -13,7 +13,7 @@ locals {
   ])
 
   oidc_provider_arn = (
-    var.create_oidc_provider ?
+    local.create_oidc_provider ?
     aws_iam_openid_connect_provider.github[0].arn :
     data.aws_iam_openid_connect_provider.github[0].arn
   )
@@ -69,7 +69,7 @@ resource "aws_iam_openid_connect_provider" "github" {
 
   client_id_list = concat(
     [for org in local.github_organizations : format("https://github.com/%v", org)],
-    format("sts.%v", data.aws_partition.this[0].dns_suffix),
+    [format("sts.%v", data.aws_partition.this[0].dns_suffix)],
   )
 
   tags = merge(var.tags, var.oidc_provider_tags)

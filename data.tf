@@ -26,9 +26,9 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test = "StringEquals"
       values = var.additional_audiences != null ? concat(
-        format("sts.%v", data.aws_partition.this[0].dns_suffix),
+        [format("sts.%v", data.aws_partition.this[0].dns_suffix)],
         var.additional_audiences,
-      ) : format("sts.%v", data.aws_partition.this[0].dns_suffix)
+      ) : [format("sts.%v", data.aws_partition.this[0].dns_suffix)]
       variable = "token.actions.githubusercontent.com:aud"
     }
 
