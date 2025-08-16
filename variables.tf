@@ -3,13 +3,13 @@
 
 variable "additional_audiences" {
   default     = null
-  description = "List of additional OIDC audiences allowed to assume the role."
+  description = "Additional OIDC audiences allowed to assume the role."
   type        = list(string)
 }
 
 variable "additional_thumbprints" {
   default     = []
-  description = "A list of additional thumbprints for the OIDC provider."
+  description = "Additional thumbprints for the OIDC provider."
   type        = list(string)
 
   validation {
@@ -20,25 +20,31 @@ variable "additional_thumbprints" {
 
 variable "attach_read_only_policy" {
   default     = false
-  description = "Flag to enable/disable the attachment of the ReadOnly policy."
+  description = "Enable/disable the attachment of the ReadOnly policy."
   type        = bool
 }
 
 variable "create_oidc_provider" {
   default     = true
-  description = "Flag to enable/disable the creation of the GitHub OIDC provider."
+  description = "Enable/disable the creation of the GitHub OIDC provider."
   type        = bool
 }
 
 variable "create_iam_role" {
   default     = true
-  description = ""
+  description = "Enable/disable creation of the IAM role."
   type        = bool
 }
 
 variable "dangerously_attach_admin_policy" {
   default     = false
-  description = "Flag to enable/disable the attachment of the AdministratorAccess policy."
+  description = "Enable/disable the attachment of the AdministratorAccess policy."
+  type        = bool
+}
+
+variable "enabled" {
+  default     = true
+  description = "Enable/disable the creation of resources."
   type        = bool
 }
 
@@ -50,12 +56,12 @@ variable "enterprise_slug" {
 
 variable "force_detach_policies" {
   default     = false
-  description = "Flag to force detachment of policies attached to the IAM role."
+  description = "Force detachment of policies attached to the IAM role."
   type        = bool
 }
 
 variable "github_repositories" {
-  description = "A list of GitHub organization/repository names authorized to assume the role."
+  description = "GitHub organization/repository names authorized to assume the role."
   type        = list(string)
 
   validation {
@@ -89,7 +95,7 @@ variable "iam_role_permissions_boundary" {
 
 variable "iam_role_policy_arns" {
   default     = []
-  description = "A list of IAM policy ARNs to attach to the IAM role."
+  description = "IAM policy ARNs to attach to the IAM role."
   type        = list(string)
 }
 
@@ -112,6 +118,6 @@ variable "max_session_duration" {
 
 variable "tags" {
   default     = {}
-  description = "A map of tags to be applied to all applicable resources."
+  description = "Tags to be applied to all applicable resources."
   type        = map(string)
 }
