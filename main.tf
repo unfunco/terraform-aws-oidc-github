@@ -90,11 +90,8 @@ resource "aws_iam_role_policy_attachment" "s3_full_access" {
 resource "aws_iam_role_policy_attachment" "custom" {
   count = local.create_iam_role ? length(var.iam_role_policy_arns) : 0
 
-  role = aws_iam_role.github[0].id
-  policy_arn = format(
-    "arn:%v:iam::aws:policy/AdministratorAccess",
-    data.aws_partition.this[0].partition,
-  )
+  policy_arn = var.iam_role_policy_arns[count.index]
+  role       = aws_iam_role.github[0].id
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
