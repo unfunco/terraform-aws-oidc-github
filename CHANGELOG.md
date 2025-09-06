@@ -3,6 +3,13 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [2.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.1...v2.0.2) (2025-09-06)
+
+
+### Bug fixes
+
+* Reduce the minimum Terraform version required ([#90](https://github.com/unfunco/terraform-aws-oidc-github/issues/90)) ([0bccdca](https://github.com/unfunco/terraform-aws-oidc-github/commit/0bccdca71fee8b6f37f0a09d4d55c4c05dbd49b9))
+
 ## [2.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.0...v2.0.1) (2025-08-21)
 
 
