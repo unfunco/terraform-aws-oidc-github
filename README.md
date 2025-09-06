@@ -13,7 +13,7 @@ between GitHub Actions workflows and AWS resources.
 
 ### Requirements
 
-- [Terraform] 1.12+
+- [Terraform] 1.0+
 
 ### Installation and usage
 
