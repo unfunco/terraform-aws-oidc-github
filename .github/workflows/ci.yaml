@@ -44,7 +44,7 @@ jobs:
       run: terraform validate
     - name: Configure AWS credentials
       if: github.event_name == 'push' && github.repository == 'unfunco/terraform-aws-oidc-github'
-      uses: aws-actions/configure-aws-credentials@v4
+      uses: aws-actions/configure-aws-credentials@v5
       with:
         aws-region: ${{ vars.AWS_REGION }}
         role-session-name: OIDCGitHubActionsTerraformTest${{ github.run_id }}
