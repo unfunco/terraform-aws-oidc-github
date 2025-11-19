@@ -5,59 +5,54 @@ This project adheres to the [semantic versioning] specification.
 
 ## [2.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.1...v2.0.2) (2025-09-06)
 
-
 ### Bug fixes
 
-* Reduce the minimum Terraform version required ([#90](https://github.com/unfunco/terraform-aws-oidc-github/issues/90)) ([0bccdca](https://github.com/unfunco/terraform-aws-oidc-github/commit/0bccdca71fee8b6f37f0a09d4d55c4c05dbd49b9))
+- Reduce the minimum Terraform version required ([#90](https://github.com/unfunco/terraform-aws-oidc-github/issues/90)) ([0bccdca](https://github.com/unfunco/terraform-aws-oidc-github/commit/0bccdca71fee8b6f37f0a09d4d55c4c05dbd49b9))
 
 ## [2.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.0...v2.0.1) (2025-08-21)
 
-
 ### Bug fixes
 
-* Fix custom policies ([#87](https://github.com/unfunco/terraform-aws-oidc-github/issues/87)) ([35daa17](https://github.com/unfunco/terraform-aws-oidc-github/commit/35daa17654e86d89b3c6840312c7c4cb9197cce9))
+- Fix custom policies ([#87](https://github.com/unfunco/terraform-aws-oidc-github/issues/87)) ([35daa17](https://github.com/unfunco/terraform-aws-oidc-github/commit/35daa17654e86d89b3c6840312c7c4cb9197cce9))
 
 ## [2.0.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.8.1...v2.0.0) (2025-08-16)
 
-
 ### ⚠ BREAKING CHANGES
 
-* Rename the enabled variable to create ([#80](https://github.com/unfunco/terraform-aws-oidc-github/issues/80))
-* Rename default IAM role to GitHubActions ([#77](https://github.com/unfunco/terraform-aws-oidc-github/issues/77))
-* Remove the enabled variable ([#76](https://github.com/unfunco/terraform-aws-oidc-github/issues/76))
-* Replace Apache-2.0 with the MIT license ([#74](https://github.com/unfunco/terraform-aws-oidc-github/issues/74))
-* Increase the minimum required versions ([#73](https://github.com/unfunco/terraform-aws-oidc-github/issues/73))
-* Rename the attach_admin_policy variable ([#72](https://github.com/unfunco/terraform-aws-oidc-github/issues/72))
-* Change the attach_read_only_policy default ([#71](https://github.com/unfunco/terraform-aws-oidc-github/issues/71))
+- Rename the enabled variable to create ([#80](https://github.com/unfunco/terraform-aws-oidc-github/issues/80))
+- Rename default IAM role to GitHubActions ([#77](https://github.com/unfunco/terraform-aws-oidc-github/issues/77))
+- Remove the enabled variable ([#76](https://github.com/unfunco/terraform-aws-oidc-github/issues/76))
+- Replace Apache-2.0 with the MIT license ([#74](https://github.com/unfunco/terraform-aws-oidc-github/issues/74))
+- Increase the minimum required versions ([#73](https://github.com/unfunco/terraform-aws-oidc-github/issues/73))
+- Rename the attach_admin_policy variable ([#72](https://github.com/unfunco/terraform-aws-oidc-github/issues/72))
+- Change the attach_read_only_policy default ([#71](https://github.com/unfunco/terraform-aws-oidc-github/issues/71))
 
 ### New features
 
-* Add a flag to enable/disable role creation ([#68](https://github.com/unfunco/terraform-aws-oidc-github/issues/68)) ([6c252cf](https://github.com/unfunco/terraform-aws-oidc-github/commit/6c252cf48fdf60bba543b6280d19d0ec22b2ee1b))
-* Add AWS IAM OpenID connect provider URL to outputs ([#79](https://github.com/unfunco/terraform-aws-oidc-github/issues/79)) ([208ca71](https://github.com/unfunco/terraform-aws-oidc-github/commit/208ca71eb5072df2bf9656262bb982d4a411b84f))
-* Allow more managed policies to be attached ([#82](https://github.com/unfunco/terraform-aws-oidc-github/issues/82)) ([06b4849](https://github.com/unfunco/terraform-aws-oidc-github/commit/06b484971628e78b28567cdedd4fc913296fc04f))
-* Support non-default AWS partitions ([#65](https://github.com/unfunco/terraform-aws-oidc-github/issues/65)) ([801d242](https://github.com/unfunco/terraform-aws-oidc-github/commit/801d24208abb4547c695c7b38545d3b9142d4dbf))
-
+- Add a flag to enable/disable role creation ([#68](https://github.com/unfunco/terraform-aws-oidc-github/issues/68)) ([6c252cf](https://github.com/unfunco/terraform-aws-oidc-github/commit/6c252cf48fdf60bba543b6280d19d0ec22b2ee1b))
+- Add AWS IAM OpenID connect provider URL to outputs ([#79](https://github.com/unfunco/terraform-aws-oidc-github/issues/79)) ([208ca71](https://github.com/unfunco/terraform-aws-oidc-github/commit/208ca71eb5072df2bf9656262bb982d4a411b84f))
+- Allow more managed policies to be attached ([#82](https://github.com/unfunco/terraform-aws-oidc-github/issues/82)) ([06b4849](https://github.com/unfunco/terraform-aws-oidc-github/commit/06b484971628e78b28567cdedd4fc913296fc04f))
+- Support non-default AWS partitions ([#65](https://github.com/unfunco/terraform-aws-oidc-github/issues/65)) ([801d242](https://github.com/unfunco/terraform-aws-oidc-github/commit/801d24208abb4547c695c7b38545d3b9142d4dbf))
 
 ### Bug fixes
 
-* Do not skip the release job ([#84](https://github.com/unfunco/terraform-aws-oidc-github/issues/84)) ([3b2f620](https://github.com/unfunco/terraform-aws-oidc-github/commit/3b2f62006c7e102cfadf2a5d09924a155772262c))
-* Fix broken unit test ([#86](https://github.com/unfunco/terraform-aws-oidc-github/issues/86)) ([6ecfd59](https://github.com/unfunco/terraform-aws-oidc-github/commit/6ecfd59c7e6cfe917c24d357aa80a8e7037e2a3f))
-
+- Do not skip the release job ([#84](https://github.com/unfunco/terraform-aws-oidc-github/issues/84)) ([3b2f620](https://github.com/unfunco/terraform-aws-oidc-github/commit/3b2f62006c7e102cfadf2a5d09924a155772262c))
+- Fix broken unit test ([#86](https://github.com/unfunco/terraform-aws-oidc-github/issues/86)) ([6ecfd59](https://github.com/unfunco/terraform-aws-oidc-github/commit/6ecfd59c7e6cfe917c24d357aa80a8e7037e2a3f))
 
 ### Miscellaneous
 
-* Automatically bump README.md version number ([#83](https://github.com/unfunco/terraform-aws-oidc-github/issues/83)) ([b39d995](https://github.com/unfunco/terraform-aws-oidc-github/commit/b39d9959c90d0a9f83dca9fbc7ae45843590be0f))
-* Change the attach_read_only_policy default ([#71](https://github.com/unfunco/terraform-aws-oidc-github/issues/71)) ([c997cb9](https://github.com/unfunco/terraform-aws-oidc-github/commit/c997cb9e3a22485778706fb5af273164e44bb3dd))
-* Increase max_line_length to 120 characters ([#70](https://github.com/unfunco/terraform-aws-oidc-github/issues/70)) ([e6edce5](https://github.com/unfunco/terraform-aws-oidc-github/commit/e6edce5fab4d2142b71f96805e8dd8047b7145e0))
-* Increase the minimum required versions ([#73](https://github.com/unfunco/terraform-aws-oidc-github/issues/73)) ([395b8b1](https://github.com/unfunco/terraform-aws-oidc-github/commit/395b8b1ce2eb9e4efe839d912c27f607f85b5366))
-* Remove the cron workflow ([#69](https://github.com/unfunco/terraform-aws-oidc-github/issues/69)) ([10f3f5a](https://github.com/unfunco/terraform-aws-oidc-github/commit/10f3f5a5bede332f00f4fb2b8757b34e610dd213))
-* Remove the enabled variable ([#76](https://github.com/unfunco/terraform-aws-oidc-github/issues/76)) ([03185e5](https://github.com/unfunco/terraform-aws-oidc-github/commit/03185e591d9044e65196ffcdf1afbe6026c4b564))
-* Rename default IAM role to GitHubActions ([#77](https://github.com/unfunco/terraform-aws-oidc-github/issues/77)) ([29a447d](https://github.com/unfunco/terraform-aws-oidc-github/commit/29a447de7230e3c089d1053fa60a744b908358fc))
-* Rename the attach_admin_policy variable ([#72](https://github.com/unfunco/terraform-aws-oidc-github/issues/72)) ([f0aaed4](https://github.com/unfunco/terraform-aws-oidc-github/commit/f0aaed44627da39a2654fcb523acee9be7323b4a))
-* Rename the enabled variable to create ([#80](https://github.com/unfunco/terraform-aws-oidc-github/issues/80)) ([2eb9470](https://github.com/unfunco/terraform-aws-oidc-github/commit/2eb9470ebdeaccae0c1478ec433477d996d62b3f))
-* Replace Apache-2.0 with the MIT license ([#74](https://github.com/unfunco/terraform-aws-oidc-github/issues/74)) ([54470d2](https://github.com/unfunco/terraform-aws-oidc-github/commit/54470d25bf0104e1ee405f319f473559c917e8d9))
-* Split workflows and simplify testing ([#67](https://github.com/unfunco/terraform-aws-oidc-github/issues/67)) ([7cbbdbd](https://github.com/unfunco/terraform-aws-oidc-github/commit/7cbbdbd7837fc47554468dbc7ce20d3504c43ac3))
-* Update the examples ([#85](https://github.com/unfunco/terraform-aws-oidc-github/issues/85)) ([77ea7bc](https://github.com/unfunco/terraform-aws-oidc-github/commit/77ea7bc8a0fdf9e5b89ca10a692c9c44eb1693eb))
+- Automatically bump README.md version number ([#83](https://github.com/unfunco/terraform-aws-oidc-github/issues/83)) ([b39d995](https://github.com/unfunco/terraform-aws-oidc-github/commit/b39d9959c90d0a9f83dca9fbc7ae45843590be0f))
+- Change the attach_read_only_policy default ([#71](https://github.com/unfunco/terraform-aws-oidc-github/issues/71)) ([c997cb9](https://github.com/unfunco/terraform-aws-oidc-github/commit/c997cb9e3a22485778706fb5af273164e44bb3dd))
+- Increase max_line_length to 120 characters ([#70](https://github.com/unfunco/terraform-aws-oidc-github/issues/70)) ([e6edce5](https://github.com/unfunco/terraform-aws-oidc-github/commit/e6edce5fab4d2142b71f96805e8dd8047b7145e0))
+- Increase the minimum required versions ([#73](https://github.com/unfunco/terraform-aws-oidc-github/issues/73)) ([395b8b1](https://github.com/unfunco/terraform-aws-oidc-github/commit/395b8b1ce2eb9e4efe839d912c27f607f85b5366))
+- Remove the cron workflow ([#69](https://github.com/unfunco/terraform-aws-oidc-github/issues/69)) ([10f3f5a](https://github.com/unfunco/terraform-aws-oidc-github/commit/10f3f5a5bede332f00f4fb2b8757b34e610dd213))
+- Remove the enabled variable ([#76](https://github.com/unfunco/terraform-aws-oidc-github/issues/76)) ([03185e5](https://github.com/unfunco/terraform-aws-oidc-github/commit/03185e591d9044e65196ffcdf1afbe6026c4b564))
+- Rename default IAM role to GitHubActions ([#77](https://github.com/unfunco/terraform-aws-oidc-github/issues/77)) ([29a447d](https://github.com/unfunco/terraform-aws-oidc-github/commit/29a447de7230e3c089d1053fa60a744b908358fc))
+- Rename the attach_admin_policy variable ([#72](https://github.com/unfunco/terraform-aws-oidc-github/issues/72)) ([f0aaed4](https://github.com/unfunco/terraform-aws-oidc-github/commit/f0aaed44627da39a2654fcb523acee9be7323b4a))
+- Rename the enabled variable to create ([#80](https://github.com/unfunco/terraform-aws-oidc-github/issues/80)) ([2eb9470](https://github.com/unfunco/terraform-aws-oidc-github/commit/2eb9470ebdeaccae0c1478ec433477d996d62b3f))
+- Replace Apache-2.0 with the MIT license ([#74](https://github.com/unfunco/terraform-aws-oidc-github/issues/74)) ([54470d2](https://github.com/unfunco/terraform-aws-oidc-github/commit/54470d25bf0104e1ee405f319f473559c917e8d9))
+- Split workflows and simplify testing ([#67](https://github.com/unfunco/terraform-aws-oidc-github/issues/67)) ([7cbbdbd](https://github.com/unfunco/terraform-aws-oidc-github/commit/7cbbdbd7837fc47554468dbc7ce20d3504c43ac3))
+- Update the examples ([#85](https://github.com/unfunco/terraform-aws-oidc-github/issues/85)) ([77ea7bc](https://github.com/unfunco/terraform-aws-oidc-github/commit/77ea7bc8a0fdf9e5b89ca10a692c9c44eb1693eb))
 
 ## [1.8.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v1.8.0...v1.8.1) (2024-12-29)
 
