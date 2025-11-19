@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
 [![Security](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml)
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-purple.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE.md)
 
 Terraform module to configure GitHub Actions as an OpenID Connect (OIDC)
 identity provider in AWS, allowing GitHub Actions to obtain short-lived
@@ -114,13 +114,13 @@ applied, the JWT will contain an updated `iss` claim.
 
 ## Outputs
 
-| Name                             | Description                                                                  |
-| -------------------------------- | ---------------------------------------------------------------------------- |
-| assume_role_policy_document_json | The assume role policy JSON document that can be attached to your IAM roles. |
-| iam_role_arn                     | The ARN of the IAM role.                                                     |
-| iam_role_name                    | The name of the IAM role.                                                    |
-| oidc_provider_arn                | The ARN of the OIDC provider.                                                |
-| oidc_provider_url                | The URL of the OIDC provider.                                                |
+| Name               | Description                                                             |
+| ------------------ | ----------------------------------------------------------------------- |
+| assume_role_policy | The assume role policy document that can be attached to your IAM roles. |
+| iam_role_arn       | The ARN of the IAM role.                                                |
+| iam_role_name      | The name of the IAM role.                                               |
+| oidc_provider_arn  | The ARN of the OIDC provider.                                           |
+| oidc_provider_url  | The URL of the OIDC provider.                                           |
 
 <!-- END_TF_DOCS -->
 
