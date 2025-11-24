@@ -3,6 +3,18 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [2.0.3](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.2...v2.0.3) (2025-11-24)
+
+
+### Miscellaneous
+
+* Bump actions/checkout from 5 to 6 ([#98](https://github.com/unfunco/terraform-aws-oidc-github/issues/98)) ([939f8b3](https://github.com/unfunco/terraform-aws-oidc-github/commit/939f8b378f281b9e46b7e26402f9c39575258ab8))
+* Bump actions/github-script from 7 to 8 ([#94](https://github.com/unfunco/terraform-aws-oidc-github/issues/94)) ([0ce5f99](https://github.com/unfunco/terraform-aws-oidc-github/commit/0ce5f99447d904b6121ce041d1a4dd86821890ad))
+* Bump actions/labeler from 5 to 6 ([#92](https://github.com/unfunco/terraform-aws-oidc-github/issues/92)) ([faed9f6](https://github.com/unfunco/terraform-aws-oidc-github/commit/faed9f672093c072bd1e26ba04fe10bc4241e1d8))
+* Bump aws-actions/configure-aws-credentials from 4 to 5 ([#93](https://github.com/unfunco/terraform-aws-oidc-github/issues/93)) ([1028c84](https://github.com/unfunco/terraform-aws-oidc-github/commit/1028c844ae540e6d2e12a8e81d94d332ade76c02))
+* Bump github/codeql-action from 3 to 4 ([#96](https://github.com/unfunco/terraform-aws-oidc-github/issues/96)) ([cde96b6](https://github.com/unfunco/terraform-aws-oidc-github/commit/cde96b605d22c3be644934d7126898011cdda9ea))
+* Update the license badge in the README ([#97](https://github.com/unfunco/terraform-aws-oidc-github/issues/97)) ([cebbb0f](https://github.com/unfunco/terraform-aws-oidc-github/commit/cebbb0f1bb155c99eb3d2c192353d7c6efcba41d))
+
 ## [2.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.1...v2.0.2) (2025-09-06)
 
 ### Bug fixes
