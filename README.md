@@ -18,19 +18,7 @@ between GitHub Actions workflows and AWS resources.
 ### Installation and usage
 
 The following snippet shows the minimum required configuration to create a
-working OIDC connection between GitHub Actions and AWS. By default, it will only
-allow the `main` branch of the specified repository to assume the role, you can
-set the `default_branch_name` variable to `master` if required, or use `*` to
-allow all branches to assume the role. To allow specific branches or tags, you
-can include an explicit ref in the repository string:
-
-```terraform
-github_repositories = [
-  "org/repo:ref:refs/heads/main",
-  "org/repo:ref:refs/heads/release/*",
-  "org/repo:ref:refs/tags/v*",
-]
-```
+working OIDC connection between GitHub Actions and AWS. 
 
 <!-- x-release-please-start-version -->
 
@@ -44,6 +32,19 @@ module "oidc_github" {
 ```
 
 <!-- x-release-please-end -->
+
+By default, it will only allow the `main` branch of the specified repository to
+assume the IAM role, you can set the `default_branch_name` variable to `master`
+if necessary, or specify `*` to allow all branches to assume the role. To allow
+specific branches or tags, you can include an explicit ref:
+
+```terraform
+github_repositories = [
+  "org/repo:ref:refs/heads/main",
+  "org/repo:ref:refs/heads/release/*",
+  "org/repo:ref:refs/tags/v*",
+]
+```
 
 The following demonstrates how to use GitHub Actions once the Terraform module
 has been applied to your AWS account. The action receives a JSON Web Token (JWT)
