@@ -1,7 +1,7 @@
 # AWS GitHub Actions OIDC Terraform Module
 
 [![CI](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/ci.yaml)
-[![Security](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml/badge.svg)](https://github.com/unfunco/terraform-aws-oidc-github/actions/workflows/security.yaml)
+[![Terraform Registry](https://img.shields.io/badge/Terraform%20Registry-unfunco%2Foidc--github-blue?logo=terraform)](https://registry.terraform.io/modules/unfunco/oidc-github/aws)
 [![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE.md)
 
 Terraform module to configure GitHub Actions as an OpenID Connect (OIDC)
@@ -21,10 +21,11 @@ Refer to the [complete example] to view all the available configuration options.
 The following snippet shows the minimum required configuration to create a
 working OIDC connection between GitHub Actions and AWS.
 
+<!-- x-release-please-start-version -->
 ```terraform
 module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "2.0.2" # x-release-please-version
+  version = "2.0.2"
 
   github_repositories = [
     "org/repo",
@@ -32,6 +33,7 @@ module "oidc_github" {
   ]
 }
 ```
+<!-- x-release-please-end -->
 
 The following demonstrates how to use GitHub Actions once the Terraform module
 has been applied to your AWS account. The action receives a JSON Web Token (JWT)
