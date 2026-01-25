@@ -17,9 +17,20 @@ between GitHub Actions workflows and AWS resources.
 
 ### Installation and usage
 
-Refer to the [complete example] to view all the available configuration options.
 The following snippet shows the minimum required configuration to create a
-working OIDC connection between GitHub Actions and AWS.
+working OIDC connection between GitHub Actions and AWS. By default, it will only
+allow the `main` branch of the specified repository to assume the role, you can
+set the `default_branch_name` variable to `master` if required, or use `*` to
+allow all branches to assume the role. To allow specific branches or tags, you
+can include an explicit ref in the repository string:
+
+```terraform
+github_repositories = [
+  "org/repo:ref:refs/heads/main",
+  "org/repo:ref:refs/heads/release/*",
+  "org/repo:ref:refs/tags/v*",
+]
+```
 
 <!-- x-release-please-start-version -->
 
@@ -28,10 +39,7 @@ module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
   version = "2.0.2"
 
-  github_repositories = [
-    "org/repo",
-    "another-org/another-repo:ref:refs/heads/main",
-  ]
+  github_repositories = ["org/repo"]
 }
 ```
 
@@ -142,7 +150,6 @@ applied, the JWT will contain an updated `iss` claim.
 Made available under the terms of the [MIT License].
 
 [aws provider]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
-[complete example]: examples/complete
 [configuring openid connect in amazon web services]: https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services
 [creating openid connect (oidc) identity providers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html
 [github actions – update on oidc integration with aws]: https://github.blog/changelog/2023-06-27-github-actions-update-on-oidc-integration-with-aws/
