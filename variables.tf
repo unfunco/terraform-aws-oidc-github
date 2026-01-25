@@ -72,6 +72,12 @@ variable "dangerously_attach_admin_policy" {
   type        = bool
 }
 
+variable "default_branch_name" {
+  default     = "main"
+  description = "Default branch name for repositories without an explicit ref. Use '*' to allow all refs (less secure)."
+  type        = string
+}
+
 variable "enterprise_slug" {
   default     = ""
   description = "Enterprise slug for GitHub Enterprise Cloud customers."
