@@ -18,7 +18,7 @@ between GitHub Actions workflows and AWS resources.
 ### Installation and usage
 
 The following snippet shows the minimum required configuration to create a
-working OIDC connection between GitHub Actions and AWS. 
+working OIDC connection between GitHub Actions and AWS.
 
 <!-- x-release-please-start-version -->
 
@@ -77,7 +77,7 @@ applied, the JWT will contain an updated `iss` claim.
 
 <!-- BEGIN_TF_DOCS -->
 
-## Resources
+### Resources
 
 | Name                                                                                                                                                        | Type        |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
@@ -96,7 +96,7 @@ applied, the JWT will contain an updated `iss` claim.
 | [aws_partition.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition)                                              | data source |
 | [tls_certificate.github](https://registry.terraform.io/providers/hashicorp/tls/latest/docs/data-sources/certificate)                                        | data source |
 
-## Inputs
+### Inputs
 
 | Name                             | Description                                                                                             | Type           | Default                                  | Required |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------- | :------: |
@@ -126,7 +126,7 @@ applied, the JWT will contain an updated `iss` claim.
 | oidc_provider_tags               | Tags to be applied to the OIDC provider.                                                                | `map(string)`  | `{}`                                     |    no    |
 | tags                             | Tags to be applied to all applicable resources.                                                         | `map(string)`  | `{}`                                     |    no    |
 
-## Outputs
+### Outputs
 
 | Name               | Description                                                             |
 | ------------------ | ----------------------------------------------------------------------- |

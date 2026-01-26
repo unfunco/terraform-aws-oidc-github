@@ -5,7 +5,9 @@ output:
   mode: inject
   template: |-
     <!-- BEGIN_TF_DOCS -->
+
     {{ .Content }}
+
     <!-- END_TF_DOCS -->
 
 sections:
@@ -23,7 +25,7 @@ settings:
   escape: true
   hide-empty: true
   html: false
-  indent: 0
+  indent: 3
   lockfile: true
   read-comments: true
   required: true
