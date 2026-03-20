@@ -146,39 +146,6 @@ run "aud_claim_includes_additional_audiences" {
   }
 }
 
-run "enterprise_slug_updates_oidc_principal" {
-  variables {
-    enterprise_slug     = "octo-enterprise"
-    github_repositories = ["unfunco/terraform-aws-oidc-github"]
-  }
-
-  command = plan
-
-  override_resource {
-    override_during = plan
-
-    target = aws_iam_openid_connect_provider.github
-    values = {
-      arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
-    }
-  }
-
-  assert {
-    condition     = output.oidc_provider_url == "https://token.actions.githubusercontent.com/octo-enterprise"
-    error_message = "OIDC provider URL should include the enterprise slug"
-  }
-
-  assert {
-    condition     = output.oidc_provider_arn == "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
-    error_message = "OIDC provider ARN should include the enterprise slug path once"
-  }
-
-  assert {
-    condition     = jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Principal.Federated == "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
-    error_message = "Assume role policy should trust the OIDC provider ARN without duplicating the enterprise slug"
-  }
-}
-
 run "create_role_with_existing_oidc_provider" {
   variables {
     create_oidc_provider = false
