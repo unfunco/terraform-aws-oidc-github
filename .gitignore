@@ -1,3 +1,9 @@
+# General
+.DS_Store
+.idea/
+Thumbs.db
+
+# Terraform
 **/.terraform/*
 *.tfstate
 *.tfstate.*

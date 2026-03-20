@@ -1,0 +1,2 @@
+* text=auto eol=lf
+.terraform.lock.hcl -diff
