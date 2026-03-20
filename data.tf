@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     principals {
-      identifiers = ["${local.oidc_provider_arn}%{if var.enterprise_slug != ""}/${var.enterprise_slug}%{endif}"]
+      identifiers = [local.oidc_provider_arn]
       type        = "Federated"
     }
   }
