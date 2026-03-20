@@ -18,36 +18,6 @@ variable "additional_thumbprints" {
   }
 }
 
-variable "attach_ec2_full_access_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the AmazonEC2FullAccess policy."
-  type        = bool
-}
-
-variable "attach_lambda_full_access_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the AWSLambda_FullAccess policy."
-  type        = bool
-}
-
-variable "attach_rds_full_access_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the AmazonRDSFullAccess policy."
-  type        = bool
-}
-
-variable "attach_read_only_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the ReadOnly policy."
-  type        = bool
-}
-
-variable "attach_s3_full_access_policy" {
-  default     = false
-  description = "Enable/disable the attachment of the AmazonS3FullAccess policy."
-  type        = bool
-}
-
 variable "create" {
   default     = true
   description = "Enable/disable the creation of all resources."
@@ -141,10 +111,18 @@ variable "iam_role_permissions_boundary" {
   type        = string
 }
 
-variable "iam_role_policy_arns" {
+variable "iam_role_policy_names" {
   default     = []
-  description = "IAM policy ARNs to attach to the IAM role."
+  description = "AWS managed IAM policy names to attach to the IAM role. Provide the value after `policy/`, for example `ReadOnlyAccess` or `service-role/AWSLambdaBasicExecutionRole`."
   type        = list(string)
+
+  validation {
+    condition = alltrue([
+      for policy_name in var.iam_role_policy_names :
+      trimspace(policy_name) != "" && !startswith(trimspace(policy_name), "arn:")
+    ])
+    error_message = "IAM role policies must be provided as AWS managed policy names, not full ARNs."
+  }
 }
 
 variable "iam_role_inline_policies" {

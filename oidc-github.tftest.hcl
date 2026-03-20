@@ -169,3 +169,40 @@ run "create_role_with_existing_oidc_provider" {
     error_message = "OIDC provider output should expose the ARN of the existing provider"
   }
 }
+
+run "custom_policy_attachments_are_keyed_by_generated_arn" {
+  variables {
+    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+    iam_role_policy_names = [
+      "AmazonS3FullAccess",
+      "ReadOnlyAccess",
+      "AmazonS3FullAccess",
+    ]
+  }
+
+  command = plan
+
+  assert {
+    condition = toset(keys(aws_iam_role_policy_attachment.custom)) == toset([
+      "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+      "arn:aws:iam::aws:policy/ReadOnlyAccess",
+    ])
+    error_message = "Custom policy attachments should be keyed by generated managed policy ARN rather than input position"
+  }
+
+  assert {
+    condition     = length(aws_iam_role_policy_attachment.custom) == 2
+    error_message = "Duplicate custom policy names should not create duplicate attachment instances"
+  }
+}
+
+run "custom_policy_names_reject_full_arns" {
+  variables {
+    github_repositories   = ["unfunco/terraform-aws-oidc-github"]
+    iam_role_policy_names = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
+  }
+
+  command = plan
+
+  expect_failures = [var.iam_role_policy_names]
+}
