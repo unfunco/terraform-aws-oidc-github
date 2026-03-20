@@ -10,8 +10,11 @@ locals {
     var.github_repositories != null && length(var.github_repositories) > 0
   )
 
-  attach_read_only_policy         = local.create_iam_role && var.attach_read_only_policy
   dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
+  custom_iam_role_policy_arns = local.create_iam_role ? toset([
+    for policy_name in var.iam_role_policy_names :
+    "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/${policy_name}"
+  ]) : toset([])
 
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
@@ -52,45 +55,10 @@ resource "aws_iam_role_policy_attachment" "admin" {
   role       = aws_iam_role.github[0].id
 }
 
-resource "aws_iam_role_policy_attachment" "ec2_full_access" {
-  count = local.create_iam_role && var.attach_ec2_full_access_policy ? 1 : 0
-
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AmazonEC2FullAccess"
-  role       = aws_iam_role.github[0].id
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_full_access" {
-  count = local.create_iam_role && var.attach_lambda_full_access_policy ? 1 : 0
-
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AWSLambda_FullAccess"
-  role       = aws_iam_role.github[0].id
-}
-
-resource "aws_iam_role_policy_attachment" "rds_full_access" {
-  count = local.create_iam_role && var.attach_rds_full_access_policy ? 1 : 0
-
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AmazonRDSFullAccess"
-  role       = aws_iam_role.github[0].id
-}
-
-resource "aws_iam_role_policy_attachment" "read_only" {
-  count = local.create_iam_role && var.attach_read_only_policy ? 1 : 0
-
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/ReadOnlyAccess"
-  role       = aws_iam_role.github[0].id
-}
-
-resource "aws_iam_role_policy_attachment" "s3_full_access" {
-  count = local.create_iam_role && var.attach_s3_full_access_policy ? 1 : 0
-
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AmazonS3FullAccess"
-  role       = aws_iam_role.github[0].id
-}
-
 resource "aws_iam_role_policy_attachment" "custom" {
-  count = local.create_iam_role ? length(var.iam_role_policy_arns) : 0
+  for_each = local.custom_iam_role_policy_arns
 
-  policy_arn = var.iam_role_policy_arns[count.index]
+  policy_arn = each.value
   role       = aws_iam_role.github[0].id
 }
 
