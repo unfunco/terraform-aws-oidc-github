@@ -8,8 +8,6 @@ on:
 jobs:
   verify:
     name: Verify
-    permissions:
-      contents: read
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code

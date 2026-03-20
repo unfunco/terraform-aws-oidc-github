@@ -6,21 +6,19 @@ on:
 jobs:
   verify:
     name: Verify
-    permissions:
-      contents: read
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.13"
-      - name: Initialise with no backend
-        run: terraform init -backend=false
-      - name: Check formatting
-        run: terraform fmt -check -recursive
-      - name: Validate the configuration
-        run: terraform validate
-      - name: Run unit tests
-        run: terraform test
+    - name: Checkout code
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@5e8dbf3c6d9deaf4193ca7a8fb23f2ac83bb6c85 # v4.0.0
+      with:
+        terraform_version: 1.14.7
+    - name: Initialise with no backend
+      run: terraform init -backend=false
+    - name: Check formatting
+      run: terraform fmt -check -recursive
+    - name: Validate the configuration
+      run: terraform validate
+    - name: Run unit tests
+      run: terraform test
