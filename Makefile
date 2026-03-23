@@ -2,7 +2,6 @@ SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
 
 .DELETE_ON_ERROR:
-.ONESHELL:
 
 MAKEFLAGS += --no-builtin-rules
 MAKEFLAGS += --warn-undefined-variables
@@ -10,9 +9,8 @@ MAKEFLAGS += --warn-undefined-variables
 default: help
 
 .PHONY: docs
-docs: # generate documentation
-	terraform-docs .
-	npx prettier --write '**/*.md'
+docs: # generate docs and format Terraform/README
+	./hack/make-targets/docs.sh
 
 .PHONY: help
 help: # display this help message
