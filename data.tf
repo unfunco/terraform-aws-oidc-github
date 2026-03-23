@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "assume_role" {
         for repo in var.github_repositories :
         "repo:${repo}${length(regexall(":+", repo)) > 0 ? "" : ":${var.default_branch_name == "*" ? "*" : "ref:refs/heads/${var.default_branch_name}"}"}"
       ]
-      variable = "token.actions.githubusercontent.com:sub"
+      variable = "${local.oidc_provider_claim_prefix}:sub"
     }
 
     condition {
@@ -29,7 +29,17 @@ data "aws_iam_policy_document" "assume_role" {
         [format("sts.%v", data.aws_partition.this[0].dns_suffix)],
         var.additional_audiences,
       ) : [format("sts.%v", data.aws_partition.this[0].dns_suffix)]
-      variable = "token.actions.githubusercontent.com:aud"
+      variable = "${local.oidc_provider_claim_prefix}:aud"
+    }
+
+    dynamic "condition" {
+      for_each = var.additional_claim_conditions
+
+      content {
+        test     = trimspace(condition.value.test)
+        values   = condition.value.values
+        variable = "${local.oidc_provider_claim_prefix}:${trimspace(condition.value.claim)}"
+      }
     }
 
     principals {
@@ -42,10 +52,7 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_openid_connect_provider" "github" {
   count = !local.create_oidc_provider ? 1 : 0
 
-  url = format(
-    "https://token.actions.githubusercontent.com%v",
-    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
-  )
+  url = local.oidc_provider_url
 }
 
 data "tls_certificate" "github" {

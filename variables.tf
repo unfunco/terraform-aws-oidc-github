@@ -7,6 +7,28 @@ variable "additional_audiences" {
   type        = list(string)
 }
 
+variable "additional_claim_conditions" {
+  default     = []
+  description = "Additional GitHub OIDC claim conditions to add to the IAM trust policy. Each claim is prefixed automatically, for example `repository`, `ref`, or `repo_property_business_unit`."
+  type = list(object({
+    claim  = string
+    test   = string
+    values = list(string)
+  }))
+
+  validation {
+    condition = alltrue([
+      for condition in var.additional_claim_conditions :
+      trimspace(condition.claim) != "" &&
+      !contains(["aud", "sub"], lower(trimspace(condition.claim))) &&
+      trimspace(condition.test) != "" &&
+      length(condition.values) > 0 &&
+      alltrue([for value in condition.values : trimspace(value) != ""])
+    ])
+    error_message = "Additional claim conditions must include a non-empty claim other than aud/sub, a test, and at least one non-empty value."
+  }
+}
+
 variable "additional_thumbprints" {
   default     = []
   description = "Additional thumbprints for the OIDC provider."

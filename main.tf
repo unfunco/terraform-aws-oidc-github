@@ -10,15 +10,20 @@ locals {
     var.github_repositories != null && length(var.github_repositories) > 0
   )
 
-  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
   custom_iam_role_policy_arns = local.create_iam_role ? toset([
     for policy_name in var.iam_role_policy_names :
     "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/${policy_name}"
   ]) : toset([])
 
+  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
+
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
   ])
+
+  oidc_provider_path         = var.enterprise_slug != "" ? "/${var.enterprise_slug}" : ""
+  oidc_provider_url          = "https://token.actions.githubusercontent.com${local.oidc_provider_path}"
+  oidc_provider_claim_prefix = "token.actions.githubusercontent.com${local.oidc_provider_path}"
 
   oidc_provider_arn = (
     local.create_oidc_provider ?
@@ -79,8 +84,5 @@ resource "aws_iam_openid_connect_provider" "github" {
     )
   )
 
-  url = format(
-    "https://token.actions.githubusercontent.com%v",
-    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
-  )
+  url = local.oidc_provider_url
 }

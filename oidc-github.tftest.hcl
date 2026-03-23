@@ -90,6 +90,58 @@ run "create_oidc_provider_only" {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+run "enterprise_slug_updates_created_oidc_provider_principal" {
+  variables {
+    enterprise_slug     = "octo-enterprise"
+    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  override_resource {
+    override_during = plan
+
+    target = aws_iam_openid_connect_provider.github
+    values = {
+      arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
+    }
+  }
+
+  assert {
+    condition     = output.oidc_provider_url == "https://token.actions.githubusercontent.com/octo-enterprise"
+    error_message = "OIDC provider URL should include the enterprise slug"
+  }
+
+  assert {
+    condition     = output.oidc_provider_arn == "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
+    error_message = "OIDC provider ARN should include the enterprise slug path once"
+  }
+
+  assert {
+    condition     = jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Principal.Federated == output.oidc_provider_arn
+    error_message = "Assume role policy should trust the created OIDC provider ARN without duplicating the enterprise slug"
+  }
+
+  assert {
+    condition = contains(
+      keys(jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike),
+      "token.actions.githubusercontent.com/octo-enterprise:sub",
+    )
+    error_message = "Assume role policy should use enterprise-scoped claim keys for the sub claim"
+  }
+
+  assert {
+    condition = contains(
+      keys(jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringEquals),
+      "token.actions.githubusercontent.com/octo-enterprise:aud",
+    )
+    error_message = "Assume role policy should use enterprise-scoped claim keys for the aud claim"
+  }
+}
+
+>>>>>>> Stashed changes
 run "sub_claim_default_branch" {
   variables {
     github_repositories = ["unfunco/terraform-aws-oidc-github"]
@@ -146,6 +198,75 @@ run "aud_claim_includes_additional_audiences" {
   }
 }
 
+run "additional_claim_conditions_include_custom_claims" {
+  variables {
+    additional_claim_conditions = [
+      {
+        claim  = "repo_property_business_unit"
+        test   = "StringEquals"
+        values = ["payments"]
+      },
+      {
+        claim  = "repository"
+        test   = "StringEquals"
+        values = ["unfunco/terraform-aws-oidc-github"]
+      },
+      {
+        claim  = "ref"
+        test   = "StringLike"
+        values = ["refs/heads/release/*"]
+      },
+    ]
+    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:repo_property_business_unit"],
+      ]) == [
+      "payments",
+    ]
+    error_message = "Additional claim conditions should include custom repository property claims"
+  }
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com:repository"],
+      ]) == [
+      "unfunco/terraform-aws-oidc-github",
+    ]
+    error_message = "Additional claim conditions should include built-in GitHub repository claims"
+  }
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike["token.actions.githubusercontent.com:ref"],
+      ]) == [
+      "refs/heads/release/*",
+    ]
+    error_message = "Additional claim conditions should support string-like matching for GitHub claims"
+  }
+}
+
+run "additional_claim_conditions_reject_reserved_claims" {
+  variables {
+    additional_claim_conditions = [
+      {
+        claim  = "sub"
+        test   = "StringLike"
+        values = ["repo:unfunco/terraform-aws-oidc-github:*"]
+      },
+    ]
+    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  expect_failures = [var.additional_claim_conditions]
+}
+
 run "create_role_with_existing_oidc_provider" {
   variables {
     create_oidc_provider = false
@@ -170,6 +291,94 @@ run "create_role_with_existing_oidc_provider" {
   }
 }
 
+<<<<<<< Updated upstream
+=======
+run "enterprise_slug_updates_existing_oidc_provider_principal" {
+  variables {
+    create_oidc_provider = false
+    enterprise_slug      = "octo-enterprise"
+    github_repositories  = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  override_data {
+    override_during = plan
+
+    target = data.aws_iam_openid_connect_provider.github
+    values = {
+      arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
+      url = "https://token.actions.githubusercontent.com/octo-enterprise"
+    }
+  }
+
+  assert {
+    condition     = output.oidc_provider_url == "https://token.actions.githubusercontent.com/octo-enterprise"
+    error_message = "Existing OIDC provider URL should include the enterprise slug"
+  }
+
+  assert {
+    condition     = output.oidc_provider_arn == "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
+    error_message = "Existing OIDC provider ARN should include the enterprise slug path once"
+  }
+
+  assert {
+    condition     = jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Principal.Federated == output.oidc_provider_arn
+    error_message = "Assume role policy should trust the existing OIDC provider ARN without duplicating the enterprise slug"
+  }
+
+  assert {
+    condition = contains(
+      keys(jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike),
+      "token.actions.githubusercontent.com/octo-enterprise:sub",
+    )
+    error_message = "Assume role policy should use enterprise-scoped claim keys for reused providers"
+  }
+
+  assert {
+    condition = contains(
+      keys(jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringEquals),
+      "token.actions.githubusercontent.com/octo-enterprise:aud",
+    )
+    error_message = "Assume role policy should use enterprise-scoped audience claim keys for reused providers"
+  }
+}
+
+run "enterprise_slug_prefixes_additional_claim_conditions" {
+  variables {
+    additional_claim_conditions = [
+      {
+        claim  = "repo_property_business_unit"
+        test   = "StringEquals"
+        values = ["payments"]
+      },
+    ]
+    enterprise_slug     = "octo-enterprise"
+    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  override_resource {
+    override_during = plan
+
+    target = aws_iam_openid_connect_provider.github
+    values = {
+      arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.githubusercontent.com/octo-enterprise"
+    }
+  }
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringEquals["token.actions.githubusercontent.com/octo-enterprise:repo_property_business_unit"],
+      ]) == [
+      "payments",
+    ]
+    error_message = "Additional claim conditions should use enterprise-scoped claim keys"
+  }
+}
+
+>>>>>>> Stashed changes
 run "custom_policy_attachments_are_keyed_by_generated_arn" {
   variables {
     github_repositories = ["unfunco/terraform-aws-oidc-github"]
