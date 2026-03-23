@@ -10,11 +10,19 @@ locals {
     var.github_repositories != null && length(var.github_repositories) > 0
   )
 
-  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
   custom_iam_role_policy_arns = local.create_iam_role ? toset([
     for policy_name in var.iam_role_policy_names :
-    "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/${policy_name}"
+    format("arn:%s:iam::aws:policy/%s", data.aws_partition.this[0].partition, policy_name)
   ]) : toset([])
+
+  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
+
+  default_branch_name = trimspace(var.default_branch_name)
+  default_repository_sub_claim_suffix = (
+    local.default_branch_name == "*" ? ":*" : format(":ref:refs/heads/%s", local.default_branch_name)
+  )
+
+  enterprise_slug_path = var.enterprise_slug != "" ? format("/%s", var.enterprise_slug) : ""
 
   github_organizations = toset([
     for repo in var.github_repositories : split("/", repo)[0]
@@ -51,7 +59,7 @@ resource "aws_iam_role_policy" "inline_policies" {
 resource "aws_iam_role_policy_attachment" "admin" {
   count = local.create_iam_role && var.dangerously_attach_admin_policy ? 1 : 0
 
-  policy_arn = "arn:${data.aws_partition.this[0].partition}:iam::aws:policy/AdministratorAccess"
+  policy_arn = format("arn:%s:iam::aws:policy/AdministratorAccess", data.aws_partition.this[0].partition)
   role       = aws_iam_role.github[0].id
 }
 
@@ -66,8 +74,8 @@ resource "aws_iam_openid_connect_provider" "github" {
   count = local.create_oidc_provider ? 1 : 0
 
   client_id_list = concat(
-    [for org in local.github_organizations : format("https://github.com/%v", org)],
-    [format("sts.%v", data.aws_partition.this[0].dns_suffix)],
+    [for org in local.github_organizations : format("https://github.com/%s", org)],
+    [format("sts.%s", data.aws_partition.this[0].dns_suffix)],
   )
 
   tags = merge(var.tags, var.oidc_provider_tags)
@@ -79,8 +87,5 @@ resource "aws_iam_openid_connect_provider" "github" {
     )
   )
 
-  url = format(
-    "https://token.actions.githubusercontent.com%v",
-    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
-  )
+  url = format("https://token.actions.githubusercontent.com%s", local.enterprise_slug_path)
 }
