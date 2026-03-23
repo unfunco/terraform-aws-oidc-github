@@ -3,6 +3,42 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.0.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.2...v3.0.0) (2026-03-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove noisy custom policies ([#106](https://github.com/unfunco/terraform-aws-oidc-github/issues/106))
+* Only allow the default branch to use OIDC ([#100](https://github.com/unfunco/terraform-aws-oidc-github/issues/100))
+
+### New features
+
+* Only allow the default branch to use OIDC ([#100](https://github.com/unfunco/terraform-aws-oidc-github/issues/100)) ([fa9daef](https://github.com/unfunco/terraform-aws-oidc-github/commit/fa9daef3007cae95ed1c100c5a0abb699d0d1443))
+
+
+### Bug fixes
+
+* Resolve issues in broken unit tests ([#103](https://github.com/unfunco/terraform-aws-oidc-github/issues/103)) ([e62ca0d](https://github.com/unfunco/terraform-aws-oidc-github/commit/e62ca0dc481212a10ecaa08ff7257b50c2437f94))
+
+
+### Miscellaneous
+
+* Add unit tests for the OIDC sub claims ([#102](https://github.com/unfunco/terraform-aws-oidc-github/issues/102)) ([ed88711](https://github.com/unfunco/terraform-aws-oidc-github/commit/ed887119f8e0a3973e218a44abd90a6537a2e773))
+* Bump actions/checkout from 5 to 6 ([#98](https://github.com/unfunco/terraform-aws-oidc-github/issues/98)) ([939f8b3](https://github.com/unfunco/terraform-aws-oidc-github/commit/939f8b378f281b9e46b7e26402f9c39575258ab8))
+* Bump actions/github-script from 7 to 8 ([#94](https://github.com/unfunco/terraform-aws-oidc-github/issues/94)) ([0ce5f99](https://github.com/unfunco/terraform-aws-oidc-github/commit/0ce5f99447d904b6121ce041d1a4dd86821890ad))
+* Bump actions/labeler from 5 to 6 ([#92](https://github.com/unfunco/terraform-aws-oidc-github/issues/92)) ([faed9f6](https://github.com/unfunco/terraform-aws-oidc-github/commit/faed9f672093c072bd1e26ba04fe10bc4241e1d8))
+* Bump aws-actions/configure-aws-credentials from 4 to 5 ([#93](https://github.com/unfunco/terraform-aws-oidc-github/issues/93)) ([1028c84](https://github.com/unfunco/terraform-aws-oidc-github/commit/1028c844ae540e6d2e12a8e81d94d332ade76c02))
+* Bump aws-actions/configure-aws-credentials from 5 to 6 ([#104](https://github.com/unfunco/terraform-aws-oidc-github/issues/104)) ([d64b242](https://github.com/unfunco/terraform-aws-oidc-github/commit/d64b242b787c443b37e1ee671903aad5a33515d9))
+* Bump github/codeql-action from 3 to 4 ([#96](https://github.com/unfunco/terraform-aws-oidc-github/issues/96)) ([cde96b6](https://github.com/unfunco/terraform-aws-oidc-github/commit/cde96b605d22c3be644934d7126898011cdda9ea))
+* Bump hashicorp/setup-terraform from 3 to 4 ([#105](https://github.com/unfunco/terraform-aws-oidc-github/issues/105)) ([c80ee45](https://github.com/unfunco/terraform-aws-oidc-github/commit/c80ee45109b34ab69c40c39076f69745601e10ab))
+* Document the new more secure default config ([#101](https://github.com/unfunco/terraform-aws-oidc-github/issues/101)) ([9391a3d](https://github.com/unfunco/terraform-aws-oidc-github/commit/9391a3d16886bc1b0a7b6804b1eb0d00353a3e27))
+* Pin GitHub Actions to specific SHAs ([9102a7a](https://github.com/unfunco/terraform-aws-oidc-github/commit/9102a7a2008bce78fc61653a35bfbfd7e4f05fed))
+* Pin more GitHub Actions ([aa8be7f](https://github.com/unfunco/terraform-aws-oidc-github/commit/aa8be7f0aff27f7da72c61264dc8de5a7d919a6f))
+* Prefer format over interpolation ([589901b](https://github.com/unfunco/terraform-aws-oidc-github/commit/589901b03481cd2f2122ed7694ca12d10252a6a7))
+* Remove comment used for version updates ([#99](https://github.com/unfunco/terraform-aws-oidc-github/issues/99)) ([5f5e67d](https://github.com/unfunco/terraform-aws-oidc-github/commit/5f5e67dfa836c402d301f0d39585ac1caa4625d6))
+* Remove noisy custom policies ([#106](https://github.com/unfunco/terraform-aws-oidc-github/issues/106)) ([9176aac](https://github.com/unfunco/terraform-aws-oidc-github/commit/9176aace53d753d56f2c221978db936ebf0efb4c))
+* Update the license badge in the README ([#97](https://github.com/unfunco/terraform-aws-oidc-github/issues/97)) ([cebbb0f](https://github.com/unfunco/terraform-aws-oidc-github/commit/cebbb0f1bb155c99eb3d2c192353d7c6efcba41d))
+
 ## [2.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.1...v2.0.2) (2025-09-06)
 
 ### Bug fixes
