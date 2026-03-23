@@ -25,7 +25,7 @@ working OIDC connection between GitHub Actions and AWS.
 ```terraform
 module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
-  version = "2.0.2"
+  version = "3.0.0"
 
   github_repositories = ["org/repo"]
 }
