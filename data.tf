@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "assume_role" {
         for repo in var.github_repositories :
         "repo:${repo}${length(regexall(":+", repo)) > 0 ? "" : ":${var.default_branch_name == "*" ? "*" : "ref:refs/heads/${var.default_branch_name}"}"}"
       ]
-      variable = "token.actions.githubusercontent.com:sub"
+      variable = "${local.oidc_issuer}:sub"
     }
 
     condition {
@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "assume_role" {
         [format("sts.%v", data.aws_partition.this[0].dns_suffix)],
         var.additional_audiences,
       ) : [format("sts.%v", data.aws_partition.this[0].dns_suffix)]
-      variable = "token.actions.githubusercontent.com:aud"
+      variable = "${local.oidc_issuer}:aud"
     }
 
     principals {

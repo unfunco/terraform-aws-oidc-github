@@ -20,6 +20,11 @@ locals {
     for repo in var.github_repositories : split("/", repo)[0]
   ])
 
+  oidc_issuer = format(
+    "token.actions.githubusercontent.com%v",
+    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
+  )
+
   oidc_provider_arn = (
     local.create_oidc_provider ?
     aws_iam_openid_connect_provider.github[0].arn :
