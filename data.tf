@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "assume_role" {
           length(regexall(":+", repo)) > 0 ? "" : local.default_repository_sub_claim_suffix,
         )
       ]
-      variable = "token.actions.githubusercontent.com:sub"
+      variable = "${local.oidc_issuer}:sub"
     }
 
     condition {
@@ -33,11 +33,11 @@ data "aws_iam_policy_document" "assume_role" {
         [format("sts.%s", data.aws_partition.this[0].dns_suffix)],
         var.additional_audiences,
       ) : [format("sts.%s", data.aws_partition.this[0].dns_suffix)]
-      variable = "token.actions.githubusercontent.com:aud"
+      variable = "${local.oidc_issuer}:aud"
     }
 
     principals {
-      identifiers = [format("%s%s", local.oidc_provider_arn, local.enterprise_slug_path)]
+      identifiers = [local.oidc_provider_arn]
       type        = "Federated"
     }
   }
