@@ -86,6 +86,29 @@ posture by setting the `enterprise_slug` variable. This configuration ensures
 that the organisation will receive OIDC tokens from a unique URL, after this is
 applied, the JWT will contain an updated `iss` claim.
 
+Setting `enterprise_slug` in AWS is only one side of the configuration. An
+enterprise administrator must also enable the custom issuer policy in GitHub so
+that Actions will issue tokens from the enterprise-scoped URL:
+
+```sh
+gh auth refresh -h github.com -s admin:enterprise
+
+gh api \
+  -X PUT \
+  -H "Accept: application/vnd.github+json" \
+  /enterprises/ENTERPRISE/actions/oidc/customization/issuer \
+  --input - <<< '{"include_enterprise_slug":true}'
+```
+
+A successful request returns `204 No Content`, so `gh api` will exit without a
+response body. Add `-i` if you want to see the HTTP status line.
+
+To validate the change end-to-end, rerun a workflow that requests an OIDC token
+and confirm that your cloud provider sees the enterprise-scoped issuer (for
+example `token.actions.githubusercontent.com/ENTERPRISE`) or that
+`aws-actions/configure-aws-credentials` now succeeds against the
+enterprise-scoped IAM OIDC provider.
+
 <!-- BEGIN_TF_DOCS -->
 
 ### Resources
