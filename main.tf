@@ -2,30 +2,24 @@
 // SPDX-License-Identifier: MIT
 
 locals {
-  create_iam_role = var.create && var.create_iam_role && (
-    var.github_repositories != null && length(var.github_repositories) > 0
-  )
+  has_github_subjects = var.github_subjects != null && length(var.github_subjects) > 0
 
-  create_oidc_provider = var.create && var.create_oidc_provider && (
-    var.github_repositories != null && length(var.github_repositories) > 0
-  )
+  create_iam_role = var.create && var.create_iam_role && local.has_github_subjects
+
+  create_oidc_provider = var.create && var.create_oidc_provider && local.has_github_subjects
 
   custom_iam_role_policy_arns = local.create_iam_role ? toset([
     for policy_name in var.iam_role_policy_names :
     format("arn:%s:iam::aws:policy/%s", data.aws_partition.this[0].partition, policy_name)
   ]) : toset([])
 
-  dangerously_attach_admin_policy = local.create_iam_role && var.dangerously_attach_admin_policy
-
-  default_branch_name = trimspace(var.default_branch_name)
-  default_repository_sub_claim_suffix = (
-    local.default_branch_name == "*" ? ":*" : format(":ref:refs/heads/%s", local.default_branch_name)
-  )
+  default_subject        = trimspace(var.default_subject)
+  default_subject_suffix = local.default_subject == "*" ? ":*" : format(":%s", local.default_subject)
 
   enterprise_slug_path = var.enterprise_slug != "" ? format("/%s", var.enterprise_slug) : ""
 
-  github_organizations = toset([
-    for repo in var.github_repositories : split("/", repo)[0]
+  github_repository_owners = toset([
+    for subject in var.github_subjects : split("/", subject)[0]
   ])
 
   oidc_issuer = format(
@@ -79,7 +73,7 @@ resource "aws_iam_openid_connect_provider" "github" {
   count = local.create_oidc_provider ? 1 : 0
 
   client_id_list = concat(
-    [for org in local.github_organizations : format("https://github.com/%s", org)],
+    [for owner in local.github_repository_owners : format("https://github.com/%s", owner)],
     [format("sts.%s", data.aws_partition.this[0].dns_suffix)],
   )
 

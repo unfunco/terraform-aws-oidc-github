@@ -3,7 +3,7 @@
 
 output "assume_role_policy" {
   description = "The assume role policy document that can be attached to your IAM roles."
-  value       = local.create_oidc_provider ? data.aws_iam_policy_document.assume_role[0].json : ""
+  value       = var.create && local.has_github_subjects ? data.aws_iam_policy_document.assume_role[0].json : ""
 }
 
 output "iam_role_arn" {

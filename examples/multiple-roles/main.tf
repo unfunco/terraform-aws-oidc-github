@@ -12,8 +12,8 @@ module "label" {
 module "oidc_github" {
   source = "../.."
 
-  create_iam_role     = false
-  github_repositories = var.github_repositories
+  create_iam_role = false
+  github_subjects = var.github_subjects
 }
 
 resource "aws_iam_role" "network" {

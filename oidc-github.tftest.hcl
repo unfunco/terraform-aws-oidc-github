@@ -73,8 +73,8 @@ run "create_nothing" {
 
 run "create_oidc_provider_only" {
   variables {
-    create_iam_role     = false
-    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+    create_iam_role = false
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -92,8 +92,8 @@ run "create_oidc_provider_only" {
 
 run "enterprise_slug_updates_created_oidc_provider_principal" {
   variables {
-    enterprise_slug     = "octo-enterprise"
-    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+    enterprise_slug = "octo-enterprise"
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -123,9 +123,9 @@ run "enterprise_slug_updates_created_oidc_provider_principal" {
   }
 }
 
-run "sub_claim_default_branch" {
+run "sub_claim_default_subject" {
   variables {
-    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -137,13 +137,42 @@ run "sub_claim_default_branch" {
       ]),
       "repo:unfunco/terraform-aws-oidc-github:ref:refs/heads/main"
     )
-    error_message = "Sub claim should include ref:refs/heads/main for default branch"
+    error_message = "Sub claim should include ref:refs/heads/main for the default subject"
   }
+}
+
+run "sub_claim_supports_pull_request_default_subject" {
+  variables {
+    default_subject = "pull_request"
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike["token.actions.githubusercontent.com:sub"],
+      ]) == [
+      "repo:unfunco/terraform-aws-oidc-github:pull_request",
+    ]
+    error_message = "Sub claim should support pull_request as the default subject"
+  }
+}
+
+run "default_subject_rejects_leading_colon" {
+  variables {
+    default_subject = ":pull_request"
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  expect_failures = [var.default_subject]
 }
 
 run "sub_claim_preserves_explicit_ref" {
   variables {
-    github_repositories = ["unfunco/terraform-aws-oidc-github:ref:refs/tags/v*"]
+    github_subjects = ["unfunco/terraform-aws-oidc-github:ref:refs/tags/v*"]
   }
 
   command = plan
@@ -154,14 +183,31 @@ run "sub_claim_preserves_explicit_ref" {
       ]) == [
       "repo:unfunco/terraform-aws-oidc-github:ref:refs/tags/v*",
     ]
-    error_message = "Explicit refs should be preserved without appending the default branch"
+    error_message = "Explicit refs should be preserved without appending the default subject"
+  }
+}
+
+run "sub_claim_preserves_pull_request_subject" {
+  variables {
+    github_subjects = ["unfunco/terraform-aws-oidc-github:pull_request"]
+  }
+
+  command = plan
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike["token.actions.githubusercontent.com:sub"],
+      ]) == [
+      "repo:unfunco/terraform-aws-oidc-github:pull_request",
+    ]
+    error_message = "Explicit pull_request subjects should be preserved without appending the default subject"
   }
 }
 
 run "aud_claim_includes_additional_audiences" {
   variables {
     additional_audiences = ["https://github.com/unfunco"]
-    github_repositories  = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects      = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -182,7 +228,7 @@ run "aud_claim_includes_additional_audiences" {
 run "create_role_with_existing_oidc_provider" {
   variables {
     create_oidc_provider = false
-    github_repositories  = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects      = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -203,11 +249,30 @@ run "create_role_with_existing_oidc_provider" {
   }
 }
 
+run "assume_role_policy_available_with_existing_oidc_provider" {
+  variables {
+    create_oidc_provider = false
+    github_subjects      = ["unfunco/terraform-aws-oidc-github"]
+  }
+
+  command = plan
+
+  assert {
+    condition     = output.assume_role_policy != ""
+    error_message = "Assume role policy output should be available when reusing an existing OIDC provider"
+  }
+
+  assert {
+    condition     = output.assume_role_policy == data.aws_iam_policy_document.assume_role[0].json
+    error_message = "Assume role policy output should match the generated policy when reusing an existing OIDC provider"
+  }
+}
+
 run "enterprise_slug_updates_existing_oidc_provider_principal" {
   variables {
     create_oidc_provider = false
     enterprise_slug      = "octo-enterprise"
-    github_repositories  = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects      = ["unfunco/terraform-aws-oidc-github"]
   }
 
   command = plan
@@ -240,7 +305,7 @@ run "enterprise_slug_updates_existing_oidc_provider_principal" {
 
 run "custom_policy_attachments_are_keyed_by_generated_arn" {
   variables {
-    github_repositories = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects = ["unfunco/terraform-aws-oidc-github"]
     iam_role_policy_names = [
       "AmazonS3FullAccess",
       "ReadOnlyAccess",
@@ -266,7 +331,7 @@ run "custom_policy_attachments_are_keyed_by_generated_arn" {
 
 run "custom_policy_names_reject_full_arns" {
   variables {
-    github_repositories   = ["unfunco/terraform-aws-oidc-github"]
+    github_subjects       = ["unfunco/terraform-aws-oidc-github"]
     iam_role_policy_names = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
   }
 

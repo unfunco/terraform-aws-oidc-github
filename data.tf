@@ -6,7 +6,7 @@ data "aws_partition" "this" {
 }
 
 data "aws_iam_policy_document" "assume_role" {
-  count = var.create ? 1 : 0
+  count = var.create && local.has_github_subjects ? 1 : 0
 
   version = "2012-10-17"
 
@@ -17,11 +17,11 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test = "StringLike"
       values = [
-        for repo in var.github_repositories :
+        for subject in var.github_subjects :
         format(
           "repo:%s%s",
-          repo,
-          length(regexall(":+", repo)) > 0 ? "" : local.default_repository_sub_claim_suffix,
+          subject,
+          length(regexall(":+", subject)) > 0 ? "" : local.default_subject_suffix,
         )
       ]
       variable = "${local.oidc_issuer}:sub"
