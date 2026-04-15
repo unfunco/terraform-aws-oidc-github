@@ -1,5 +1,5 @@
-variable "github_repositories" {
+variable "github_subjects" {
   default     = []
-  description = "GitHub organization/repository names authorized to assume the role."
+  description = "GitHub repository subject patterns authorized to assume the role."
   type        = list(string)
 }

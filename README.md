@@ -27,20 +27,25 @@ module "oidc_github" {
   source  = "unfunco/oidc-github/aws"
   version = "2.0.2"
 
-  github_repositories = ["org/repo"]
+  github_subjects = ["org/repo"]
 }
 ```
 
 <!-- x-release-please-end -->
 
-By default, it will only allow the `main` branch of the specified repository to
-assume the IAM role, you can set the `default_branch_name` variable to `master`
-if necessary, or specify `*` to allow all branches to assume the role. To allow
-specific branches or tags, you can include an explicit ref:
+By default, bare `github_subjects` entries are expanded to the
+`ref:refs/heads/main` subject. You can set `default_subject` to a different
+value such as `ref:refs/heads/master`, `pull_request`, or `*`, but `*` is
+broader than most projects need.
+
+Each `github_subjects` entry can also include an explicit GitHub OIDC subject
+suffix. That means pull requests do **not** require `default_subject = "*"`,
+and can be allowed explicitly alongside the default branch:
 
 ```terraform
-github_repositories = [
-  "org/repo:ref:refs/heads/main",
+github_subjects = [
+  "org/repo",
+  "org/repo:pull_request",
   "org/repo:ref:refs/heads/release/*",
   "org/repo:ref:refs/tags/v*",
 ]
@@ -104,28 +109,28 @@ applied, the JWT will contain an updated `iss` claim.
 
 ### Inputs
 
-| Name                            | Description                                                                                                                                                            | Type           | Default                                  | Required |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------- | :------: |
-| additional_audiences            | Additional OIDC audiences allowed to assume the role.                                                                                                                  | `list(string)` | `null`                                   |    no    |
-| additional_thumbprints          | Additional thumbprints for the OIDC provider.                                                                                                                          | `list(string)` | `[]`                                     |    no    |
-| create                          | Enable/disable the creation of all resources.                                                                                                                          | `bool`         | `true`                                   |    no    |
-| create_iam_role                 | Enable/disable creation of the IAM role.                                                                                                                               | `bool`         | `true`                                   |    no    |
-| create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                                                                                                               | `bool`         | `true`                                   |    no    |
-| dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.                                                                                                       | `bool`         | `false`                                  |    no    |
-| default_branch_name             | Default branch name for repositories without an explicit ref. Use '\*' to allow all refs (less secure).                                                                | `string`       | `"main"`                                 |    no    |
-| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers.                                                                                                                 | `string`       | `""`                                     |    no    |
-| github_repositories             | GitHub organization/repository names authorized to assume the role.                                                                                                    | `list(string)` | `[]`                                     |    no    |
-| iam_role_description            | Description of the IAM role to be created.                                                                                                                             | `string`       | `"Assumed by the GitHub OIDC provider."` |    no    |
-| iam_role_force_detach_policies  | Force detachment of policies attached to the IAM role.                                                                                                                 | `bool`         | `false`                                  |    no    |
-| iam_role_inline_policies        | Inline policies map with policy name as key and json as value.                                                                                                         | `map(string)`  | `{}`                                     |    no    |
-| iam_role_max_session_duration   | The maximum session duration in seconds.                                                                                                                               | `number`       | `3600`                                   |    no    |
-| iam_role_name                   | The name of the IAM role to be created and made assumable by GitHub Actions.                                                                                           | `string`       | `"GitHubActions"`                        |    no    |
-| iam_role_path                   | The path under which to create IAM role.                                                                                                                               | `string`       | `"/"`                                    |    no    |
-| iam_role_permissions_boundary   | The ARN of the permissions boundary to be used by the IAM role.                                                                                                        | `string`       | `""`                                     |    no    |
-| iam_role_policy_names           | AWS managed IAM policy names to attach to the IAM role. Provide the value after `policy/`, for example `ReadOnlyAccess` or `service-role/AWSLambdaBasicExecutionRole`. | `list(string)` | `[]`                                     |    no    |
-| iam_role_tags                   | Additional tags to be applied to the IAM role.                                                                                                                         | `map(string)`  | `{}`                                     |    no    |
-| oidc_provider_tags              | Tags to be applied to the OIDC provider.                                                                                                                               | `map(string)`  | `{}`                                     |    no    |
-| tags                            | Tags to be applied to all applicable resources.                                                                                                                        | `map(string)`  | `{}`                                     |    no    |
+| Name                            | Description                                                                                                                                                                                      | Type           | Default                                  | Required |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ---------------------------------------- | :------: |
+| additional_audiences            | Additional OIDC audiences allowed to assume the role.                                                                                                                                            | `list(string)` | `null`                                   |    no    |
+| additional_thumbprints          | Additional thumbprints for the OIDC provider.                                                                                                                                                    | `list(string)` | `[]`                                     |    no    |
+| create                          | Enable/disable the creation of all resources.                                                                                                                                                    | `bool`         | `true`                                   |    no    |
+| create_iam_role                 | Enable/disable creation of the IAM role.                                                                                                                                                         | `bool`         | `true`                                   |    no    |
+| create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                                                                                                                                         | `bool`         | `true`                                   |    no    |
+| dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.                                                                                                                                 | `bool`         | `false`                                  |    no    |
+| default_subject                 | Default GitHub OIDC subject pattern appended to github_subjects entries without an explicit subject suffix. Examples: ref:refs/heads/main, pull_request, \*.                                     | `string`       | `"ref:refs/heads/main"`                  |    no    |
+| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers. This changes the OIDC issuer URL and IAM condition keys.                                                                                  | `string`       | `""`                                     |    no    |
+| github_subjects                 | GitHub repository subject patterns authorized to assume the role. Entries may be bare owner/repository values or include an explicit subject suffix such as :pull_request or :ref:refs/tags/v\*. | `list(string)` | `[]`                                     |    no    |
+| iam_role_description            | Description of the IAM role to be created.                                                                                                                                                       | `string`       | `"Assumed by the GitHub OIDC provider."` |    no    |
+| iam_role_force_detach_policies  | Force detachment of policies attached to the IAM role.                                                                                                                                           | `bool`         | `false`                                  |    no    |
+| iam_role_inline_policies        | Inline policies map with policy name as key and json as value.                                                                                                                                   | `map(string)`  | `{}`                                     |    no    |
+| iam_role_max_session_duration   | The maximum session duration in seconds.                                                                                                                                                         | `number`       | `3600`                                   |    no    |
+| iam_role_name                   | The name of the IAM role to be created and made assumable by GitHub Actions.                                                                                                                     | `string`       | `"GitHubActions"`                        |    no    |
+| iam_role_path                   | The path under which to create IAM role.                                                                                                                                                         | `string`       | `"/"`                                    |    no    |
+| iam_role_permissions_boundary   | The ARN of the permissions boundary to be used by the IAM role.                                                                                                                                  | `string`       | `""`                                     |    no    |
+| iam_role_policy_names           | AWS managed IAM policy names to attach to the IAM role. Provide the value after `policy/`, for example `ReadOnlyAccess` or `service-role/AWSLambdaBasicExecutionRole`.                           | `list(string)` | `[]`                                     |    no    |
+| iam_role_tags                   | Additional tags to be applied to the IAM role.                                                                                                                                                   | `map(string)`  | `{}`                                     |    no    |
+| oidc_provider_tags              | Tags to be applied to the OIDC provider.                                                                                                                                                         | `map(string)`  | `{}`                                     |    no    |
+| tags                            | Tags to be applied to all applicable resources.                                                                                                                                                  | `map(string)`  | `{}`                                     |    no    |
 
 ### Outputs
 

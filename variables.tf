@@ -42,31 +42,36 @@ variable "dangerously_attach_admin_policy" {
   type        = bool
 }
 
-variable "default_branch_name" {
-  default     = "main"
-  description = "Default branch name for repositories without an explicit ref. Use '*' to allow all refs (less secure)."
+variable "default_subject" {
+  default     = "ref:refs/heads/main"
+  description = "Default GitHub OIDC subject pattern appended to github_subjects entries without an explicit subject suffix. Examples: ref:refs/heads/main, pull_request, *."
   type        = string
+
+  validation {
+    condition     = trimspace(var.default_subject) != "" && !startswith(trimspace(var.default_subject), ":")
+    error_message = "The default subject must not be empty or start with ':'. Use values such as ref:refs/heads/main, pull_request, or *."
+  }
 }
 
 variable "enterprise_slug" {
   default     = ""
-  description = "Enterprise slug for GitHub Enterprise Cloud customers."
+  description = "Enterprise slug for GitHub Enterprise Cloud customers. This changes the OIDC issuer URL and IAM condition keys."
   type        = string
 }
 
-variable "github_repositories" {
+variable "github_subjects" {
   default     = []
-  description = "GitHub organization/repository names authorized to assume the role."
+  description = "GitHub repository subject patterns authorized to assume the role. Entries may be bare owner/repository values or include an explicit subject suffix such as :pull_request or :ref:refs/tags/v*."
   type        = list(string)
 
   validation {
-    // Ensures each element of github_repositories list matches the
-    // organization/repository format used by GitHub.
+    // Ensures each element of github_subjects matches a GitHub
+    // owner/repository value with an optional explicit subject suffix.
     condition = length([
-      for repo in var.github_repositories : 1
-      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/\\-\\*]+)$", repo)) > 0
-    ]) == length(var.github_repositories)
-    error_message = "Repositories must be specified in the organization/repository format."
+      for subject in var.github_subjects : 1
+      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/\\-\\*]+)$", subject)) > 0
+    ]) == length(var.github_subjects)
+    error_message = "Subjects must be specified as owner/repository, optionally followed by a subject suffix such as :pull_request or :ref:refs/heads/main."
   }
 }
 
