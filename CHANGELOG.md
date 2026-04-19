@@ -3,6 +3,13 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.0...v3.0.1) (2026-04-19)
+
+
+### Miscellaneous
+
+* Bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([#111](https://github.com/unfunco/terraform-aws-oidc-github/issues/111)) ([42c9777](https://github.com/unfunco/terraform-aws-oidc-github/commit/42c97770b1a00d88cb16619d452b1be89820bc74))
+
 ## [3.0.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.2...v3.0.0) (2026-04-15)
 
 
