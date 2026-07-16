@@ -69,9 +69,9 @@ variable "github_subjects" {
     // owner/repository value with an optional explicit subject suffix.
     condition = length([
       for subject in var.github_subjects : 1
-      if length(regexall("^[A-Za-z0-9_.-]+?/([A-Za-z0-9_.:/\\-\\*]+)$", subject)) > 0
+      if length(regexall("^[A-Za-z0-9_.@-]+?/([A-Za-z0-9_.:/@\\-\\*]+)$", subject)) > 0
     ]) == length(var.github_subjects)
-    error_message = "Subjects must be specified as owner/repository, optionally followed by a subject suffix such as :pull_request or :ref:refs/heads/main."
+    error_message = "Subjects must be specified as owner/repository, optionally followed by a subject suffix such as :pull_request or :ref:refs/heads/main. The '@' character is permitted to support GitHub's immutable subject-claim format (e.g. owner@ownerId/repo@repoId)."
   }
 }
 
