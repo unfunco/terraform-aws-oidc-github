@@ -18,8 +18,14 @@ locals {
 
   enterprise_slug_path = var.enterprise_slug != "" ? format("/%s", var.enterprise_slug) : ""
 
+  # Strip any "@ownerId" suffix (immutable OIDC subject-claim format) before
+  # deriving the OIDC provider's client_id_list - that list only needs the
+  # plain GitHub org name as an audience URL, never the numeric owner id.
+  # The numeric id is still preserved verbatim in var.github_subjects itself
+  # for the trust policy's `sub` condition (see data.tf), this only affects
+  # what gets used to build "https://github.com/<org>" entries.
   github_repository_owners = toset([
-    for subject in var.github_subjects : split("/", subject)[0]
+    for subject in var.github_subjects : split("@", split("/", subject)[0])[0]
   ])
 
   oidc_issuer = format(
