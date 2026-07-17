@@ -3,6 +3,24 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.0...v3.0.1) (2026-07-17)
+
+
+### Bug fixes
+
+* Allow @ in github_subjects to support GitHub's immutable OIDC subject-claim format ([#120](https://github.com/unfunco/terraform-aws-oidc-github/issues/120)) ([4ddb81e](https://github.com/unfunco/terraform-aws-oidc-github/commit/4ddb81ee0260534ea50f341a16aa8513d48984e0))
+
+
+### Miscellaneous
+
+* Bump actions/checkout from 6.0.2 to 6.0.3 ([#116](https://github.com/unfunco/terraform-aws-oidc-github/issues/116)) ([2876a28](https://github.com/unfunco/terraform-aws-oidc-github/commit/2876a28505e78527a1ebee09ce1dec39e39e9c01))
+* Bump actions/checkout from 6.0.3 to 7.0.0 ([#117](https://github.com/unfunco/terraform-aws-oidc-github/issues/117)) ([2c35a96](https://github.com/unfunco/terraform-aws-oidc-github/commit/2c35a96698f7bf0f8164db5e832057d6a9ca8c0b))
+* Bump actions/labeler from 6.0.1 to 6.1.0 ([#114](https://github.com/unfunco/terraform-aws-oidc-github/issues/114)) ([81e28fb](https://github.com/unfunco/terraform-aws-oidc-github/commit/81e28fbccf8f0dcad2b9327a69216674a79296b9))
+* Bump actions/labeler from 6.1.0 to 6.2.0 ([#118](https://github.com/unfunco/terraform-aws-oidc-github/issues/118)) ([935e24a](https://github.com/unfunco/terraform-aws-oidc-github/commit/935e24ad2ba87763aff18b098a49091621509483))
+* Bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([#111](https://github.com/unfunco/terraform-aws-oidc-github/issues/111)) ([42c9777](https://github.com/unfunco/terraform-aws-oidc-github/commit/42c97770b1a00d88cb16619d452b1be89820bc74))
+* Bump googleapis/release-please-action from 4.4.1 to 5.0.0 ([#113](https://github.com/unfunco/terraform-aws-oidc-github/issues/113)) ([6d94d60](https://github.com/unfunco/terraform-aws-oidc-github/commit/6d94d6025ef75b2fea82829d5c004de144fc356b))
+* Bump hashicorp/setup-terraform from 4.0.0 to 4.0.1 ([#115](https://github.com/unfunco/terraform-aws-oidc-github/issues/115)) ([b6ffb74](https://github.com/unfunco/terraform-aws-oidc-github/commit/b6ffb7476cb2352e5657fa284c53caa35b793183))
+
 ## [3.0.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v2.0.2...v3.0.0) (2026-04-15)
 
 
