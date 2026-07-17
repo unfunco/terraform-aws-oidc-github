@@ -187,6 +187,48 @@ run "sub_claim_preserves_explicit_ref" {
   }
 }
 
+run "oidc_provider_client_id_list_strips_owner_id" {
+  variables {
+    create_iam_role = false
+    github_subjects = ["unfunco@12345/terraform-aws-oidc-github@67890:pull_request"]
+  }
+
+  command = plan
+
+  assert {
+    condition = contains(
+      aws_iam_openid_connect_provider.github[0].client_id_list,
+      "https://github.com/unfunco",
+    )
+    error_message = "client_id_list should contain the plain org URL, without the numeric owner id"
+  }
+
+  assert {
+    condition = !contains(
+      aws_iam_openid_connect_provider.github[0].client_id_list,
+      "https://github.com/unfunco@12345",
+    )
+    error_message = "client_id_list must not contain an owner-id-suffixed URL"
+  }
+}
+
+run "sub_claim_accepts_immutable_id_subject" {
+  variables {
+    github_subjects = ["unfunco@12345/terraform-aws-oidc-github@67890:pull_request"]
+  }
+
+  command = plan
+
+  assert {
+    condition = flatten([
+      jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike["token.actions.githubusercontent.com:sub"],
+      ]) == [
+      "repo:unfunco@12345/terraform-aws-oidc-github@67890:pull_request",
+    ]
+    error_message = "Immutable-ID subject values (owner@ownerId/repo@repoId) should validate and be preserved verbatim"
+  }
+}
+
 run "sub_claim_preserves_pull_request_subject" {
   variables {
     github_subjects = ["unfunco/terraform-aws-oidc-github:pull_request"]
