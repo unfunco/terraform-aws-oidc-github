@@ -3,6 +3,14 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.1...v3.0.2) (2026-07-28)
+
+
+### Miscellaneous
+
+* Bump actions/checkout from 7.0.0 to 7.0.1 ([#122](https://github.com/unfunco/terraform-aws-oidc-github/issues/122)) ([4d068a4](https://github.com/unfunco/terraform-aws-oidc-github/commit/4d068a46aed06d24bdd1873d783d4a7efe66862e))
+* Bump actions/labeler from 6.2.0 to 7.0.0 ([#121](https://github.com/unfunco/terraform-aws-oidc-github/issues/121)) ([3e39356](https://github.com/unfunco/terraform-aws-oidc-github/commit/3e39356d3962a54b3c82f2405420147278a6586e))
+
 ## [3.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.0...v3.0.1) (2026-07-17)
 
 
