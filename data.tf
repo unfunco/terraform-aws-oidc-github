@@ -46,11 +46,11 @@ data "aws_iam_policy_document" "assume_role" {
 data "aws_iam_openid_connect_provider" "github" {
   count = !local.create_oidc_provider ? 1 : 0
 
-  url = format("https://token.actions.githubusercontent.com%s", local.enterprise_slug_path)
+  url = local.oidc_provider_url
 }
 
 data "tls_certificate" "github" {
   count = local.create_oidc_provider ? 1 : 0
 
-  url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
+  url = format("https://%s/.well-known/openid-configuration", local.oidc_issuer_host)
 }
