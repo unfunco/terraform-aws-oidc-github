@@ -11,8 +11,6 @@ jobs:
     uses: unfunco/meta/.github/workflows/verify-terraform.yaml@80154eaeae1d18131405850847f76b27490a68f0
     with:
       run-tests: true
-      terraform-version-file: .terraform-version
-      working-directory: .
 
   release:
     name: Release?
