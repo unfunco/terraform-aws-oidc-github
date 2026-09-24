@@ -55,8 +55,20 @@ variable "default_subject" {
 
 variable "enterprise_slug" {
   default     = ""
-  description = "Enterprise slug for GitHub Enterprise Cloud customers. This changes the OIDC issuer URL and IAM condition keys."
+  description = "Enterprise slug for a custom OIDC issuer. For data residency, use the same value as github_enterprise_subdomain."
   type        = string
+}
+
+variable "github_enterprise_subdomain" {
+  default     = ""
+  description = "GitHub Enterprise Cloud data residency subdomain (e.g. acme for acme.ghe.com). Leave empty to use github.com."
+  nullable    = false
+  type        = string
+
+  validation {
+    condition     = var.github_enterprise_subdomain == "" || can(regex("^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$", var.github_enterprise_subdomain))
+    error_message = "The GitHub Enterprise subdomain must be empty or a lowercase DNS label of 1-63 characters, with no leading or trailing hyphens. Provide only the subdomain, not a URL or a .ghe.com hostname."
+  }
 }
 
 variable "github_subjects" {
