@@ -6,8 +6,6 @@ on:
 jobs:
   verify:
     name: Verify
-    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@80154eaeae1d18131405850847f76b27490a68f0
+    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@06f3fca81cc4034ff0cc99c7a7ef58f76ed21077
     with:
       run-tests: true
-      terraform-version-file: .terraform-version
-      working-directory: .
