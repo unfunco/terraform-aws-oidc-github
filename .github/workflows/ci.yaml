@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     name: Verify
-    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@80154eaeae1d18131405850847f76b27490a68f0
+    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@06f3fca81cc4034ff0cc99c7a7ef58f76ed21077
     with:
       run-tests: true
 
@@ -19,12 +19,4 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-    - name: Prepare a release
-      uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
-      with:
-        config-file: .github/release-please-config.json
-        manifest-file: .github/release-please-manifest.json
+    uses: unfunco/meta/.github/workflows/release-please.yaml@06f3fca81cc4034ff0cc99c7a7ef58f76ed21077
