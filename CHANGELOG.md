@@ -3,6 +3,21 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.0.2](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.1...v3.0.2) (2026-09-26)
+
+
+### Bug fixes
+
+* Require Terraform 1.3 for the startswith function ([#128](https://github.com/unfunco/terraform-aws-oidc-github/issues/128)) ([cc8183a](https://github.com/unfunco/terraform-aws-oidc-github/commit/cc8183ac724e87866c76120a7d41954623794bf1))
+
+
+### Miscellaneous
+
+* Bump actions/checkout from 7.0.0 to 7.0.1 ([#122](https://github.com/unfunco/terraform-aws-oidc-github/issues/122)) ([4d068a4](https://github.com/unfunco/terraform-aws-oidc-github/commit/4d068a46aed06d24bdd1873d783d4a7efe66862e))
+* Bump actions/labeler from 6.2.0 to 7.0.0 ([#121](https://github.com/unfunco/terraform-aws-oidc-github/issues/121)) ([3e39356](https://github.com/unfunco/terraform-aws-oidc-github/commit/3e39356d3962a54b3c82f2405420147278a6586e))
+* Reuse shared Terraform verification workflow ([#125](https://github.com/unfunco/terraform-aws-oidc-github/issues/125)) ([2d96960](https://github.com/unfunco/terraform-aws-oidc-github/commit/2d96960f8fa22a63c2ffe37d4ff168bbf1af26ab))
+* Run Terraform tests in shared verification workflow ([#126](https://github.com/unfunco/terraform-aws-oidc-github/issues/126)) ([fa7c1fb](https://github.com/unfunco/terraform-aws-oidc-github/commit/fa7c1fb046d71a6ccd1c8aafd82ffe870ca12392))
+
 ## [3.0.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.0...v3.0.1) (2026-07-17)
 
 
