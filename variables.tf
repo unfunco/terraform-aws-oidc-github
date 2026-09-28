@@ -55,7 +55,7 @@ variable "default_subject" {
 
 variable "enterprise_slug" {
   default     = ""
-  description = "Enterprise slug for a custom OIDC issuer. For data residency, use the same value as github_enterprise_subdomain."
+  description = "Enterprise slug for an explicitly enabled custom OIDC issuer. Adds a path to the issuer URL and IAM condition keys; leave empty for data residency alone."
   type        = string
 }
 

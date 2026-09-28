@@ -86,14 +86,23 @@ jobs:
 
 #### Enterprise Cloud
 
-Organisations using GitHub Enterprise Cloud can further improve their security
-posture by setting the `enterprise_slug` variable. This configuration ensures
-that the organisation will receive OIDC tokens from a unique URL, after this is
-applied, the JWT will contain an updated `iss` claim.
+For GitHub Enterprise Cloud with data residency, set
+`github_enterprise_subdomain` to the label before `.ghe.com` (for example,
+`acme` for `acme.ghe.com`). This uses the issuer
+`https://token.actions.acme.ghe.com` and organisation audiences at
+`https://acme.ghe.com/ORG`. Leave `enterprise_slug` empty unless your enterprise
+has separately enabled a custom OIDC issuer with a path in its `iss` claim.
+Check the token's actual `iss` and `sub` claims when configuring AWS; some
+enterprises use immutable `owner@ownerId/repo@repoId` subjects.
+
+For a custom enterprise-scoped issuer, set `enterprise_slug` to the slug in
+the token's `iss` claim. This adds `/SLUG` to the issuer URL and IAM condition
+keys; it is independent of the data-residency subdomain.
 
 Setting `enterprise_slug` in AWS is only one side of the configuration. An
 enterprise administrator must also enable the custom issuer policy in GitHub so
-that Actions will issue tokens from the enterprise-scoped URL:
+that Actions will issue tokens from the enterprise-scoped URL. For an
+enterprise on `github.com`, this can be enabled with:
 
 ```sh
 gh auth refresh -h github.com -s admin:enterprise
@@ -141,7 +150,8 @@ enterprise-scoped IAM OIDC provider.
 | create_oidc_provider            | Enable/disable the creation of the GitHub OIDC provider.                                                                                                                                         | `bool`         | `true`                                   |    no    |
 | dangerously_attach_admin_policy | Enable/disable the attachment of the AdministratorAccess policy.                                                                                                                                 | `bool`         | `false`                                  |    no    |
 | default_subject                 | Default GitHub OIDC subject pattern appended to github_subjects entries without an explicit subject suffix. Examples: ref:refs/heads/main, pull_request, \*.                                     | `string`       | `"ref:refs/heads/main"`                  |    no    |
-| enterprise_slug                 | Enterprise slug for GitHub Enterprise Cloud customers. This changes the OIDC issuer URL and IAM condition keys.                                                                                  | `string`       | `""`                                     |    no    |
+| enterprise_slug                 | Enterprise slug for an explicitly enabled custom OIDC issuer. Adds a path to the issuer URL and IAM condition keys; leave empty for data residency alone.                                       | `string`       | `""`                                     |    no    |
+| github_enterprise_subdomain     | GitHub Enterprise Cloud data residency subdomain (e.g. acme for acme.ghe.com). Leave empty to use github.com.                                                                                   | `string`       | `""`                                     |    no    |
 | github_subjects                 | GitHub repository subject patterns authorized to assume the role. Entries may be bare owner/repository values or include an explicit subject suffix such as :pull_request or :ref:refs/tags/v\*. | `list(string)` | `[]`                                     |    no    |
 | iam_role_description            | Description of the IAM role to be created.                                                                                                                                                       | `string`       | `"Assumed by the GitHub OIDC provider."` |    no    |
 | iam_role_force_detach_policies  | Force detachment of policies attached to the IAM role.                                                                                                                                           | `bool`         | `false`                                  |    no    |
