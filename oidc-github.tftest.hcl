@@ -123,6 +123,47 @@ run "enterprise_slug_updates_created_oidc_provider_principal" {
   }
 }
 
+run "data_residency_does_not_require_enterprise_slug" {
+  variables {
+    github_enterprise_subdomain = "acme"
+    github_subjects             = ["owner@12345/repo@67890:pull_request"]
+  }
+
+  command = plan
+
+  override_resource {
+    override_during = plan
+
+    target = aws_iam_openid_connect_provider.github
+    values = {
+      arn = "arn:aws:iam::123456789012:oidc-provider/token.actions.acme.ghe.com"
+    }
+  }
+
+  assert {
+    condition     = output.oidc_provider_url == "https://token.actions.acme.ghe.com"
+    error_message = "Data residency should use the dedicated issuer host without an enterprise slug path"
+  }
+
+  assert {
+    condition = toset(aws_iam_openid_connect_provider.github[0].client_id_list) == toset([
+      "https://acme.ghe.com/owner",
+      "sts.amazonaws.com",
+    ])
+    error_message = "Data-residency audiences should use the dedicated GitHub domain without immutable owner IDs"
+  }
+
+  assert {
+    condition     = jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Condition.StringLike["token.actions.acme.ghe.com:sub"] == "repo:owner@12345/repo@67890:pull_request"
+    error_message = "Data-residency trust should use the issuer host and preserve the immutable subject"
+  }
+
+  assert {
+    condition     = jsondecode(data.aws_iam_policy_document.assume_role[0].json).Statement[0].Principal.Federated == output.oidc_provider_arn
+    error_message = "Data-residency trust should reference the provider ARN without an enterprise slug path"
+  }
+}
+
 run "sub_claim_default_subject" {
   variables {
     github_subjects = ["unfunco/terraform-aws-oidc-github"]

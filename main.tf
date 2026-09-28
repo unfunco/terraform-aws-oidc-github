@@ -18,20 +18,22 @@ locals {
 
   enterprise_slug_path = var.enterprise_slug != "" ? format("/%s", var.enterprise_slug) : ""
 
+  github_domain = var.github_enterprise_subdomain != "" ? format("%s.ghe.com", var.github_enterprise_subdomain) : "github.com"
+
+  oidc_issuer_host = var.github_enterprise_subdomain != "" ? format("token.actions.%s", local.github_domain) : "token.actions.githubusercontent.com"
+
   # Strip any "@ownerId" suffix (immutable OIDC subject-claim format) before
   # deriving the OIDC provider's client_id_list - that list only needs the
   # plain GitHub org name as an audience URL, never the numeric owner id.
   # The numeric id is still preserved verbatim in var.github_subjects itself
   # for the trust policy's `sub` condition (see data.tf), this only affects
-  # what gets used to build "https://github.com/<org>" entries.
+  # what gets used to build the GitHub organization audience URLs.
   github_repository_owners = toset([
     for subject in var.github_subjects : split("@", split("/", subject)[0])[0]
   ])
 
-  oidc_issuer = format(
-    "token.actions.githubusercontent.com%s",
-    var.enterprise_slug != "" ? "/${var.enterprise_slug}" : "",
-  )
+  oidc_issuer       = format("%s%s", local.oidc_issuer_host, local.enterprise_slug_path)
+  oidc_provider_url = format("https://%s", local.oidc_issuer)
 
   oidc_provider_arn = (
     local.create_oidc_provider ?
@@ -79,7 +81,7 @@ resource "aws_iam_openid_connect_provider" "github" {
   count = local.create_oidc_provider ? 1 : 0
 
   client_id_list = concat(
-    [for owner in local.github_repository_owners : format("https://github.com/%s", owner)],
+    [for owner in local.github_repository_owners : format("https://%s/%s", local.github_domain, owner)],
     [format("sts.%s", data.aws_partition.this[0].dns_suffix)],
   )
 
@@ -92,5 +94,5 @@ resource "aws_iam_openid_connect_provider" "github" {
     )
   )
 
-  url = format("https://token.actions.githubusercontent.com%s", local.enterprise_slug_path)
+  url = local.oidc_provider_url
 }
