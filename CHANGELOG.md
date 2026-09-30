@@ -3,6 +3,13 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.1.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.1.0...v3.1.1) (2026-09-30)
+
+
+### Miscellaneous
+
+* Upgrade installed Terraform to 1.16.4 ([#134](https://github.com/unfunco/terraform-aws-oidc-github/issues/134)) ([4be06dc](https://github.com/unfunco/terraform-aws-oidc-github/commit/4be06dcc472c8b352f73a7f77f5155ce13a71683))
+
 ## [3.1.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.1...v3.1.0) (2026-09-28)
 
 
