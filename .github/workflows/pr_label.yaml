@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-slim
     steps:
     - name: Checkout code
-      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      uses: actions/checkout@v7.0.1
     - name: Apply context labels
-      uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
+      uses: actions/labeler@v7.0.0
       with:
         configuration-path: .github/labeler.yaml
         sync-labels: true
     - name: Apply commit message labels
-      uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+      uses: actions/github-script@v9.0.0
       with:
         script: |
           const labels = []
