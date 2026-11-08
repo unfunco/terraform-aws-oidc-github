@@ -3,44 +3,14 @@ name: PR / Label
 on:
   pull_request_target: { }
 
+permissions:
+  contents: read
+
 jobs:
   triage:
     name: Triage
     permissions:
       contents: read
+      issues: write
       pull-requests: write
-    runs-on: ubuntu-slim
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v7.0.1
-    - name: Apply context labels
-      uses: actions/labeler@v7.0.0
-      with:
-        configuration-path: .github/labeler.yaml
-        sync-labels: true
-    - name: Apply commit message labels
-      uses: actions/github-script@v9.0.0
-      with:
-        script: |
-          const labels = []
-
-          if (context.payload.pull_request.title.startsWith('fix')) {
-            labels.push('bug 🐛')
-          }
-
-          if (context.payload.pull_request.title.startsWith('chore')) {
-            labels.push('chore 🧹')
-          }
-
-          if (context.payload.pull_request.title.startsWith('feat')) {
-            labels.push('feature 💡')
-          }
-
-          if (labels.length > 0) {
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              labels,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })
-          }
+    uses: unfunco/meta/.github/workflows/label-pr.yaml@ed74a86a4f828ad47a4c65139c4be4101b23a294 # v0.4.0

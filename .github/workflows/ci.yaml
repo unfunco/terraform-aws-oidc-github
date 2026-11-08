@@ -8,7 +8,7 @@ on:
 jobs:
   verify:
     name: Verify
-    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@8a2e3873c609d86b9a67b353a9111bd44171240d # v0.3.0
+    uses: unfunco/meta/.github/workflows/verify-terraform.yaml@ed74a86a4f828ad47a4c65139c4be4101b23a294 # v0.4.0
     with:
       run-tests: true
 
@@ -19,4 +19,4 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: unfunco/meta/.github/workflows/release-please.yaml@8a2e3873c609d86b9a67b353a9111bd44171240d # v0.3.0
+    uses: unfunco/meta/.github/workflows/release-please.yaml@ed74a86a4f828ad47a4c65139c4be4101b23a294 # v0.4.0
