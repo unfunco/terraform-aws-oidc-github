@@ -1,7 +1,12 @@
 variable "github_subjects" {
-  default     = []
   description = "GitHub repository subject patterns authorized to assume the role."
+  nullable    = false
   type        = list(string)
+
+  validation {
+    condition     = length(var.github_subjects) > 0
+    error_message = "Provide at least one GitHub repository subject to create the managing role."
+  }
 }
 
 variable "workload_account_id" {
