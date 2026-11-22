@@ -11,8 +11,6 @@ updates:
   - workflows 👷‍♀️
   pull-request-branch-name:
     separator: /
-  reviewers:
-  - unfunco
   schedule:
     day: sunday
     interval: weekly
