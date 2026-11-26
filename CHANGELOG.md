@@ -3,6 +3,29 @@
 Notable changes to this project are documented in this changelog.  
 This project adheres to the [semantic versioning] specification.
 
+## [3.1.1](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.1.0...v3.1.1) (2026-11-26)
+
+
+### 📚 Documentation
+
+* Add a multi-account example ([#141](https://github.com/unfunco/terraform-aws-oidc-github/issues/141)) ([6172d7e](https://github.com/unfunco/terraform-aws-oidc-github/commit/6172d7e91b2f3ef70551324dd0eca9d7e2904cbc))
+
+
+### ⚙️ Continuous integration
+
+* Lock GitHub Actions workflow dependencies ([#137](https://github.com/unfunco/terraform-aws-oidc-github/issues/137)) ([41ea1f0](https://github.com/unfunco/terraform-aws-oidc-github/commit/41ea1f0d6238c9c365b0d09b6cfe7cb5b1c24d8a))
+* Use the shared PR labelling workflow ([#138](https://github.com/unfunco/terraform-aws-oidc-github/issues/138)) ([a08cc03](https://github.com/unfunco/terraform-aws-oidc-github/commit/a08cc039c4a6458e587ce16b918b56e534acea3e))
+
+
+### 🧹 Miscellaneous
+
+* Adopt Meta v0.4.1 workflows ([#140](https://github.com/unfunco/terraform-aws-oidc-github/issues/140)) ([e7d3db8](https://github.com/unfunco/terraform-aws-oidc-github/commit/e7d3db88b0966fb738245121c687d2fc0395c055))
+* Replace Dependabot reviewers with CODEOWNERS ([#143](https://github.com/unfunco/terraform-aws-oidc-github/issues/143)) ([5d24024](https://github.com/unfunco/terraform-aws-oidc-github/commit/5d24024bfbfd01cc774e473417001b762a82c014))
+* Standardise changelog emoji sections ([#144](https://github.com/unfunco/terraform-aws-oidc-github/issues/144)) ([2990fc6](https://github.com/unfunco/terraform-aws-oidc-github/commit/2990fc6e2c8922c4b835ed92dd3f6dfddd0cec7b))
+* Upgrade installed Terraform to 1.16.4 ([#134](https://github.com/unfunco/terraform-aws-oidc-github/issues/134)) ([4be06dc](https://github.com/unfunco/terraform-aws-oidc-github/commit/4be06dcc472c8b352f73a7f77f5155ce13a71683))
+* Upgrade Terraform to v1.17.1 ([#139](https://github.com/unfunco/terraform-aws-oidc-github/issues/139)) ([f21b87b](https://github.com/unfunco/terraform-aws-oidc-github/commit/f21b87b157f7b87c899747f099cd2807acae8e0d))
+* Upgrade Terraform to v1.17.2 ([#142](https://github.com/unfunco/terraform-aws-oidc-github/issues/142)) ([2fd70f5](https://github.com/unfunco/terraform-aws-oidc-github/commit/2fd70f5cd81f85388a3f6c4031d2a3a6c8730165))
+
 ## [3.1.0](https://github.com/unfunco/terraform-aws-oidc-github/compare/v3.0.1...v3.1.0) (2026-09-28)
 
 
