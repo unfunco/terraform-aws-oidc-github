@@ -10,6 +10,7 @@ workflows:
         - 'actions/checkout@v7.0.1'
         - 'aquasecurity/tfsec-sarif-action@v0.1.4'
         - 'github/codeql-action@v4.39.3'
+    '.github/workflows/sync_labels.yaml': []
 dependencies:
     'actions/checkout@v7.0.1':
         ref: 'v7.0.1'

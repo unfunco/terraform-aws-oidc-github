@@ -13,4 +13,4 @@ jobs:
       contents: read
       issues: write
       pull-requests: write
-    uses: unfunco/meta/.github/workflows/label-pr.yaml@b40ef8e1b220c86892199cb32e2d65d392e74e34 # v0.4.1
+    uses: unfunco/meta/.github/workflows/label-pr.yaml@724bfc4bf30a9b93758939d5fb7c427828cc6c23
